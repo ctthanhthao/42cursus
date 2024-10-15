@@ -303,3 +303,89 @@ You can also log in with credentials directly:
 ```bash
 lftp -u <username>,<password> <server-ip-or-hostname>
 ```
+The error message **"500 OOPS: vsftpd: refusing to run with writable root inside chroot()"**  indicates that the `vsftpd` FTP server is refusing to allow a user to log in because the root directory of the chroot jail is writable. This is a common security feature in `vsftpd` to prevent potential vulnerabilities.
+### Steps to Fix the Issue 
+
+Here’s how to resolve this problem step-by-step:
+
+#### Step 1: Verify the Chroot Directory 
+ 
+1. Identify the chroot directory for your FTP user. This is usually set in the user’s home directory or specified in the `vsftpd` configuration.
+ 
+2. If the user is `ftpuser`, the home directory might be something like `/home/ftpuser` or `/srv/ftp/ftpuser`.
+
+#### Step 2: Change Permissions on the Chroot Directory 
+ 
+1. **Set the root of the chroot jail to non-writable** :If your chroot directory is `/home/ftpuser` or `/srv/ftp`, you can set the permissions like this:
+
+```bash
+sudo chmod 755 /home/ftpuser  # or /srv/ftp, adjust accordingly
+```
+
+This command makes the directory readable and executable but not writable for others.
+ 
+2. **Ensure ownership is correct** :Set the owner of the chroot directory to `root`:
+
+```bash
+sudo chown root:root /home/ftpuser  # or /srv/ftp, adjust accordingly
+```
+
+This prevents the user from having write access to the root of the chroot.
+
+#### Step 3: Create User-Specific Directories 
+ 
+1. If your FTP user (`ftpuser`) needs to have their own writable directory within the chroot, create a subdirectory under their home directory and set the correct permissions:
+
+```bash
+sudo mkdir /home/ftpuser/files  # or /srv/ftp/ftpuser/files
+sudo chown ftpuser:ftpuser /home/ftpuser/files
+sudo chmod 755 /home/ftpuser/files  # Set to writable if the user needs to upload files
+```
+ 
+2. Ensure that any directories above this one (the chroot root) are not writable.
+
+#### Step 4: Update the vsftpd Configuration 
+ 
+1. Open the `vsftpd` configuration file:
+
+```bash
+sudo nano /etc/vsftpd.conf
+```
+ 
+2. Ensure you have the following lines:
+
+
+```plaintext
+chroot_local_user=YES
+allow_writeable_chroot=NO
+```
+ 
+  - **`chroot_local_user=YES`** : This setting confines local users to their home directories.
+ 
+  - **`allow_writeable_chroot=NO`** : Prevents writable root directories within the chroot environment.
+ 
+3. **Save**  the changes and exit the editor.
+
+#### Step 5: Restart vsftpd 
+Restart the `vsftpd` service to apply the changes:
+
+```bash
+sudo systemctl restart vsftpd
+```
+
+#### Step 6: Test the FTP Connection Again 
+
+Try connecting again using the FTP command:
+
+
+```bash
+ftp ftpuser@localhost -p 2121
+```
+
+### Additional Notes 
+ 
+- Ensure that your `vsftpd` service is running correctly. You can check its status using:
+
+```bash
+sudo systemctl status vsftpd
+```
