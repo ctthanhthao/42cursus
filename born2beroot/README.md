@@ -1,6 +1,9 @@
-## 42cursus - Born2beroot - Bonus Part
-
-### To set up a functional WordPress website on your Debian virtual machine (VM) with Lighttpd, MariaDB, and PHP, and make it accessible from your local machine, follow the steps below:
+## Mandatory part
+A good reference source and it worked properly to me here https://github.com/pasqualerossi/Born2BeRoot-Guide
+## Bonus Part
+### I. Reorganise partition
+Watch bonus installation walkthrough (no audio) here.
+### II. To set up a functional WordPress website on your Debian virtual machine (VM) with Lighttpd, MariaDB, and PHP, and make it accessible from your local machine, follow the steps below:
 1. **Ensure Network Configuration** 
 Since you are using a bridged network, your local machine should be able to communicate with the VM using its IP address. First, find the IP address of your VM:
 
