@@ -51,7 +51,7 @@ WordPress requires PHP, so you need to install PHP and some extensions:
 
 
 ```bash
-sudo apt install php-cgi php-mysql php-common php-curl php-gd php-intl php-json php-mbstring php-xml php-zip -y
+sudo apt install php-cgi php-mysql php-cli php-curl php-gd php-mbstring -y
 ```
 
 Enable PHP in Lighttpd:
