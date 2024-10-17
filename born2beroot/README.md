@@ -392,3 +392,5 @@ ftp ftpuser@localhost -p 2121
 ```bash
 sudo systemctl status vsftpd
 ```
+### Evaluation
+https://42evals.me/Cursus/Born2beroot/
