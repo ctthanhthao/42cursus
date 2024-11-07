@@ -6,37 +6,11 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 19:42:24 by thchau            #+#    #+#             */
-/*   Updated: 2024/11/06 11:42:54 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/07 08:44:06 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
-
-/*int	ft_handlepercent(t_flags *flags)
-{
-	int	count;
-
-	count = 0;
-	if (flags->minus == 1)
-	{
-		count += ft_printchar('%');
-		if (flags->width > count)
-			count += handle_width(flags->width, count, 0);
-	}
-	else if (flags->zero == 1)
-	{
-		if (flags->width > 1)
-			count += handle_width(flags->width, 1, 1);
-		count += ft_printchar('%');
-	}
-	else
-	{
-		if (flags->width > 1)
-			count += handle_width(flags->width, 1, 0);
-		count += ft_printchar('%');
-	}
-	return (count);
-}*/
 
 int	ft_handlechar(char c, t_flags *flags)
 {
