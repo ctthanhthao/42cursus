@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:03:57 by thchau            #+#    #+#             */
-/*   Updated: 2024/10/31 18:19:21 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/06 12:38:13 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	*transform_number(char *num_str, long num)
 {
 	if (num == 0)
 	{
-		num_str[0] = 0 + '0';
-		num_str[1] = '\0';
+		ft_memcpy(num_str, "(nil)", 5);
+		num_str[5] = '\0';
 	}
 	else
 	{
@@ -33,13 +33,13 @@ int	ft_handleptr(unsigned long num, t_flags *flags)
 	int		count;
 	int		len;
 	char	num_str[17];
-	char	zerox[3];
+	char	*zerox;
 
-	ft_memset(zerox, 0, 3);
+	zerox = NULL;
+	if (num != 0)
+		zerox = ft_strdup("0x");
 	transform_number(num_str, num);
 	len = ft_strlen(num_str);
-	zerox[0] = '0';
-	zerox[1] = 'x';
 	count = 0;
 	flags->hash = 1;
 	if (flags->minus == 1)
@@ -48,5 +48,7 @@ int	ft_handleptr(unsigned long num, t_flags *flags)
 		count += handlehex_zero_hash_dot(num_str, len, flags, zerox);
 	else
 		count += handlehex_hash_dot(num_str, len, flags, zerox);
+	if (zerox != NULL)
+		free(zerox);
 	return (count);
 }

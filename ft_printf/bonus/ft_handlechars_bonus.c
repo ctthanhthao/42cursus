@@ -6,13 +6,13 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 19:42:24 by thchau            #+#    #+#             */
-/*   Updated: 2024/10/31 13:06:22 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/06 11:42:54 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	ft_handlepercent(t_flags *flags)
+/*int	ft_handlepercent(t_flags *flags)
 {
 	int	count;
 
@@ -36,7 +36,7 @@ int	ft_handlepercent(t_flags *flags)
 		count += ft_printchar('%');
 	}
 	return (count);
-}
+}*/
 
 int	ft_handlechar(char c, t_flags *flags)
 {
@@ -80,6 +80,22 @@ static int	handle_chars_minus_width(int len, t_flags *flags, int zero)
 	return (count);
 }
 
+static char	*makeup_chars_if_dot(char *arg, int has_dot, int precision)
+{
+	char	*result;
+
+	if (arg == NULL)
+	{
+		if (has_dot == 1 && precision < 6)
+			result = ft_strdup("");
+		else
+			result = ft_strdup("(null)");
+	}
+	else
+		result = ft_strdup(arg);
+	return (result);
+}
+
 int	ft_handlechars(char *arg, t_flags *flags)
 {
 	int		count;
@@ -87,10 +103,7 @@ int	ft_handlechars(char *arg, t_flags *flags)
 	char	*copy;
 
 	count = 0;
-	if (arg == NULL)
-		copy = ft_strdup("(null)");
-	else
-		copy = ft_strdup(arg);
+	copy = makeup_chars_if_dot(arg, flags->dot, flags->precision);
 	len = ft_strlen(copy);
 	if (flags->minus == 1)
 	{

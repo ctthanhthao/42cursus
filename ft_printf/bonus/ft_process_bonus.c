@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:02:31 by thchau            #+#    #+#             */
-/*   Updated: 2024/10/31 12:41:42 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/06 09:55:04 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	handle_conversions(const char **str, va_list args, t_flags *flags)
 {
 	if (**str == '%')
-		return (ft_handlepercent(flags));
+		return (ft_printchar('%'));
 	if (**str == 'c')
 		return (ft_handlechar(va_arg(args, int), flags));
 	if (**str == 's')

@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:01:45 by thchau            #+#    #+#             */
-/*   Updated: 2024/10/28 10:50:57 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/06 09:43:47 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_printptr(unsigned long num)
 	int		count;		
 
 	if (num == 0)
-		return (ft_printchars("0x0"));
+		return (ft_printchars("(nil)"));
 	count = 0;
 	count += ft_printchars("0x");
 	count += ft_printhex(num, 0);

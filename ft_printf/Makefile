@@ -20,7 +20,8 @@ BONUS_OBJS		= $(BONUS:.c=.o)
 
 LIBS			= ./lib/ft_atoi.c ./lib/ft_isdigit.c ./lib/ft_itoa.c \
 				./lib/ft_memset.c ./lib/ft_printchars.c ./lib/ft_strdup.c \
-				./lib/ft_strlen.c ./lib/ft_strreverse.c ./lib/ft_utils.c
+				./lib/ft_strlen.c ./lib/ft_strreverse.c ./lib/ft_handle_utils.c \
+				./lib/ft_memcpy.c
 LIBS_OBJS		= $(LIBS:.c=.o)
 
 # Rules

@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:14:15 by thchau            #+#    #+#             */
-/*   Updated: 2024/10/31 18:19:51 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/06 11:14:37 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char			*ft_strdup(const char *src);
 
 void			*ft_memset(void *s, int c, size_t n);
 void			*ft_strreverse(char *num_str);
+void			*ft_memcpy(void *dest, const void *src, size_t n);
 
 unsigned int	ft_strlen(const char *s);
 #endif // End of include guard

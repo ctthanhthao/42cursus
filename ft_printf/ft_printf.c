@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 20:41:50 by thchau            #+#    #+#             */
-/*   Updated: 2024/10/31 15:56:03 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/06 12:18:18 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 // #include "lib/ft_atoi.c"
 // #include "lib/ft_itoa.c"
 // #include "lib/ft_isdigit.c"
-// #include "lib/ft_memcpy.c"
 // #include "lib/ft_memset.c"
 // #include "lib/ft_strreverse.c"
 // #include "lib/ft_printchars.c"
 // #include "lib/ft_strdup.c"
 // #include "lib/ft_strlen.c"
-// #include "lib/ft_utils.c"
+// #include "lib/ft_memcpy.c"
+// #include "lib/ft_handle_utils.c"
 
 int	ft_printf(const char *str, ...)
 {
@@ -36,7 +36,7 @@ int	ft_printf(const char *str, ...)
 	int		count;
 
 	if (str == NULL)
-		return (ft_printchars(str));
+		return (-1);
 	va_start(args, str);
 	count = 0;
 	while (*str)
