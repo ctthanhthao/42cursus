@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 18:51:01 by thchau            #+#    #+#             */
-/*   Updated: 2024/11/06 07:42:42 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/07 05:58:16 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,15 @@ static char	*read_and_store(int fd, char *buffer)
 					return (NULL);
 			}
 			else
+			{
+				if (byte_read != 0 && !buffer)
+				{
+					free(buffer);
+					buffer = NULL;
+					return (NULL);
+				}
 				break;
+			}
 		}
 		else
 			break;
@@ -68,12 +76,12 @@ static char *extract_line(char **buffer)
 		return (NULL);
 	while ((*buffer)[len] && (*buffer)[len] != '\n')
 		len++;
+	if ((*buffer)[len] == '\n')
+		len++;
 	line = malloc(len + 1);
 	ft_memcpy(line, *buffer, len + 1);
-	if ((*buffer)[len] == '\n')	
-		tmp = ft_strdup(*buffer + len + 1);
-	else
-		tmp = ft_strdup(*buffer + len);
+	line[len] = '\0';
+	tmp = ft_strdup(*buffer + len);
 	free(*buffer);
 	*buffer = tmp;
 	return (line);

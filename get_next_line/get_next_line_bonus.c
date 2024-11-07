@@ -6,11 +6,18 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 18:51:01 by thchau            #+#    #+#             */
-/*   Updated: 2024/11/05 16:16:46 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/07 06:37:38 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+
+static void clear_fd_buffer(int fd, char **buffer)
+{
+	if (!buffer || !buffer[fd])
+		return ;
+	ft_memset(buffer[fd], 0, BUFFER_SIZE);
+}
 
 static int	has_new_line(char *str)
 {
@@ -25,7 +32,7 @@ static int	has_new_line(char *str)
 	return (0);
 }
 
-static char	*read_and_store(int fd, char *buffer)
+static char	*read_and_store(int fd, char **buffer)
 {
 	char	*tmp;
 	char	read_buf[BUFFER_SIZE + 1];
@@ -34,25 +41,28 @@ static char	*read_and_store(int fd, char *buffer)
 	
 	while (1)
 	{
-		new_line = has_new_line(buffer);
+		new_line = has_new_line(buffer[fd]);
 		if (new_line != 1)
 		{
 			byte_read = read(fd, read_buf, BUFFER_SIZE);
-			if (byte_read > 0)
+			if (byte_read == -1)
 			{
-				tmp = buffer;
-				buffer = ft_strjoin(tmp, read_buf);
-				free(tmp);
-				if (!buffer)
-					return (NULL);
+				clear_fd_buffer(fd, buffer);
+				return (buffer[fd]);
 			}
-			else
+			if (byte_read == 0)
 				break;
+			read_buf[byte_read] = '\0';
+			tmp = buffer[fd];
+			buffer[fd] = ft_strjoin(tmp, read_buf);
+			free(tmp);
+			if (!buffer[fd])
+				return (NULL);
 		}
 		else
 			break;
 	}
-	return (buffer);
+	return (buffer[fd]);
 }
 
 static char *extract_line(char **buffer)
@@ -67,12 +77,12 @@ static char *extract_line(char **buffer)
 		return (NULL);
 	while ((*buffer)[len] && (*buffer)[len] != '\n')
 		len++;
+	if ((*buffer)[len] == '\n')
+		len++;
 	line = malloc(len + 1);
 	ft_memcpy(line, *buffer, len + 1);
-	if ((*buffer)[len] == '\n')	
-		tmp = ft_strdup(*buffer + len + 1);
-	else
-		tmp = ft_strdup(*buffer + len);
+	line[len] = '\0';
+	tmp = ft_strdup(*buffer + len);
 	free(*buffer);
 	*buffer = tmp;
 	return (line);
@@ -85,14 +95,14 @@ char	*get_next_line(int fd)
 	
 	if (fd < 0 || fd > MAX_FD || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer[fd] = read_and_store(fd, buffer[fd]);
-	if (!buffer[fd])
+	buffer[fd] = read_and_store(fd, buffer);
+	if (!buffer[fd] || buffer[fd][0] == 0)
 		return (NULL);
 	line = extract_line(&buffer[fd]);
 	if (!line && buffer[fd])
 	{
-		free(buffer[fd]);
-		buffer[fd] = NULL;
+		clear_fd_buffer(fd, buffer);
+		return (NULL);
 	}	
 	return (line);	
 }

@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 18:46:40 by thchau            #+#    #+#             */
-/*   Updated: 2024/11/05 15:53:34 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/07 06:18:16 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ char			*get_next_line(int fd);
 char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strdup(char *src);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
+void			*ft_memset(void *s, int c, size_t n);
 unsigned int	ft_strlen(const char *s);
 #endif

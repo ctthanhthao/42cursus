@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 10:01:29 by thchau            #+#    #+#             */
-/*   Updated: 2024/11/05 20:07:50 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/07 06:41:59 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!result)
 		return (NULL);
 	ft_memcpy(result, s1, l1);
-	ft_memcpy(result + l1, s2, l2);
+	ft_memcpy(result + l1, s2, l2 + 1);
 	return (result);
 }
 
@@ -71,4 +71,16 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	while (n--)
 		*d++ = *s++;
 	return (dest);
+}
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	unsigned char	*ptr;
+
+	ptr = (unsigned char *)s;
+	while (n--)
+	{
+		ptr[n] = (unsigned char)c;
+	}
+	return (s);
 }
