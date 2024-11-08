@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 21:14:15 by thchau            #+#    #+#             */
-/*   Updated: 2024/10/31 13:35:52 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/08 15:25:38 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ typedef struct s_flags
 
 int		ft_process(const char **str, va_list args);
 
-int		ft_handlenum(long num, t_flags *flags);
+int		ft_handledi(long num, t_flags *flags);
+int		ft_handleu(long num, t_flags *flags);
 int		handledi_zero_dot(char *num_str, unsigned int len,
 			int sign, t_flags *flags);
 int		handledi_minus_dot(char *num_str, int sign, t_flags *flags);
 int		handledi_dot(char *num_str, unsigned int len, int sign, t_flags *flags);
 
-int		ft_handlepercent(t_flags *flags);
 int		ft_handlechar(char c, t_flags *flags);
 int		ft_handlechars(char *arg, t_flags *flags);
 

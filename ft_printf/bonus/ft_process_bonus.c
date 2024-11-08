@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:02:31 by thchau            #+#    #+#             */
-/*   Updated: 2024/11/06 09:55:04 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/08 15:26:15 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static int	handle_conversions(const char **str, va_list args, t_flags *flags)
 	if (**str == 'p')
 		return (ft_handleptr(va_arg(args, unsigned long), flags));
 	if (**str == 'd' || **str == 'i')
-		return (ft_handlenum(va_arg(args, int), flags));
+		return (ft_handledi(va_arg(args, int), flags));
 	if (**str == 'u')
-		return (ft_handlenum(va_arg(args, unsigned int), flags));
+		return (ft_handleu(va_arg(args, unsigned int), flags));
 	if (**str == 'x')
 		return (ft_handlehex(va_arg(args, unsigned int), flags, 0));
 	if (**str == 'X')

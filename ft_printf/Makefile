@@ -43,8 +43,8 @@ clean:
 	$(RM) $(SRCS_OBJS) $(BONUS_OBJS) $(LIBS_OBJS) 
 
 fclean: clean
-	$(RM) $(NAME) $(BONUS_OBJS)
-
+	$(RM) $(NAME)
+	
 re: fclean all
 
 .PHONY: all clean fclean re

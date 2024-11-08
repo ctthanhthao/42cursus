@@ -6,13 +6,23 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 20:56:59 by thchau            #+#    #+#             */
-/*   Updated: 2024/10/31 13:06:47 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/08 15:39:52 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	ft_handlenum(long num, t_flags *flags)
+int	ft_handleu(long num, t_flags *flags)
+{
+	if (flags->plus == 1 || flags->space == 1)
+	{
+		flags->plus = 0;
+		flags->space = 0;
+	}
+	return (ft_handledi(num, flags));
+}
+
+int	ft_handledi(long num, t_flags *flags)
 {
 	int				count;
 	int				sign;
