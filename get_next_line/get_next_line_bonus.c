@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 18:51:01 by thchau            #+#    #+#             */
-/*   Updated: 2024/11/07 06:37:38 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/10 08:31:16 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,14 @@ static int	has_new_line(char *str)
 static char	*read_and_store(int fd, char **buffer)
 {
 	char	*tmp;
-	char	read_buf[BUFFER_SIZE + 1];
+	char	*read_buf;
 	ssize_t	byte_read;
 	int		new_line;
 	
+	read_buf = malloc(BUFFER_SIZE + 1);
+	if (!read_buf)
+		return (NULL);
+	read_buf[BUFFER_SIZE] = '\0';
 	while (1)
 	{
 		new_line = has_new_line(buffer[fd]);
@@ -47,6 +51,7 @@ static char	*read_and_store(int fd, char **buffer)
 			byte_read = read(fd, read_buf, BUFFER_SIZE);
 			if (byte_read == -1)
 			{
+				free(read_buf);
 				clear_fd_buffer(fd, buffer);
 				return (buffer[fd]);
 			}
@@ -62,6 +67,7 @@ static char	*read_and_store(int fd, char **buffer)
 		else
 			break;
 	}
+	free(read_buf);
 	return (buffer[fd]);
 }
 
@@ -80,11 +86,19 @@ static char *extract_line(char **buffer)
 	if ((*buffer)[len] == '\n')
 		len++;
 	line = malloc(len + 1);
-	ft_memcpy(line, *buffer, len + 1);
+	if (!line)
+		return (NULL);
+	ft_memcpy(line, *buffer, len);
 	line[len] = '\0';
 	tmp = ft_strdup(*buffer + len);
+	if (!tmp)
+	{
+		free(line);
+        return NULL;
+	}
 	free(*buffer);
-	*buffer = tmp;
+	*buffer = ft_strdup(tmp);
+	free(tmp);
 	return (line);
 }
 
@@ -107,6 +121,7 @@ char	*get_next_line(int fd)
 	return (line);	
 }
 /*#include <stdio.h>
+#include "get_next_line_utils_bonus.c"
 int	main(void)
 {
 	char	*line;
@@ -115,25 +130,20 @@ int	main(void)
 	int		fd2;
 	int		fd3;
 
-	fd1 = open("test.txt", O_RDONLY);
-	fd2 = open("test1.txt", O_RDONLY);
-	fd3 = open("test2.txt", O_RDONLY);
+	fd1 = open("1char.txt", O_RDONLY);
+//	fd2 = open("test1.txt", O_RDONLY);
+//	fd3 = open("test2.txt", O_RDONLY);
 	i = 1;
-	while (i < 3)
+	while (1)
 	{
 		line = get_next_line(fd1);
-		printf("line [%02d]: %s", i, line);
+		if (!line)
+			break;
+		printf("line: %s", line);
 		free(line);
-		line = get_next_line(fd2);
-		printf("line [%02d]: %s", i, line);
-		free(line);
-		line = get_next_line(fd3);
-		printf("line [%02d]: %s", i, line);
-		free(line);
-		i++;
 	}
 	close(fd1);
-	close(fd2);
-	close(fd3);
+//	close(fd2);
+//	close(fd3);
 	return (0);
 }*/

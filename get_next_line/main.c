@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
         return 1;
     }
 	filename = argv[1];
-    int fd = open("test.txt", O_RDONLY);
+    int fd = open(filename, O_RDONLY);
     if (fd < 0) {
         perror("Error opening file");
         return 1;

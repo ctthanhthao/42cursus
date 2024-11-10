@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 10:01:29 by thchau            #+#    #+#             */
-/*   Updated: 2024/11/07 06:41:59 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/10 08:15:47 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,19 @@ char	*ft_strdup(char *src)
 	unsigned int	idx;
 	char	*ptr;
 
+	if (src == NULL)
+		return (NULL);
 	s_len = ft_strlen(src);
 	ptr = (char *)malloc((s_len + 1) * sizeof(char));
 	if (ptr == NULL)
 		return (NULL);
 	idx = 0;
-	while (idx <= s_len)
+	while (idx < s_len)
 	{
 		ptr[idx] = src[idx];
 		idx++;
 	}
+	ptr[idx] = '\0';
 	return (ptr);
 }
 

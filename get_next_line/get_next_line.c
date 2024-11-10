@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 18:51:01 by thchau            #+#    #+#             */
-/*   Updated: 2024/11/07 05:58:16 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/10 07:55:40 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,40 @@ static int	has_new_line(char *str)
 static char	*read_and_store(int fd, char *buffer)
 {
 	char	*tmp;
-	char	read_buf[BUFFER_SIZE + 1];
+	char	*read_buf;
 	ssize_t	byte_read;
 	int		new_line;
 	
+	read_buf = malloc(BUFFER_SIZE + 1);
+	if (!read_buf)
+		return (NULL);
+	read_buf[BUFFER_SIZE] = '\0';
 	while (1)
 	{
 		new_line = has_new_line(buffer);
 		if (new_line != 1)
 		{
 			byte_read = read(fd, read_buf, BUFFER_SIZE);
-			if (byte_read > 0)
+			if (byte_read == -1)
 			{
-				read_buf[byte_read] = '\0';
-				tmp = buffer;
-				buffer = ft_strjoin(tmp, read_buf);
-				free(tmp);
-				if (!buffer)
-					return (NULL);
+				free(read_buf);
+				free(buffer);
+				buffer = NULL;
+				return (NULL);
 			}
-			else
-			{
-				if (byte_read != 0 && !buffer)
-				{
-					free(buffer);
-					buffer = NULL;
-					return (NULL);
-				}
+			if (byte_read == 0)
 				break;
-			}
+			read_buf[byte_read] = '\0';
+			tmp = buffer;
+			buffer = ft_strjoin(tmp, read_buf);
+			free(tmp);
+			if (!buffer)
+				return (NULL);
 		}
 		else
 			break;
 	}
+	free(read_buf);
 	return (buffer);
 }
 
@@ -79,9 +80,16 @@ static char *extract_line(char **buffer)
 	if ((*buffer)[len] == '\n')
 		len++;
 	line = malloc(len + 1);
-	ft_memcpy(line, *buffer, len + 1);
+	if (!line)
+		return (NULL);
+	ft_memcpy(line, *buffer, len);
 	line[len] = '\0';
 	tmp = ft_strdup(*buffer + len);
+	if (!tmp)
+	{
+		free(line);
+		return (NULL);
+	}
 	free(*buffer);
 	*buffer = tmp;
 	return (line);

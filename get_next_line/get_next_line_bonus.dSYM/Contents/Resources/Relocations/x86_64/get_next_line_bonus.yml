@@ -1,0 +1,18 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     '/Users/macbook/Documents/Project/42 Prague/Core Curriculum/git_repo/get_next_line/get_next_line_bonus'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _get_next_line, symObjAddr: 0x0, symBinAddr: 0x100000800, symSize: 0x100 }
+  - { offsetInCU: 0x33, offset: 0x33, size: 0x8, addend: 0x0, symName: _get_next_line, symObjAddr: 0x0, symBinAddr: 0x100000800, symSize: 0x100 }
+  - { offsetInCU: 0x58, offset: 0x58, size: 0x8, addend: 0x0, symName: _get_next_line.buffer, symObjAddr: 0x1B50, symBinAddr: 0x100002000, symSize: 0x0 }
+  - { offsetInCU: 0xB5, offset: 0xB5, size: 0x8, addend: 0x0, symName: _read_and_store, symObjAddr: 0x100, symBinAddr: 0x100000900, symSize: 0x150 }
+  - { offsetInCU: 0x123, offset: 0x123, size: 0x8, addend: 0x0, symName: _extract_line, symObjAddr: 0x250, symBinAddr: 0x100000A50, symSize: 0x160 }
+  - { offsetInCU: 0x175, offset: 0x175, size: 0x8, addend: 0x0, symName: _clear_fd_buffer, symObjAddr: 0x3B0, symBinAddr: 0x100000BB0, symSize: 0x50 }
+  - { offsetInCU: 0x1A7, offset: 0x1A7, size: 0x8, addend: 0x0, symName: _ft_strlen, symObjAddr: 0x400, symBinAddr: 0x100000C00, symSize: 0x60 }
+  - { offsetInCU: 0x1DD, offset: 0x1DD, size: 0x8, addend: 0x0, symName: _ft_strjoin, symObjAddr: 0x460, symBinAddr: 0x100000C60, symSize: 0xA0 }
+  - { offsetInCU: 0x23D, offset: 0x23D, size: 0x8, addend: 0x0, symName: _ft_memcpy, symObjAddr: 0x500, symBinAddr: 0x100000D00, symSize: 0xA0 }
+  - { offsetInCU: 0x29D, offset: 0x29D, size: 0x8, addend: 0x0, symName: _ft_strdup, symObjAddr: 0x5A0, symBinAddr: 0x100000DA0, symSize: 0x90 }
+  - { offsetInCU: 0x2EF, offset: 0x2EF, size: 0x8, addend: 0x0, symName: _ft_memset, symObjAddr: 0x630, symBinAddr: 0x100000E30, symSize: 0x50 }
+  - { offsetInCU: 0x341, offset: 0x341, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x680, symBinAddr: 0x100000E80, symSize: 0x80 }
+  - { offsetInCU: 0x3A1, offset: 0x3A1, size: 0x8, addend: 0x0, symName: _has_new_line, symObjAddr: 0x700, symBinAddr: 0x100000F00, symSize: 0x6A }
+...
