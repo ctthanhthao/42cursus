@@ -1,2 +1,1 @@
-You’ll see the results of the lottery in the registration system after logging in on the 13th of November 2024. The results of the lottery will be available in registration system only.
- For that reason, please do not forget to login into it the day of drawing.
+test with no new line
