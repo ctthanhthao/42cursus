@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 19:42:24 by thchau            #+#    #+#             */
-/*   Updated: 2024/11/07 08:51:48 by thchau           ###   ########.fr       */
+/*   Updated: 2024/11/16 11:54:25 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ static int	handle_chars_minus_dot(char *arg, t_flags *flags)
 	return (count);
 }
 
-static int	handle_chars_minus_width(int len, t_flags *flags, int zero)
+static int	handle_chars_minus_width(int len, t_flags *flags)
 {
 	int	count;
 
 	count = 0;
 	if (flags->precision >= 0 && flags->precision <= len)
-		count += handle_width(flags->width, flags->precision, zero);
+		count += handle_width(flags->width, flags->precision, 0);
 	else
-		count += handle_width(flags->width, len, zero);
+		count += handle_width(flags->width, len, 0);
 	return (count);
 }
 
@@ -82,11 +82,11 @@ int	ft_handlechars(char *arg, t_flags *flags)
 	if (flags->minus == 1)
 	{
 		count += handle_chars_minus_dot(copy, flags);
-		count += handle_chars_minus_width(len, flags, 0);
+		count += handle_chars_minus_width(len, flags);
 	}
 	else
 	{
-		count += handle_chars_minus_width(len, flags, flags->zero);
+		count += handle_chars_minus_width(len, flags);
 		count += handle_chars_minus_dot(copy, flags);
 	}
 	free(copy);

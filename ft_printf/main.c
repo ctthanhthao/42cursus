@@ -105,8 +105,8 @@ int main(void) {
     ret_ft_printf = ft_printf("Custom ft_printf  : [%.*s]\n", 5, str);   
     printf("Return values      : printf=%d, ft_printf=%d\n\n", ret_printf, ret_ft_printf);
 
-    ret_printf = printf("Standard printf   : [%-20.10s]\n", str);       
-    ret_ft_printf = ft_printf("Custom ft_printf  : [%-20.10s]\n", str);  
+    ret_printf = printf("Standard printf   : [%.15s]\n", str);       
+    ret_ft_printf = ft_printf("Custom ft_printf  : [%.15s]\n", str);  
     printf("Return values      : printf=%d, ft_printf=%d\n\n", ret_printf, ret_ft_printf);
 
 
