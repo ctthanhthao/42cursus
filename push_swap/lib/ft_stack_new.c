@@ -19,6 +19,9 @@ t_stack	*ft_stack_new(int content)
 	node = (t_stack *)malloc(sizeof(t_stack));
 	if (node == NULL)
 		return (NULL);
+	node->content = (int *)malloc(sizeof(int));
+	if (node->content == NULL)
+		return (NULL);
 	*(node->content) = content;
 	node->next = NULL;
 	return (node);
