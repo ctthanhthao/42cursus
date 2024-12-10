@@ -6,11 +6,11 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 19:53:16 by thchau            #+#    #+#             */
-/*   Updated: 2024/11/06 12:36:33 by thchau           ###   ########.fr       */
+/*   Updated: 2024/12/09 10:55:58 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "../include/push_swap.h"
 
 char	*ft_strdup(const char *src)
 {

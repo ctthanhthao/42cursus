@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 08:54:29 by thchau            #+#    #+#             */
-/*   Updated: 2024/12/04 10:21:27 by thchau           ###   ########.fr       */
+/*   Updated: 2024/12/09 14:57:00 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ size_t	ps_atoi(const char *str)
 void	write_intr(char *str, char c)
 {
 	write(1, str, ft_strlen(str));
-	write(1, &c, 1);
+	if (c != ' ')
+		write(1, &c, 1);
 	write(1, "\n",1);
 }

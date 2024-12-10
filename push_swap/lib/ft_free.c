@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:32:16 by thchau            #+#    #+#             */
-/*   Updated: 2024/12/04 10:50:38 by thchau           ###   ########.fr       */
+/*   Updated: 2024/12/10 10:51:52 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void ft_free_arr(char **ar)
 		n1 = *ar;
 		ar++;
 		free(n1);
+		n1 = NULL;
 	}
 	*ar = NULL;
 }
@@ -37,6 +38,7 @@ void	ft_free_stack(t_stack **lst)
 	{
 		tmp = (*lst)->next;
 		free(*lst);
+		*lst = NULL;
 		*lst = tmp;
 	}
 	*lst = NULL;

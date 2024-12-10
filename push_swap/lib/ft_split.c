@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 11:53:42 by thchau            #+#    #+#             */
-/*   Updated: 2024/11/28 16:24:04 by thchau           ###   ########.fr       */
+/*   Updated: 2024/12/10 09:54:00 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static	int	ft_alloc_words(char const *s, char c)
 
 	count = 0;
 	in_word = 0;
+	if (!s)
+		return (count);
 	while (*s)
 	{
 		if (*s != c && in_word == 0)
@@ -74,7 +76,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	w_len = 0;
 	idx_r = 0;
-	while (s[w_len] && word_count > 0)
+	while (word_count > 0 && s[w_len])
 	{
 		while (s[w_len] == c)
 			w_len++;

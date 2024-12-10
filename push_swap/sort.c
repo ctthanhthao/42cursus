@@ -6,13 +6,13 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 11:22:37 by thchau            #+#    #+#             */
-/*   Updated: 2024/12/04 10:12:50 by thchau           ###   ########.fr       */
+/*   Updated: 2024/12/05 08:55:07 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*#include "include/push_swap.h"
 
-int	is_sorted(const t_stack **stack, int is_asc)
+int	is_asc_sorted(const t_stack **stack, int is_asc)
 {
 	if (!stack || !*stack || ft_stack_size(stack) == 1)
 		return (1);
@@ -43,7 +43,7 @@ void	do_sort(char **argv)
 		new_node = ft_stack_new(ps_atoi(argv[i]));
 		ft_stack_add_back(&stack_a, new_node);
 	}
-	while (!is_sorted(stack_a, ASC))
+	while (!is_asc_sorted(stack_a, ASC))
 	{
 		top = stack_a;
 		next = stack_a->next;
