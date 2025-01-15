@@ -6,43 +6,45 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:32:16 by thchau            #+#    #+#             */
-/*   Updated: 2024/12/10 10:51:52 by thchau           ###   ########.fr       */
+/*   Updated: 2025/01/15 10:26:58 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void ft_free_arr(char **ar)
+void	ft_free_arr(char **ar)
 {
-	char	*n1;
+	int		i;
 
 	if (!ar)
 		return ;
-	while (*ar)
+	i = 0;
+	while (ar[i])
 	{
-		n1 = *ar;
-		ar++;
-		free(n1);
-		n1 = NULL;
+		free(ar[i]);
+		ar[i] = NULL;
+		i++;
 	}
-	*ar = NULL;
+	free(ar);
+	ar = NULL;
 }
 
-void	ft_free_stack(t_stack **lst)
+char	**ft_clean_arr(char **arr)
 {
-	t_stack	*tmp;
+	int	i;
 
-	if (*lst == NULL || lst == NULL)
-		return ;
-	while (*lst)
+	if (!arr)
+		return (NULL);
+	i = 0;
+	while (arr[i])
 	{
-		tmp = (*lst)->next;
-		free(*lst);
-		*lst = NULL;
-		*lst = tmp;
+		free(arr[i]);
+		arr[i] = NULL;
+		i++;
 	}
-	*lst = NULL;
+	return (arr);
 }
+
 /*#include <stdio.h>
 #include "ft_stack_new.c"
 #include "ft_stack_add_back.c"

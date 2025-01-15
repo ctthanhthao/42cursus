@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stack_new.c                                        :+:      :+:    :+:   */
+/*   ft_stack_new.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 19:42:47 by thchau            #+#    #+#             */
-/*   Updated: 2024/11/29 10:21:45 by thchau           ###   ########.fr       */
+/*   Updated: 2025/01/14 19:28:25 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ t_stack	*ft_stack_new(int content)
 		return (NULL);
 	node->content = (int *)malloc(sizeof(int));
 	if (node->content == NULL)
+	{
+		free(node);
 		return (NULL);
+	}
 	*(node->content) = content;
 	node->next = NULL;
 	return (node);

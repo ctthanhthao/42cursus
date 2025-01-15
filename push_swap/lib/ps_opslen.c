@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_dup.c                                     :+:      :+:    :+:   */
+/*   ps_opslen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 10:26:27 by thchau            #+#    #+#             */
-/*   Updated: 2024/12/04 10:28:01 by thchau           ###   ########.fr       */
+/*   Created: 2025/01/14 15:33:10 by thchau            #+#    #+#             */
+/*   Updated: 2025/01/15 11:31:25 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	ft_checkdup(t_stack *a)
+int	ft_arrlen(char **ops)
 {
-	t_stack	*tmp;
+	int	i;
 
-	while (a)
+	i = 0;
+	if (!ops || !*ops)
+		return (0);
+	while (ops[i])
+		i++;
+	return (i);
+}
+
+int	ps_opslen_by_comma(char *ops)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 1;
+	if (!ops)
+		return (i);
+	while (ops[i])
 	{
-		tmp = a->next;
-		while (tmp)
-		{
-			if (a->content == tmp->content)
-				return (1);
-			tmp = tmp->next;
-		}
-		a = a->next;
+		if (ops[i] == ',')
+			count++;
+		i++;
 	}
-	return (0);
+	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 08:54:29 by thchau            #+#    #+#             */
-/*   Updated: 2024/12/09 14:57:00 by thchau           ###   ########.fr       */
+/*   Updated: 2025/01/14 19:19:09 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ void	write_intr(char *str, char c)
 	write(1, str, ft_strlen(str));
 	if (c != ' ')
 		write(1, &c, 1);
-	write(1, "\n",1);
+	write(1, "\n", 1);
 }

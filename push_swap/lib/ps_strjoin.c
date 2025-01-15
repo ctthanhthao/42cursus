@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_by_comma.c                                       :+:      :+:    :+:   */
+/*   ps_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 10:14:12 by thchau            #+#    #+#             */
-/*   Updated: 2024/12/09 10:41:43 by thchau           ###   ########.fr       */
+/*   Updated: 2025/01/14 19:21:43 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,23 @@ char	*ft_strjoin_by_comma(char const *s1, char const *s2)
 		i++;
 	}
 	return (result[j] = 0, result);
+}
+
+char	*ps_strjoin(int count, const char *ops_name)
+{
+	char	*ops;
+	char	*tmp;
+
+	ops = NULL;
+	while (count > 0)
+	{
+		tmp = ops;
+		ops = ft_strjoin_by_comma(tmp, ops_name);
+		free(tmp);
+		tmp = NULL;
+		count--;
+	}
+	return (ops);
 }
 /*#include <stdio.h>
 int main()
