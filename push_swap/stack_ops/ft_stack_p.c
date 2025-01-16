@@ -6,13 +6,13 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 13:24:32 by thchau            #+#    #+#             */
-/*   Updated: 2025/01/14 19:25:57 by thchau           ###   ########.fr       */
+/*   Updated: 2025/01/16 12:52:04 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-static void	push_s2_to_s1(t_stack **s1, t_stack **s2)
+void	push_s2_to_s1(t_stack **s1, t_stack **s2)
 {
 	t_stack	*item;
 	t_stack	*tmp;

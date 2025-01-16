@@ -6,11 +6,27 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:36:43 by thchau            #+#    #+#             */
-/*   Updated: 2025/01/15 10:28:11 by thchau           ###   ########.fr       */
+/*   Updated: 2025/01/16 09:50:32 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+
+char	*seq_moves_to_top(int st_size, int num_pos)
+{
+	char	*ops;
+
+	ops = NULL;
+	if (num_pos == 1)
+		ops = ft_strdup("r");
+	else if (num_pos == (st_size - 1))
+		ops = ft_strdup("rr");
+	else if (num_pos > st_size - num_pos)
+		ops = ps_strjoin(st_size - num_pos, "rr");
+	else
+		ops = ps_strjoin(num_pos, "r");
+	return (ops);
+}
 
 void	move_to_top(t_stack **stack, int num_pos, int stack_size, char s_name)
 {

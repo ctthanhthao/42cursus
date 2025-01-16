@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 09:06:21 by thchau            #+#    #+#             */
-/*   Updated: 2025/01/15 11:45:08 by thchau           ###   ########.fr       */
+/*   Updated: 2025/01/16 18:47:32 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ int	main(int argc, char **argv)
 		ft_stack_free(&a);
 	return (0);
 }
-
-/*int	main()
+/*
+int	main()
 {
-	int argc = 11;
- 	char *argv[] = {"test","37", "17","43", "33", "21", "7", "35", "32", "23", "22"};
+	int argc = 2;
+ 	char *argv[] = {"test","2 1 3 6 5 8 4"};
 	t_stack	*a;
 
 	a = ft_process(argc, argv);

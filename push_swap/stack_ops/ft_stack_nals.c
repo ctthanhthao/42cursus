@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stack_new.c                                     :+:      :+:    :+:   */
+/*   ft_stack_nals.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/22 19:42:47 by thchau            #+#    #+#             */
-/*   Updated: 2025/01/14 19:28:25 by thchau           ###   ########.fr       */
+/*   Created: 2025/01/16 12:27:04 by thchau            #+#    #+#             */
+/*   Updated: 2025/01/16 13:53:18 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,54 @@ t_stack	*ft_stack_new(int content)
 	node->next = NULL;
 	return (node);
 }
-/*#include <stdio.h>
-int main()
+
+void	ft_stack_add_back(t_stack **lst, t_stack *new)
 {
-	char *s = "Hello World";
-	t_list *node = ft_stack_new((char *)s);
-	printf("content of node is %s\n", (char *)node->content);
-	if (node->next == NULL)
+	t_stack	*ptr;
+
+	if (*lst == NULL)
+		*lst = new;
+	else
 	{
-		printf("next of node is null\n");
-		free(node);
-		return 0;
+		ptr = ft_stack_last(*lst);
+		ptr->next = new;
 	}
-	return 1;
-}*/
+}
+
+void	ft_stack_add_front(t_stack **lst, t_stack *new)
+{
+	if (*lst != NULL)
+	{
+		new->next = *lst;
+	}
+	*lst = new;
+}
+
+t_stack	*ft_stack_last(t_stack *lst)
+{
+	t_stack	*last;
+
+	last = lst;
+	while (last && last->next)
+	{
+		last = last->next;
+	}
+	return (last);
+}
+
+int	ft_stack_size(t_stack *lst)
+{
+	t_stack	*ptr;
+	int		count;
+
+	if (lst == NULL)
+		return (0);
+	ptr = lst;
+	count = 0;
+	while (ptr)
+	{
+		ptr = ptr->next;
+		count++;
+	}
+	return (count);
+}

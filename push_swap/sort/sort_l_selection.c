@@ -6,27 +6,11 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 13:47:48 by thchau            #+#    #+#             */
-/*   Updated: 2025/01/15 10:30:16 by thchau           ###   ########.fr       */
+/*   Updated: 2025/01/16 09:57:39 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-static char	*seq_moves_to_top(int stack_size, int num_pos)
-{
-	char	*ops;
-
-	ops = NULL;
-	if (num_pos == 1)
-		ops = ft_strdup("r");
-	else if (num_pos == (stack_size - 1))
-		ops = ft_strdup("rr");
-	else if (num_pos > stack_size - num_pos)
-		ops = ps_strjoin(stack_size - num_pos, "rr");
-	else
-		ops = ps_strjoin(num_pos, "r");
-	return (ops);
-}
 
 static int	find_pos_in_b(t_stack *sb, int num)
 {
@@ -70,62 +54,62 @@ static int	calculate_ops(char *ops_a, char *ops_b)
 	return (count_ops_b + 1);
 }
 
-/*static char	**find_cheapest_moves(char **cheapest_moves, int st_a_size,
-				int st_b_size, int *total_ops, int pos_in_a, int pos_in_b)
+// Helper function to calculate the operations for a single item
+static char	**calculate_ops_for_item(int a_item, t_stack *st_b,
+	int pos_in_a, t_st_data *data)
 {
 	char	*ops_in_a;
 	char	*ops_in_b;
-	int		total;
+	char	**best_moves;
+	int		c_total_moves;
 
-	ops_in_a = seq_moves_to_top(st_a_size, pos_in_a);
-	ops_in_b = seq_moves_to_top(st_b_size, pos_in_b);
-	total = calculate_ops(ops_in_a, ops_in_b);
-	if (total_ops == 0 || *total_ops > total)
+	ops_in_a = seq_moves_to_top(data->st_a_size, pos_in_a);
+	ops_in_b = seq_moves_to_top(data->st_b_size, find_pos_in_b(st_b, a_item));
+	best_moves = NULL;
+	c_total_moves = calculate_ops(ops_in_a, ops_in_b);
+	if (data->total_moves == 0 || c_total_moves < data->total_moves)
 	{
-		cheapest_moves = ft_clean_arr(cheapest_moves);
-		cheapest_moves[0] = ft_strdup(ops_in_a);
-		cheapest_moves[1] = ft_strdup(ops_in_b);
-		total_ops = &total;
+		best_moves = ft_alloc(2);
+		best_moves[0] = ft_strdup(ops_in_a);
+		best_moves[1] = ft_strdup(ops_in_b);
+		data->total_moves = c_total_moves;
 	}
 	free(ops_in_a);
 	free(ops_in_b);
-	return (cheapest_moves);
-}*/
+	return (best_moves);
+}
 
-char	**next_item_position(t_stack *stack_a, t_stack *stack_b)
+static char	**clone_arr(char **ori, char **copy)
 {
-	int		top_a;
-	int		pos_in_b;
-	int		pos_in_a;
-	int		stack_a_size;
-	int		stack_b_size;
-	int		total;
-	char	*ops_in_a;
-	char	*ops_in_b;
-	char	**cheapest_moves;
-	t_stack	*cur;
+	ft_clean_arr(copy);
+	copy[0] = ft_strdup(ori[0]);
+	copy[1] = ft_strdup(ori[1]);
+	return (copy);
+}
 
-	cur = stack_a;
-	pos_in_a = 0;
-	total = 0;
-	stack_a_size = ft_stack_size(stack_a);
-	stack_b_size = ft_stack_size(stack_b);
+char	**next_item_position(t_stack *st_a, t_stack *st_b)
+{
+	t_st_data	data;
+	t_stack		*cur;
+	int			pos_in_a;
+	char		**cheapest_moves;
+	char		**current_moves;
+
+	data.st_a_size = ft_stack_size(st_a);
+	data.st_b_size = ft_stack_size(st_b);
+	data.total_moves = 0;
 	cheapest_moves = ft_alloc(2);
+	cur = st_a;
+	pos_in_a = 0;
 	while (cur)
 	{
-		top_a = *(cur->content);
-		pos_in_b = find_pos_in_b(stack_b, top_a);
-		ops_in_a = seq_moves_to_top(stack_a_size, pos_in_a);
-		ops_in_b = seq_moves_to_top(stack_b_size, pos_in_b);
-		if (total == 0 || total > calculate_ops(ops_in_a, ops_in_b))
+		current_moves = calculate_ops_for_item(*(cur->content), st_b, pos_in_a,
+				&data);
+		if (current_moves)
 		{
-			cheapest_moves = ft_clean_arr(cheapest_moves);
-			cheapest_moves[0] = ft_strdup(ops_in_a);
-			cheapest_moves[1] = ft_strdup(ops_in_b);
-			total = calculate_ops(ops_in_a, ops_in_b);
+			cheapest_moves = clone_arr(current_moves, cheapest_moves);
+			ft_free_arr(current_moves);
 		}
-		free(ops_in_a);
-		free(ops_in_b);
 		pos_in_a++;
 		cur = cur->next;
 	}

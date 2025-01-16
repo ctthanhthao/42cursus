@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   push_swap_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 10:19:53 by thchau            #+#    #+#             */
-/*   Updated: 2025/01/16 10:53:49 by thchau           ###   ########.fr       */
+/*   Created: 2025/01/16 13:38:43 by thchau            #+#    #+#             */
+/*   Updated: 2025/01/16 13:41:38 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#ifndef PUSH_SWAP_BONUS_H
+# define PUSH_SWAP_BONUS_H
 
-void	ft_error(void)
-{
-	write (2, "Error\n", 6);
-	exit(EXIT_FAILURE);
-}
+# include <fcntl.h>
+# include "push_swap.h"
+
+# define BUFFER_SIZE	1024
+
+char	*get_next_line(int fd);
+char	*ft_strjoin(char *s1, char *s2);
+
+#endif

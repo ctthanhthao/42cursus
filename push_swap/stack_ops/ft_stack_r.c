@@ -6,13 +6,13 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 13:21:24 by thchau            #+#    #+#             */
-/*   Updated: 2025/01/15 10:27:36 by thchau           ###   ########.fr       */
+/*   Updated: 2025/01/16 13:05:46 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-static void	rotate_no_print(t_stack **st)
+void	rotate_no_print(t_stack **st)
 {
 	t_stack	*start;
 	t_stack	*last;
@@ -33,9 +33,14 @@ void	rotate(t_stack **st, char c)
 	write_intr("r", c);
 }
 
-void	both_rotate(t_stack **st_a, t_stack **st_b)
+void	both_rotate_no_print(t_stack **st_a, t_stack **st_b)
 {
 	rotate_no_print(st_a);
 	rotate_no_print(st_b);
+}
+
+void	both_rotate(t_stack **st_a, t_stack **st_b)
+{
+	both_rotate_no_print(st_a, st_b);
 	write_intr("rr", ' ');
 }

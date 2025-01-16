@@ -6,27 +6,11 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:29:02 by thchau            #+#    #+#             */
-/*   Updated: 2025/01/15 10:29:01 by thchau           ###   ########.fr       */
+/*   Updated: 2025/01/16 14:07:46 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-int	is_asc_sorted(t_stack *stack)
-{
-	t_stack	*tmp;
-
-	if (!stack || ft_stack_size(stack) == 1)
-		return (1);
-	tmp = stack;
-	while (tmp && tmp->next)
-	{
-		if (*(tmp->content) > *(tmp->next->content))
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
-}
 
 static void	init_stack_b(t_stack **stack_a, t_stack **stack_b)
 {
@@ -35,18 +19,6 @@ static void	init_stack_b(t_stack **stack_a, t_stack **stack_b)
 	if (*((*stack_b)->content) < *((*stack_b)->next->content))
 		swap_top(stack_b, 'b');
 }
-
-/*int	*init_moves_arr(int pos_a, int pos_b)
-{
-	int	*moves_arr;
-
-	moves_arr = (int *)malloc(2 * sizeof(int));
-	if (moves_arr == NULL)
-		return (NULL);
-	moves_arr[0] = pos_a;
-	moves_arr[1] = pos_b;
-	return (moves_arr);
-}*/
 
 t_stack	*sort_large(t_stack *st_a)
 {

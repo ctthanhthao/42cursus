@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 09:15:23 by thchau            #+#    #+#             */
-/*   Updated: 2025/01/15 11:31:25 by thchau           ###   ########.fr       */
+/*   Updated: 2025/01/16 13:54:56 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,17 @@ typedef struct s_stack
 	struct s_stack	*next;
 }					t_stack;
 
-typedef struct s_pair
+typedef struct s_stack_data
 {
-	int		pos;
-	char	*ops;
-}		t_pair;
+	int	st_a_size;
+	int	st_b_size;
+	int	total_moves;
+}		t_st_data;
 
 int		ft_isdigit(int c);
 size_t	ps_atoi(const char *ptr);
 size_t	ft_strlen(const char *s);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	write_intr(char *str, char c);
@@ -52,18 +54,26 @@ char	**ft_clean_arr(char **arr);
 int		ft_arrlen(char **ops);
 int		ps_opslen_by_comma(char *ops);
 void	swap_top(t_stack **stack, char c);
+void	swap_top_no_print(t_stack **st);
 void	push_a(t_stack **stack_a, t_stack **stack_b);
 void	push_b(t_stack **stack_a, t_stack **stack_b);
+void	push_s2_to_s1(t_stack **s1, t_stack **s2);
 void	rotate(t_stack **stack, char c);
+void	rotate_no_print(t_stack **st);
 void	reverse_rotate(t_stack **stack, char c);
+void	reverse_rotate_no_print(t_stack **st);
 void	both_rotate(t_stack **st_a, t_stack **st_b);
+void	both_rotate_no_print(t_stack **st_a, t_stack **st_b);
 void	both_reverse_rotate(t_stack **st_a, t_stack **st_b);
+void	both_reverse_rotate_no_print(t_stack **st_a, t_stack **st_b);
+
 int		is_asc_sorted(t_stack *stack);
 t_stack	*sort_three(t_stack *stack);
 t_stack	*sort_five(t_stack *stack);
 t_stack	*sort_large(t_stack *stack);
 t_stack	*move_b_to_a(t_stack *st_a, t_stack *st_b, int st_b_size);
 void	move_to_top(t_stack **stack, int num_pos, int stack_size, char s_name);
+char	*seq_moves_to_top(int st_size, int num_pos);
 void	sort_l_exec(t_stack **st_a, t_stack **st_b, char **moves);
 char	**next_item_position(t_stack *stack_a, t_stack *stack_b);
 
@@ -79,6 +89,5 @@ int		min_position(t_stack *st);
 int		max_position(t_stack *st);
 int		max(t_stack *st);
 int		min(t_stack *st);
-
 
 #endif

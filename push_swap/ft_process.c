@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:02:51 by thchau            #+#    #+#             */
-/*   Updated: 2025/01/15 11:42:17 by thchau           ###   ########.fr       */
+/*   Updated: 2025/01/16 18:44:40 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,11 @@ static t_stack	*sub_process(char **argv)
 	char	**tmp;
 	int		i;
 	int		j;
-	int		len;
 
 	a = NULL;
 	i = 0;
 	tmp = ft_split(argv[1], 32);
-	len = ft_arrlen(tmp);
-	while (len > 1 && tmp[i])
+	while (tmp[i])
 	{
 		j = ps_atoi(tmp[i]);
 		ft_stack_add_back(&a, ft_stack_new(j));
