@@ -94,3 +94,7 @@ OK
 ### Contribution
 
 Feel free to fork the project and contribute by submitting pull requests or reporting issues. If you have suggestions or improvements, I’d love to hear them!
+
+### Evaluation Sheet
+Login by your account of 42 network
+https://www.42evals.com/sheets/66b9c544e839b918d221afd1
