@@ -62,14 +62,8 @@ re: fclean all
 
 test: all
 	@echo "Running tests..."
-	@./$(NAME) "2 1 3 6 5 8 4"
-	@./$(NAME) 1 2 3 4 5 | wc -l
-	@./$(NAME) 5 4 3 2 1 | wc -l
-	@./$(NAME) 42 | wc -l
-	@./$(NAME) "1 2 one" 2>> error_log.txt || echo "Error in handling invalid input"
+	@./test_push_swap.sh
 	@echo "Tests completed."
-	@echo "Error log contents:"
-	@cat error_log.txt
 
 .PHONY: all clean fclean re test
 
