@@ -1,6 +1,6 @@
-# MinitalK
+# Minitalk
 
-MinitalK is a simple message communication system using Unix signals. It allows a client to send messages to a server, where the server will process each message bit by bit using `SIGUSR1` and `SIGUSR2` signals.
+Minitalk is a simple message communication system using Unix signals. It allows a client to send messages to a server, where the server will process each message bit by bit using `SIGUSR1` and `SIGUSR2` signals.
 
 ## Overview
 
