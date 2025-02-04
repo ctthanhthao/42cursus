@@ -17,7 +17,7 @@ static t_stack	*sub_process(char **argv)
 	t_stack	*a;
 	char	**tmp;
 	int		i;
-	int		j;
+	size_t	j;
 
 	a = NULL;
 	i = 0;
@@ -25,6 +25,12 @@ static t_stack	*sub_process(char **argv)
 	while (tmp[i])
 	{
 		j = ps_atoi(tmp[i]);
+		if (j == PROCESS_ERROR)
+		{
+			ft_free_arr(tmp);
+			ft_stack_free(&a);
+			ft_error();
+		}
 		ft_stack_add_back(&a, ft_stack_new(j));
 		i++;
 	}
@@ -36,7 +42,7 @@ t_stack	*ft_process(int argc, char **argv)
 {
 	t_stack	*a;
 	int		i;
-	int		j;
+	size_t	j;
 
 	i = 1;
 	a = NULL;
@@ -49,6 +55,11 @@ t_stack	*ft_process(int argc, char **argv)
 		while (i < argc)
 		{
 			j = ps_atoi(argv[i]);
+			if (j == PROCESS_ERROR)
+			{
+				ft_stack_free(&a);
+				ft_error();
+			}
 			ft_stack_add_back(&a, ft_stack_new(j));
 			i++;
 		}

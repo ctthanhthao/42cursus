@@ -11,33 +11,9 @@
 /* ************************************************************************** */
 
 #include "../include/push_swap_bonus.h"
-/*#include <stdio.h>
-#include "../lib/common_utils.c"
-#include "../lib/ft_free.c"
-#include "../lib/ps_opslen.c"
-#include "../lib/ps_strjoin.c"
-#include "../stack_ops/ft_stack_nals.c"
-#include "../stack_ops/ft_stack_p.c"
-#include "../stack_ops/ft_stack_r.c"
-#include "../stack_ops/ft_stack_rr.c"
-#include "../stack_ops/ft_stack_s.c"
-#include "../stack_ops/ft_min_max.c"
-#include "../stack_ops/ft_stack_free.c"
-#include "../lib/ft_split.c"
-#include "../lib/ft_strlen.c"
-#include "../lib/ft_strlcpy.c"
-#include "../stack_ops/ft_checkdup.c"
-#include "../lib/ft_strncmp.c"
-#include "../lib/ft_strdup.c"
-#include "../ft_process.c"
-#include "../lib/ft_error.c"
-#include "../lib/ft_alloc.c"
 #include <stdio.h>
-#include <fcntl.h>
-#include "../lib/ft_strjoin.c"
-#include "get_next_line.c"*/
 
-static void	execute(t_stack **st_a, t_stack **st_b, char *ins)
+static int	execute(t_stack **st_a, t_stack **st_b, char *ins)
 {
 	if (ft_strncmp(ins, "sa", 2) == 0)
 		swap_top_no_print(st_a);
@@ -60,7 +36,8 @@ static void	execute(t_stack **st_a, t_stack **st_b, char *ins)
 	else if (ft_strncmp(ins, "rr", 2) == 0)
 		both_rotate_no_print(st_a, st_b);
 	else
-		ft_error();
+		return (ft_stack_free(st_a), ft_stack_free(st_b), 0);
+	return (1);
 }
 
 // Function to read and execute instructions on the stacks
@@ -73,7 +50,11 @@ void	execute_ins(t_stack **st_a, t_stack **st_b)
 		ins = get_next_line(0);
 		if (!ins)
 			break ;
-		execute(st_a, st_b, ins);
+		if (!execute(st_a, st_b, ins))
+		{
+			free(ins);
+			ft_error();
+		}
 		free(ins);
 	}
 }
@@ -93,7 +74,8 @@ int	main(int argc, char **argv)
 		ft_error();
 	}
 	if (ft_stack_size(st_a) == 1)
-		return (ft_stack_free(&st_a), ft_stack_free(&st_b), 0);
+		return (write_intr("OK", ' '),
+			ft_stack_free(&st_a), ft_stack_free(&st_b), 0);
 	execute_ins(&st_a, &st_b);
 	if (is_asc_sorted(st_a) && ft_stack_size(st_b) == 0)
 		write_intr("OK", ' ');

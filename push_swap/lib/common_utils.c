@@ -53,12 +53,12 @@ size_t	ps_atoi(const char *str)
 	while (*str)
 	{
 		if (!ft_isdigit(*str))
-			ft_error();
+			return (PROCESS_ERROR);
 		i = i * 10 + (*str - 48);
 		str++;
 	}
 	if ((sign * i) > 2147483647 || (sign * i) < -2147483648)
-		ft_error();
+		return (PROCESS_ERROR);
 	return (sign * i);
 }
 

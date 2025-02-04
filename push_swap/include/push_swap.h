@@ -19,6 +19,7 @@
 
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
+# define PROCESS_ERROR 2147483648
 # define ASC 	1
 # define DESC	0
 

@@ -87,8 +87,10 @@ static char	*extract_line(char **buffer)
 	if (!tmp)
 		return (free(line), line = NULL, NULL);
 	free(*buffer);
-	*buffer = tmp;
-	return (line);
+	if (*tmp == '\0')
+		return (free(tmp), *buffer = NULL, line);
+	else
+		return (*buffer = tmp, line);
 }
 
 char	*get_next_line(int fd)
@@ -107,34 +109,19 @@ char	*get_next_line(int fd)
 	return (line);
 }
 /*#include <stdio.h>
-#include "get_next_line_utils.c"
+//#include "get_next_line_utils.c"
 int	main(void)
 {
 	char	*line;
-	int		i;
-	int		fd1;
-	// int		fd2;
-	// int		fd3;
+	int i = 0;
 
-	fd1 = open("limits.txt", O_RDONLY);
-	i = 1;
 	while (1)
 	{
-		line = get_next_line(fd1);
+		line = get_next_line(0);
 		if (!line)
 			break;
 		printf("line [%02d]: %s", i, line);
 		free(line);
-	// 	line = get_next_line(fd2);
-	// 	printf("line [%02d]: %s", i, line);
-	// 	free(line);
-	// 	line = get_next_line(fd3);
-	// 	printf("line [%02d]: %s", i, line);
-	// 	free(line);
-	// 	i++;
 	 }
-	close(fd1);
-	// close(fd2);
-	// close(fd3);
 	return (0);
 }*/

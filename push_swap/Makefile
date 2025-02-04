@@ -19,7 +19,7 @@ SRCS        := ft_process.c push_swap.c \
 	$(STACK_OPS_DIR)/ft_stack_s.c   $(STACK_OPS_DIR)/ft_stack_free.c\
 
 BONUS_SRC	:= ft_process.c \
-	$(BONUS_DIR)/checker.c $(BONUS_DIR)/get_next_line.c \
+	$(BONUS_DIR)/checker_bonus.c $(BONUS_DIR)/get_next_line_bonus.c \
 	$(LIB_DIR)/common_utils.c $(LIB_DIR)/ft_alloc.c  $(LIB_DIR)/ft_error.c   $(LIB_DIR)/ft_free.c \
 	$(LIB_DIR)/ft_split.c     $(LIB_DIR)/ft_strdup.c $(LIB_DIR)/ft_strlcpy.c $(LIB_DIR)/ft_strlen.c \
 	$(LIB_DIR)/ft_strncmp.c   $(LIB_DIR)/ps_opslen.c $(LIB_DIR)/ps_strjoin.c $(LIB_DIR)/ft_strjoin.c\
