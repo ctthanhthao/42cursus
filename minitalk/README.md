@@ -80,22 +80,21 @@ This will generate the `server` and `client` executables.
 
 ```bash
 $ ./server
-Server started with PID: 12345
+PID: 12345
 ```
 
 **Client:**
 
 ```bash
 $ ./client 12345 "Hello, World!"
-Sending message: 'Hello, World!'
 Sent: Hello, World!
-Received: Hello, World!
+Received: 13
 ```
 
 **Server Output (printed message):**
 
 ```
-Received: Hello, World!
+Hello, World!
 ```
 
 ## Notes
