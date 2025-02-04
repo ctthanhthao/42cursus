@@ -57,11 +57,14 @@ void	send_msg(int pid, char *str)
 
 int	main(int argc, char **argv)
 {
+	if (argc != 3 || !ft_strlen(argv[2]))
+	{
+		ft_putstr_fd("<Usage>: ./client <server pid> <message>", 1);
+		return (1);
+	}
 	ft_putstr_fd("Sent:\t", 1);
 	ft_putstr_fd(argv[2], 1);
 	ft_putendl_fd("", 1);
-	if (argc != 3 || !ft_strlen(argv[2]))
-		return (1);
 	signal(SIGUSR1, handler);
 	signal(SIGUSR2, handler);
 	send_msg(ft_atoi(argv[1]), argv[2]);
