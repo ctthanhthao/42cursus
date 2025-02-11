@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:33:19 by jcheel-n          #+#    #+#             */
-/*   Updated: 2025/02/07 09:14:16 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/11 18:47:54 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SO_LONG_BONUS_H
 
 # include "../../libft/libft.h"
-# include "../../libft/get_next_line.h"
 # include "../../mlx/mlx.h"
 # include <unistd.h>
 # include <fcntl.h>
@@ -123,8 +122,6 @@ void	move_up(t_map *map);
 void	move_left(t_map *map);
 void	move_down(t_map *map);
 void	move_right(t_map *map);
-
-int		monster_hook(t_map *map);
 
 void	print_counter(t_map *map);
 

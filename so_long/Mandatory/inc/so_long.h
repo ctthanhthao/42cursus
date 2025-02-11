@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/11 07:29:59 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/11 18:46:21 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SO_LONG_H
 
 # include "../../libft/libft.h"
-# include "../../libft/get_next_line.h"
 # include "../../mlx/mlx.h"
 # include <unistd.h>
 # include <fcntl.h>
