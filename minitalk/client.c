@@ -57,9 +57,17 @@ void	send_msg(int pid, char *str)
 
 int	main(int argc, char **argv)
 {
+	int	server_pid;
+
 	if (argc != 3 || !ft_strlen(argv[2]))
 	{
 		ft_putstr_fd("<Usage>: ./client <server pid> <message>", 1);
+		return (1);
+	}
+	server_pid = ft_atoi(argv[1]);
+	if (server_pid <= 0 || kill(server_pid, 0) == -1)
+	{
+		ft_putstr_fd("Error: Non-existent server PID\n", 1);
 		return (1);
 	}
 	ft_putstr_fd("Sent:\t", 1);
