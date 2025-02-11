@@ -3,26 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/07 17:38:14 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/02/17 20:36:59 by jcheel-n         ###   ########.fr       */
+/*   Created: 2024/09/17 12:21:06 by thchau            #+#    #+#             */
+/*   Updated: 2024/11/04 12:07:53 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
-{	
-	if (!dst && !src)
-		return (NULL);
-	if (dst < src)
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	unsigned char		*d;
+	const unsigned char	*s;
+
+	d = (unsigned char *)dest;
+	s = (const unsigned char *)src;
+	if (d == s)
+		return (dest);
+	if (d < s)
+		while (n--)
+			*d++ = *s++;
+	else
 	{
-		ft_memcpy(dst, src, len);
-	}	
-	else if (src < dst)
-	{
-		while (len--)
-			((char *)dst)[len] = ((char *)src)[len];
+		d += n;
+		s += n;
+		while (n--)
+			*--d = *--s;
 	}
-	return (dst);
+	return (dest);
+}
+#include <string.h>
+#include <stdio.h>
+int main()
+{
+	char dest[] = "1234567890\0";
+	char *src = &dest[2];
+	char dest1[] = "1234567890\0";
+	char *src1 = &dest1[2];
+	int numOfbyte = 4;
+	printf("==== before calling function ==========\n");
+	printf("dest is %s\n", dest);
+	printf("src is %s\n", src);
+	printf("dest1 is %s\n", dest1);
+	printf("src1 is %s\n", src1);
+	ft_memmove(dest, src, numOfbyte);
+	memmove(dest1, src1, numOfbyte);
+	printf("==== after calling function ==========\n");
+	printf("dest is %s\n", dest);
+	printf("src is %s\n", src);
+	printf("dest1 is %s\n", dest1);
+	printf("src1 is %s\n", src1);
+	return 1;
 }

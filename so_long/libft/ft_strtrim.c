@@ -3,28 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 16:38:59 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/02/23 18:21:13 by jcheel-n         ###   ########.fr       */
+/*   Created: 2024/09/20 10:47:19 by thchau            #+#    #+#             */
+/*   Updated: 2024/09/20 11:41:31 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
+
+static int	ft_char_in_set(char c, const char *set)
+{
+	while (*set)
+	{
+		if (*set == c)
+			return (1);
+		set++;
+	}
+	return (0);
+}
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	len;
+	char	*copy;
+	size_t	start;
+	size_t	end;
 	size_t	i;
-	char	*str;
 
+	if (s1 == NULL || set == NULL)
+		return (NULL);
+	start = 0;
+	while (s1[start] && ft_char_in_set(s1[start], set) == 1)
+		start++;
+	end = ft_strlen(s1);
+	while (end > start && ft_char_in_set(s1[end - 1], set) == 1)
+		end--;
+	copy = (char *)malloc((end - start + 1) * sizeof(char));
+	if (copy == NULL)
+		return (NULL);
 	i = 0;
-	while (s1[i] && ft_strchr(set, s1[i]))
+	while (start < end)
+	{
+		copy[i] = s1[start];
 		i++;
-	len = ft_strlen(s1);
-	while (len && ft_strchr(set, s1[len]))
-		len--;
-	if (i > len)
-		return (ft_strdup(""));
-	str = ft_substr((char *)s1, i, len - i + 1);
-	return (str);
+		start++;
+	}
+	copy[i] = 0;
+	return (copy);
 }
+/*#include <stdio.h>
+int main()
+{
+	char *s = "----+a----";
+	char *set = "-+";
+	char *r = ft_strtrim(s, set);
+	printf("Result is %s\n", r);
+	return (1);
+}*/

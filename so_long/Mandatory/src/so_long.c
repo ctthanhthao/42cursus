@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josephcheel <josephcheel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/13 15:55:50 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/07/21 14:39:12 by jcheel-n         ###   ########.fr       */
+/*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
+/*   Updated: 2025/02/11 07:31:20 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,24 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		map_initializer(&map, av);
+		printf("map_init DONE\n");
 		map_checker(&map);
+		printf("map_checker DONE\n");
 		map.mlx = mlx_init();
+		printf("mlx_init DONE with map.mlx %p\n", map.mlx);
 		map.wnd = mlx_new_window(map.mlx, map.x
 				* IMG_PXL, map.y * IMG_PXL, WND_NAME);
+		printf("mlx_new_window DONE\n");
 		file_to_image(&map);
+		printf("file_to_image DONE\n");
 		map_printer(&map);
+		printf("map_printer DONE\n");
 		mlx_hook(map.wnd, 17, 0, ft_close, &map);
+		printf("mlx_hook DONE\n");
 		mlx_key_hook(map.wnd, key_hook, &map);
+		printf("mlx_key_hook DONE\n");
 		mlx_loop(map.mlx);
+		printf("mlx_loop DONE\n");
 	}
 	write(2, "\033[1;31m🛑ERROR:", 18);
 	write(2, "Usage: ./so_long mapfile\n\033[0m", 30);

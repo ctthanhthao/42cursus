@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/28 15:54:11 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/09/30 13:59:05 by jcheel-n         ###   ########.fr       */
+/*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
+/*   Updated: 2025/02/11 07:29:59 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -22,11 +23,18 @@
 # include <math.h>
 # include <stdio.h>
 
-# define UP      13
+// Linux
+# define UP      119 //w
+# define DOWN    115 //s
+# define LEFT    97 //a
+# define RIGHT   100 //d
+# define ESC     65307
+// MacOS
+/*# define UP      13
 # define DOWN    1
 # define LEFT    0
 # define RIGHT   2
-# define ESC     53
+# define ESC     53*/
 # define IMG_PXL 50
 # define WND_NAME "so_long"
 

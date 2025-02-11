@@ -3,56 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/10 17:50:16 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/02/17 20:33:52 by jcheel-n         ###   ########.fr       */
+/*   Created: 2024/09/20 19:38:49 by thchau            #+#    #+#             */
+/*   Updated: 2024/09/20 20:42:03 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-size_t	ft_intlenght(int c)
+static int	ft_count_digits(int n)
 {
-	size_t	ret;
+	int	count;
 
-	ret = 0;
-	if (c == 0)
-		return (1);
-	if (c < 0)
-		ret++;
-	while (c)
+	count = 0;
+	if (n < 0)
 	{
-		c = c / 10;
-			ret++;
+		n = n * (-1);
+		count++;
 	}
-	return (ret);
+	while (n > 0)
+	{
+		n = n / 10;
+		count++;
+	}
+	return (count);
+}
+
+static char	*ft_convert_to_str(char *s, int n)
+{
+	int	n_len;
+
+	n_len = ft_count_digits(n);
+	s[n_len] = '\0';
+	if (n < 0)
+	{
+		*s = '-';
+		n = n * (-1);
+	}
+	while (n > 0)
+	{
+		s[--n_len] = (n % 10) + 48;
+		n = n / 10;
+	}
+	return (s);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*str;
-	size_t	lenght;
-	size_t	i;
+	char	*s;
 
-	lenght = ft_intlenght(n);
-	str = malloc(sizeof(char) * (lenght + 1));
-	if (!str || n > INT_MAX || n < INT_MIN)
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	if (n == 0)
+		return (ft_strdup("0"));
+	s = (char *)malloc((ft_count_digits(n) + 1) * sizeof(char));
+	if (s == NULL)
 		return (NULL);
-	str[lenght] = '\0';
-	if (n < 0)
-	{
-		str[0] = '-';
-		i = 1;
-	}
-	else
-		i = 0;
-	while (lenght-- > i)
-	{
-		if (n < 0)
-			str[lenght] = 48 + (n % 10) * (-1);
-		else
-			str[lenght] = (n % 10) + 48;
-		n = n / 10;
-	}
-	return (str);
+	return (ft_convert_to_str(s, n));
 }
+/*#include <stdio.h>
+int main(void)
+{
+	int num[5] = {0, -34343, 343424, -2147483648, 2147483647};
+	for (int i = 0; i < 5; i++)
+	{
+		char *s = ft_itoa(num[i]);
+		printf("Result is %s\n", s);
+		free(s);
+	}
+	return 0;
+}*/

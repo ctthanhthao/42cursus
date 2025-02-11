@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoinfree.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/30 16:22:35 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/09/30 16:22:37 by jcheel-n         ###   ########.fr       */
+/*   Created: 2024/09/20 09:27:09 by thchau            #+#    #+#             */
+/*   Updated: 2025/02/11 07:46:47 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strjoinfree(char *s1, char *s2)

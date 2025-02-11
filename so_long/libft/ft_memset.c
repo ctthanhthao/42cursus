@@ -3,23 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 19:18:59 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/01/25 19:20:59 by jcheel-n         ###   ########.fr       */
+/*   Created: 2024/09/17 10:24:40 by thchau            #+#    #+#             */
+/*   Updated: 2024/09/24 12:11:21 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	size_t	i;
+	unsigned char	*ptr;
 
-	i = 0;
-	while (i < len)
+	ptr = (unsigned char *)s;
+	while (n--)
 	{
-		((unsigned char *)b)[i] = c;
-		i++;
+		ptr[n] = (unsigned char)c;
 	}
-	return ((unsigned char *)b);
+	return (s);
 }
+
+/*#include <stdio.h>
+#include <string.h>
+int main()
+{
+	char s[] = "thao test234\0";
+	char s1[] = "thao test\0";
+	ft_memset(s, 'V', 10);
+	memset(s1, 'V', 10);
+	printf("the result s is %s\n", s);
+	printf("the result s1 is %s\n", s1);
+	return 1;
+}*/

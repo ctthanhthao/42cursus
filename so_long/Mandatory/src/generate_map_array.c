@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generate_map_array.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/21 15:06:37 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/07/21 15:10:16 by jcheel-n         ###   ########.fr       */
+/*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
+/*   Updated: 2025/02/11 07:30:51 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

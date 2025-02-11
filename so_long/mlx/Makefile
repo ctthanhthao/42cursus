@@ -1,36 +1,22 @@
+##
+## Makefile for MiniLibX in /home/boulon/work/c/raytraceur/minilibx
+## 
+## Made by Olivier Crouzet
+## Login   <ol@epitech.net>
+## 
+## Started on  Tue Oct  5 15:56:43 2004 Olivier Crouzet
+## Last update Tue May 15 15:44:41 2007 Olivier Crouzet
+##
 
-.NOTPARALLEL:
-
-MODULE_SRC= mlx_image.swift mlx_window.swift mlx_init.swift
-MODULE_OBJ=$(MODULE_SRC:.swift=.swiftmodule)
-
-SRC= interface.swift $(MODULE_SRC)
-OBJ=$(SRC:.swift=.o)
-
-C_SRC= mlx_xpm.c mlx_png.c mlx_string_put.c
-C_OBJ=$(C_SRC:.c=.o)
-CFLAGS=-O3
-
-NAME=libmlx.dylib
-
-INC=-I.
-#OPTI=-Ounchecked
-
-all: $(NAME)
-
-$(NAME): $(MODULE_OBJ) $(OBJ) $(C_OBJ)
-	swiftc $(OPTI) $(INC) -o $(NAME) -emit-library $(OBJ) $(C_OBJ) -lz \
-		-Xlinker -rpath -Xlinker @executable_path
+## Please use configure script
 
 
-%.o: %.swift
-	swiftc $(OPTI) $(INC) -parse-as-library -c $< -o $@
+all	: do_configure
 
-%.swiftmodule: %.swift
-	swiftc $(OPTI) $(INC) -emit-module -emit-module-path $@ \
-		-module-name $(patsubst %.swift,%,$<) -module-link-name $(patsubst %.swift,%,$<) \
-		$<
+do_configure	:
+	./configure
 
-clean:
-	rm -f $(NAME) $(OBJ) $(MODULE_OBJ) $(C_OBJ) *.swiftdoc *.swiftsourceinfo *~
+clean	:
+	./configure clean
 
+re	: clean all

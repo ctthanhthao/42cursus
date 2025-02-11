@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_animation_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/29 14:09:33 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/07/29 14:20:20 by jcheel-n         ###   ########.fr       */
+/*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
+/*   Updated: 2025/02/11 07:28:57 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

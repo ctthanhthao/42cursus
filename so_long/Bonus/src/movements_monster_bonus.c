@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements_monster_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/01 12:46:04 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/08/01 12:46:06 by jcheel-n         ###   ########.fr       */
+/*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
+/*   Updated: 2025/02/11 07:29:16 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

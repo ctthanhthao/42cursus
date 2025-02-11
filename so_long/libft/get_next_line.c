@@ -3,93 +3,138 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/18 13:37:13 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/07/21 16:14:49 by jcheel-n         ###   ########.fr       */
+/*   Created: 2024/11/03 18:51:01 by thchau            #+#    #+#             */
+/*   Updated: 2025/02/11 07:55:24 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
 
-static char	*returnstring(char	*recovery)
+#include "libft.h"
+
+static int	has_new_line(char *str)
 {
-	char	*line;
-	int		i;
-
-	i = 0;
-	if (recovery)
+	if (!str)
+		return (0);
+	while (*str)
 	{
-		while (recovery && recovery[i] != '\n')
-			i++;
-		line = ft_substrfree(recovery, 0, i + 1, 0);
-		return (line);
+		if (*str == '\n')
+			return (1);
+		str++;
 	}
-	return (NULL);
+	return (0);
 }
 
-static char	*staticret(char	*recovery)
+static char	*join_buffer(char *buffer, char *read_buf)
 {
-	size_t	i;
+	char	*tmp;
 
-	i = 0;
-	if (ft_strchr(recovery, '\n'))
-		while (recovery && recovery[i] != '\n')
-			i++;
-	if (!recovery[i + 1])
-	{
-		free(recovery);
-		return (NULL);
-	}
-	recovery = ft_substrfree(recovery, i + 1, ft_strlen(recovery) - i, 1);
-	return (recovery);
+	tmp = buffer;
+	buffer = ft_strjoin(tmp, read_buf);
+	free(tmp);
+	tmp = NULL;
+	return (buffer);
 }
 
-static char	*reader(int fd, char *recovery)
+static char	*read_and_store(int fd, char *buffer)
 {
-	int		ret;
-	char	*buf;
+	char	*read_buf;
+	ssize_t	byte_read;
 
-	ret = 1;
-	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buf)
+	read_buf = malloc(BUFFER_SIZE + 1);
+	if (!read_buf)
 		return (NULL);
-	buf[0] = '\0';
-	while (ret > 0 && !ft_strchr(buf, '\n'))
+	read_buf[BUFFER_SIZE] = '\0';
+	while (!has_new_line(buffer))
 	{
-		ret = read(fd, buf, BUFFER_SIZE);
-		if (ret > 0)
+		byte_read = read(fd, read_buf, BUFFER_SIZE);
+		if (byte_read == -1)
 		{
-			buf[ret] = '\0';
-			recovery = ft_strjoinfree(recovery, buf);
+			free(read_buf);
+			return (free(buffer), buffer = NULL, NULL);
 		}
+		if (byte_read == 0)
+			break ;
+		read_buf[byte_read] = '\0';
+		buffer = join_buffer(buffer, read_buf);
+		if (!buffer)
+			return (NULL);
 	}
-	free(buf);
-	if (ret < 0)
-	{	
-		free(recovery);
+	free(read_buf);
+	return (buffer);
+}
+
+static char	*extract_line(char **buffer)
+{
+	char			*line;
+	char			*tmp;
+	unsigned int	len;
+
+	len = 0;
+	line = NULL;
+	if (!*buffer || !**buffer)
 		return (NULL);
-	}
-	return (recovery);
+	while ((*buffer)[len] && (*buffer)[len] != '\n')
+		len++;
+	if ((*buffer)[len] == '\n')
+		len++;
+	line = malloc(len + 1);
+	if (!line)
+		return (NULL);
+	ft_memcpy(line, *buffer, len);
+	line[len] = '\0';
+	tmp = ft_strdup(*buffer + len);
+	if (!tmp)
+		return (free(line), line = NULL, NULL);
+	free(*buffer);
+	*buffer = tmp;
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char		*recovery = NULL;
-	char			*line;
+	static char	*buffer;
+	char		*line;
 
-	if (fd < 0 || fd > 255 || !BUFFER_SIZE)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!recovery || !ft_strchr(recovery, '\n'))
-		recovery = reader(fd, recovery);
-	if (recovery == NULL)
+	buffer = read_and_store(fd, buffer);
+	if (!buffer)
 		return (NULL);
-	if (ft_strchr(recovery, '\n'))
-	{
-		line = returnstring(recovery);
-		recovery = staticret(recovery);
-		return (line);
-	}
-	line = recovery;
-	recovery = NULL;
+	line = extract_line(&buffer);
+	if (!line && buffer)
+		return (free(buffer), buffer = NULL, NULL);
 	return (line);
 }
+/*#include <stdio.h>
+#include "get_next_line_utils.c"
+int	main(void)
+{
+	char	*line;
+	int		i;
+	int		fd1;
+	// int		fd2;
+	// int		fd3;
+
+	fd1 = open("limits.txt", O_RDONLY);
+	i = 1;
+	while (1)
+	{
+		line = get_next_line(fd1);
+		if (!line)
+			break;
+		printf("line [%02d]: %s", i, line);
+		free(line);
+	// 	line = get_next_line(fd2);
+	// 	printf("line [%02d]: %s", i, line);
+	// 	free(line);
+	// 	line = get_next_line(fd3);
+	// 	printf("line [%02d]: %s", i, line);
+	// 	free(line);
+	// 	i++;
+	 }
+	close(fd1);
+	// close(fd2);
+	// close(fd3);
+	return (0);
+}*/

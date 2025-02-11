@@ -3,23 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 17:31:52 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/02/21 17:43:59 by jcheel-n         ###   ########.fr       */
+/*   Created: 2024/09/22 20:43:02 by thchau            #+#    #+#             */
+/*   Updated: 2024/09/22 20:52:29 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 int	ft_lstsize(t_list *lst)
 {
-	int	counter;
+	t_list	*ptr;
+	int		count;
 
-	counter = 0;
-	while (lst)
+	if (lst == NULL)
+		return (0);
+	ptr = lst;
+	count = 0;
+	while (ptr)
 	{
-		counter++;
-		lst = lst->next;
-	}	
-	return (counter);
+		ptr = ptr->next;
+		count++;
+	}
+	return (count);
 }
+/*#include <stdio.h>
+#include "ft_lstnew.c"
+#include "ft_lstadd_front.c"
+int main()
+{
+	t_list *head = NULL;
+	int data1 = 10;
+	int data2 = 20;
+	int data3 = 30;
+	t_list *node1 = ft_lstnew(&data1);
+	t_list *node2 = ft_lstnew(&data2);
+	t_list *node3 = ft_lstnew(&data3);
+	
+	ft_lstadd_front(&head, node1);
+	ft_lstadd_front(&head, node2);
+	ft_lstadd_front(&head, node3);
+	
+	printf("size of list is %i\n", ft_lstsize(head));
+
+	free(node1);
+    free(node2);
+    free(node3);
+	return 1;
+}*/

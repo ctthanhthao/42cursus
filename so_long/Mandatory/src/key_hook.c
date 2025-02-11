@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/28 14:26:22 by jcheel-n          #+#    #+#             */
-/*   Updated: 2025/01/31 11:43:16 by thchau           ###   ########.fr       */
+/*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
+/*   Updated: 2025/02/11 07:30:57 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	scan_player(t_map *map)
 int	key_hook(int keycode, t_map *map)
 {
 	scan_player(map);
+	printf("key code : %d\n", keycode);
 	if (keycode == ESC)
 		return (ft_close(map));
 	else if (map->exit == 1)

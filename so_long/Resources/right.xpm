@@ -2,7 +2,7 @@
 static char *right[] = {
 /* columns rows colors chars-per-pixel */
 "47 46 5 1 ",
-"  c None",
+"  c #FFAE5D",
 ". c black",
 "X c #B94B3E",
 "o c #D07B72",

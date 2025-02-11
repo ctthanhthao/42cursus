@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_to_image_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/28 18:13:51 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/07/28 18:22:22 by jcheel-n         ###   ########.fr       */
+/*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
+/*   Updated: 2025/02/11 07:28:17 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

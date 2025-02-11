@@ -2,7 +2,7 @@
 static char *wall_or[] = {
 /* columns rows colors chars-per-pixel */
 "49 50 234 2 ",
-"   c None",
+"   c #FFAE5D",
 ".  c #1F1C1B",
 "X  c #3A261E",
 "o  c #3E2F21",

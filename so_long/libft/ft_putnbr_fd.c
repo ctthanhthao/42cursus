@@ -3,37 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/02 14:07:24 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/02/07 20:26:31 by jcheel-n         ###   ########.fr       */
+/*   Created: 2024/09/21 14:01:13 by thchau            #+#    #+#             */
+/*   Updated: 2024/09/21 14:23:46 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (n > -2147483648 || n <= 2147483647)
+	char	c;
+
+	if (n == -2147483648)
 	{
-		if (n == -2147483648)
-		{
-			ft_putchar_fd('-', fd);
-			ft_putchar_fd('2', fd);
-			ft_putnbr_fd(147483648, fd);
-			return ;
-		}
-		else if (n >= 10)
-		{
-			ft_putnbr_fd(n / 10, fd);
-			ft_putnbr_fd(n % 10, fd);
-		}
-		else if (n < 0)
-		{
-			n = -n;
-			ft_putchar_fd('-', fd);
-			ft_putnbr_fd(n, fd);
-		}
-		else
-			ft_putchar_fd(n + '0', fd);
+		write (fd, "-2147483648", 11);
+		return ;
 	}
+	else if (n < 0)
+	{
+		write (fd, "-", 1);
+		n = n * (-1);
+	}
+	if (n < 10)
+	{
+		c = n + '0';
+		write (fd, &c, 1);
+		return ;
+	}
+	ft_putnbr_fd(n / 10, fd);
+	c = n % 10 + '0';
+	write (fd, &c, 1);
 }
+/*#include <stdio.h>
+int main(void)
+{
+	int num[5] = {0, -34343, 343424, -2147483648, 2147483647};
+	for (int i = 0; i < 5; i++)
+	{
+		ft_putnbr_fd(num[i], 1);
+		write (1, "\n", 1);
+	}
+	return 0;
+}*/

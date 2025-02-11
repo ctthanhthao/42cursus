@@ -3,26 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcheel-n <jcheel-n@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 18:14:42 by jcheel-n          #+#    #+#             */
-/*   Updated: 2022/02/17 20:39:31 by jcheel-n         ###   ########.fr       */
+/*   Created: 2024/09/21 13:06:00 by thchau            #+#    #+#             */
+/*   Updated: 2024/09/21 13:30:07 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*str;
-	size_t	len;
-	size_t	i;
+	char			*str;
+	unsigned int	i;
+	unsigned int	len;
 
-	if (!s || !f)
+	if (s == NULL || f == NULL)
 		return (NULL);
 	i = 0;
 	len = ft_strlen(s);
-	str = malloc(sizeof(char) * (len + 1));
-	if (!str)
+	str = (char *)malloc((len + 1) * sizeof(char));
+	if (str == NULL)
 		return (NULL);
 	while (i < len)
 	{
@@ -32,3 +33,18 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	str[i] = '\0';
 	return (str);
 }
+/*#include <stdio.h>
+
+char ft_plus_2_char(unsigned int i, char c)
+{
+	return c + i;
+}
+
+int main()
+{
+	char s[] = "absdefkgh";
+	char *r = ft_strmapi(s, &ft_plus_2_char);
+	printf("r is %s\n", r);
+	free(r);
+	return 1;
+}*/
