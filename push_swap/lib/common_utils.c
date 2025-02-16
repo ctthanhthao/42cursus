@@ -43,12 +43,12 @@ size_t	ps_atoi(const char *str)
 	while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\f'
 		|| *str == '\v' || *str == '\r')
 		str++;
-	if (*str == '-')
+	if (*str == '-' && ft_strlen(str) > 1)
 	{
 		sign = -1;
 		str++;
 	}
-	else if (*str == '+')
+	else if (*str == '+' && ft_strlen(str) > 1)
 		str++;
 	while (*str)
 	{
