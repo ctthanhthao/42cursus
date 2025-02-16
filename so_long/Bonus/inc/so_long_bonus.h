@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:33:19 by jcheel-n          #+#    #+#             */
-/*   Updated: 2025/02/11 18:47:54 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/16 12:18:18 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ typedef struct s_map
 
 }t_map;
 
-void	map_checker(t_map *map);
-void	check_valid_path(t_map *map);
-void	map_array(t_map *mapper);
+void	map_validator(t_map *map);
+void	validate_path(t_map *map);
+void	build_map_array(t_map *mapper);
 void	file_to_image(t_map *mapper);
 void	file_to_image_player(t_map *map);
 void	map_printer(t_map *mapper);
@@ -106,7 +106,7 @@ void	error_array(void);
 void	error_filename(void);
 void	error_wall(t_map *map);
 void	error_openfile(void);
-void	error_size(t_map *map);
+void	error_shape(t_map *map);
 void	error_map_elements(t_map *map);
 void	error_empty_line(void);
 void	error_malloc(void);

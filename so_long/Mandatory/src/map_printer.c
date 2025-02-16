@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/11 07:31:03 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/16 13:20:13 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static void	map_type(t_map *map, int x, int y)
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty, x, y);
 	if (type == 'C')
 		mlx_put_image_to_window(map->mlx, map->wnd,
-			map->img.collectible, x + 2, y);
+			map->img.collectible, x, y);
 	else if (type == 'P')
 		mlx_put_image_to_window(map->mlx, map->wnd,
-			map->img.player_down1, x, y);
+			map->img.player_down, x, y);
 	else if (type == 'E')
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.exit, x, y);
 	else if (type == '1')

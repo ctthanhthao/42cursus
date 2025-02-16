@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/11 07:31:11 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/16 13:49:04 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	move_resume(t_map *map, int x, int y, int dir)
 	if (dir == UP)
 		y -= 1;
 	if (dir == DOWN)
-	y += 1;
+		y += 1;
 	if (dir == LEFT)
 		x -= 1;
 	if (dir == RIGHT)
-	x += 1;
+		x += 1;
 	if (map->array[y][x] == 'E' && map->c == 0)
 		return (ft_win(map));
 	if (map->array[y][x] == 'C')
@@ -51,7 +51,7 @@ void	move_up(t_map *map)
 		print_movements(map);
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 			x * IMG_PXL, y * IMG_PXL);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_up1,
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_up,
 			x * IMG_PXL, y * IMG_PXL);
 		map->array[y][x] = 'P';
 		map->player.x = x;
@@ -78,10 +78,10 @@ void	move_left(t_map *map)
 		print_movements(map);
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 			x * IMG_PXL, y * IMG_PXL);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_left1,
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_left,
 			x * IMG_PXL, y * IMG_PXL);
 		map->array[y][x] = 'P';
-	map->player.y = y;
+		map->player.y = y;
 	}
 }
 
@@ -104,7 +104,7 @@ void	move_down(t_map *map)
 		y++;
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 			x * IMG_PXL, y * IMG_PXL);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_down1,
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_down,
 			x * IMG_PXL, y * IMG_PXL);
 		map->array[y][x] = 'P';
 		print_movements(map);
@@ -131,7 +131,7 @@ void	move_right(t_map *map)
 		x++;
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 			x * IMG_PXL, y * IMG_PXL);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_right1,
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_right,
 			x * IMG_PXL, y * IMG_PXL);
 		map->array[y][x] = 'P';
 		print_movements(map);

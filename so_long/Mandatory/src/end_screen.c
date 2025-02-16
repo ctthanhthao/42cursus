@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/11 07:30:24 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/16 19:27:49 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	ft_close(t_map *map)
 {
-	mlx_destroy_window(map->mlx, map->wnd);
-	ft_free_array(map->array, map->y);
+	ft_clean_up(map);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
@@ -26,9 +25,10 @@ void	ft_win(t_map *map)
 	map->moves++;
 	mlx_clear_window(map->mlx, map->wnd);
 	mlx_string_put(map->mlx, map->wnd,
-		map->x / 2 * IMG_PXL, map->y / 2 * IMG_PXL, 0xFFFA9E, "YOU WON");
+		map->x / 2 * IMG_PXL - 50, map->y / 2 * IMG_PXL, 0x800080,
+		"~.~ CONGRATULATIONS ~.~");
 	write(1, "\n", 1);
-	write(1, "\x1b[32;01m", 9);
-	write(1, "🏆🏆YOU WON!!🏆🏆\n", 27);
-	write(1, "\x1b[0m", 5);
+	write(1, "\x1b[35;01m", 9);
+	write(1, "GAME FINISHED\n", 15);
+	write(1, "\x1b[0m", 5); 
 }

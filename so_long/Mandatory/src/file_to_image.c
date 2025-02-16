@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/11 07:30:37 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/16 13:11:49 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,12 @@ void	file_to_image_player(t_map *map)
 	int	a;
 
 	a = IMG_PXL;
-	map->img.player_right1 = mlx_xpm_file_to_image(map->mlx,
+	map->img.player_right = mlx_xpm_file_to_image(map->mlx,
 			"Resources/right.xpm", &a, &a);
-	map->img.player_right2 = mlx_xpm_file_to_image(map->mlx,
-			"Resources/right-2-40.xpm", &a, &a);
-	map->img.player_up1 = mlx_xpm_file_to_image(map->mlx,
+	map->img.player_up = mlx_xpm_file_to_image(map->mlx,
 			"Resources/up.xpm", &a, &a);
-	map->img.player_up2 = mlx_xpm_file_to_image(map->mlx,
-			"Resources/up-2-40.xpm", &a, &a);
-	map->img.player_down1 = mlx_xpm_file_to_image(map->mlx,
+	map->img.player_down = mlx_xpm_file_to_image(map->mlx,
 			"Resources/down.xpm", &a, &a);
-	map->img.player_down2 = mlx_xpm_file_to_image(map->mlx,
-			"Resources/down-2-40.xpm", &a, &a);
-	map->img.player_left1 = mlx_xpm_file_to_image(map->mlx,
+	map->img.player_left = mlx_xpm_file_to_image(map->mlx,
 			"Resources/left.xpm", &a, &a);
-	map->img.player_left2 = mlx_xpm_file_to_image(map->mlx,
-			"Resources/left-2-40.xpm", &a, &a);
 }

@@ -6,11 +6,11 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 18:51:01 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/11 07:55:24 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/13 16:22:43 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/so_long.h"
 
 static int	has_new_line(char *str)
 {

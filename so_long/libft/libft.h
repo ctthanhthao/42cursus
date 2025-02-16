@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 15:29:11 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/11 07:59:29 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/16 12:27:41 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,5 @@ int		ft_lstsize(t_list *lst);
 char	*ft_strjoinfree(char *s1, char *s2);
 char	*ft_substrfree(char const *s, unsigned int start, size_t len,
 	int freeme);
-char	*get_next_line(int fd);
+//char	*get_next_line(int fd);
 #endif // End of include guard
