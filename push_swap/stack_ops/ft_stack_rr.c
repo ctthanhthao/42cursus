@@ -26,6 +26,8 @@ void	reverse_rotate_no_print(t_stack **st)
 			before_last = last;
 		last = last->next;
 	}
+	if (last == *st)
+		return ;
 	last->next = *st;
 	*st = last;
 	before_last->next = NULL;
