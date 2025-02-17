@@ -60,7 +60,7 @@ int	main(int ac, char **av)
 		error_program("MLX initialization failed\n");
 	map.wnd = mlx_new_window(map.mlx, map.x
 			* IMG_PXL, map.y * IMG_PXL, WND_NAME);
-	if (!map->wnd)
+	if (!map.wnd)
 		error_program("Window creation failed\n");
 	file_to_image(&map);
 	map_printer(&map);
