@@ -4,7 +4,7 @@ I am currently enrolled in the 42 Prague coding school, where I am honing my ski
 
 #### Key Skills Developed
 Throughout my journey at 42 Prague, I have developed a wide array of skills, including:
-- **Programming Languages**: [List of languages, e.g., C, C++, Python, JavaScript, etc.]
+- **Programming Languages**: [List of languages, e.g., C, C++, JavaScript, etc.]
 - **Problem-Solving**: Developing algorithms to solve complex problems.
 - **Version Control**: Using Git for version control and collaborative development.
 - **Collaboration**: Engaging in peer-to-peer learning and providing feedback to others.
