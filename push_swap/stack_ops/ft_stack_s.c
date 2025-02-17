@@ -18,13 +18,22 @@ void	swap_top_no_print(t_stack **st)
 
 	if (!st || !*st)
 		return ;
-	tmp = (*st)->content;
-	(*st)->content = (*st)->next->content;
-	(*st)->next->content = tmp;
+	if ((*st)->next)
+	{
+		tmp = (*st)->content;
+		(*st)->content = (*st)->next->content;
+		(*st)->next->content = tmp;
+	}
 }
 
 void	swap_top(t_stack **st, char c)
 {
 	swap_top_no_print(st);
 	write_intr("s", c);
+}
+
+void	swap_top_both_stacks(t_stack **sta, t_stack **stb)
+{
+	swap_top_no_print(sta);
+	swap_top_no_print(stb);
 }
