@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/16 17:34:46 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/17 08:05:17 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,31 @@
 # include <math.h>
 # include <stdio.h>
 
-// Linux
-# define UP      119 //w
-# define DOWN    115 //s
-# define LEFT    97 //a
-# define RIGHT   100 //d
-# define ESC     65307
-// MacOS
-/*# define UP      13
-# define DOWN    1
-# define LEFT    0
-# define RIGHT   2
-# define ESC     53*/
 # define IMG_PXL 50
 # define WND_NAME "so_long"
+// Linux
+enum Key {
+	W = 119,
+	S = 115,
+	A = 97,
+	D = 100,
+	ESC = 65307
+};
+// MacOs
+/*enum Key {
+	W = 13,
+	S = 1,
+	A = 0,
+	D = 2,
+	ESC = 53
+};*/
+
+enum DIR {
+	UP = -1,
+	DOWN = 1,
+	LEFT = 1,
+	RIGHT = -1
+};
 
 typedef struct s_player
 {

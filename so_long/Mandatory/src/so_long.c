@@ -6,11 +6,19 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/16 19:06:16 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/17 07:42:28 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+
+static void error_program(char *msg)
+{
+	write(2, "\033[1;31mERROR:", 14);
+	write(2, msg, ft_strlen(msg));
+	write(2, "\033[0m", 5);
+	exit(EXIT_FAILURE);
+}
 
 void	map_initializer(t_map *map, char **av)
 {
@@ -39,24 +47,24 @@ int	main(int ac, char **av)
 {
 	t_map	map;
 
-	if (ac == 2)
-	{
-		map_initializer(&map, av);
-		map_validator(&map);
-		map.mlx = mlx_init();
-		map.wnd = mlx_new_window(map.mlx, map.x
-				* IMG_PXL, map.y * IMG_PXL, WND_NAME);
-		printf("MLX: %p, Window: %p\n", map.mlx, map.wnd);
-		file_to_image(&map);
-		map_printer(&map);
-		mlx_hook(map.wnd, 17, 0, ft_close, &map);
-		mlx_key_hook(map.wnd, key_hook, &map);
-		mlx_loop(map.mlx);
-	}
-	else
+	if (ac != 2)
 	{
 		write(2, "\033[1;31mERROR:", 14);
 		write(2, "Usage: ./so_long mapfile\n\033[0m", 30);
 		exit(EXIT_FAILURE);
 	}
+	map_initializer(&map, av);
+	map_validator(&map);
+	map.mlx = mlx_init();
+	if (!map.mlx)
+		error_program("MLX initialization failed\n");
+	map.wnd = mlx_new_window(map.mlx, map.x
+			* IMG_PXL, map.y * IMG_PXL, WND_NAME);
+	if (!map->wnd)
+		error_program("Window creation failed\n");
+	file_to_image(&map);
+	map_printer(&map);
+	mlx_hook(map.wnd, 17, 0, ft_close, &map);
+	mlx_key_hook(map.wnd, key_hook, &map);
+	mlx_loop(map.mlx);
 }
