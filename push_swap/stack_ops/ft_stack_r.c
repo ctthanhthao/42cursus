@@ -21,6 +21,8 @@ void	rotate_no_print(t_stack **st)
 		return ;
 	start = *st;
 	last = ft_stack_last(*st);
+	if (last == start)
+		return ;
 	last->next = *st;
 	*st = start->next;
 	start->next = NULL;
