@@ -75,6 +75,7 @@ void	ft_clean_up(t_map *map)
     if (map->mlx)
     {
         mlx_destroy_display(map->mlx);
+	free(map->mlx);
         map->mlx = NULL;
     }
 }
