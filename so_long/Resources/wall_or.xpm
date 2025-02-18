@@ -1,7 +1,7 @@
 /* XPM */
 static char *wall_or[] = {
 /* columns rows colors chars-per-pixel */
-"49 50 234 2 ",
+"50 50 234 2 ",
 "   c #FFAE5D",
 ".  c #1F1C1B",
 "X  c #3A261E",
@@ -286,5 +286,6 @@ static char *wall_or[] = {
 "f U ] @X~.~.[.Q w.B w.Q w.+.+.+.w.eXQ w.Q w.Q +.+.~.:XQ w.Q w.+.w.+.+.w.Q w.Q w.Q eXa.+.+.d.%Xk w ",
 "  w k k.w.~.@Xw.eX+.eXw.:Xd.[.[.w.eX+.eX+.eXw.[.~.d.:Xw.eX+.eXw.@X~.~.[.w.eX+.eXw.eXd.[.x.L U w   ",
 "    w w g @.x.] H.R H.] H.@.p.x.@.H.] H.] H.] x.@.@.x.] H.R H.] x.@.@.x.] H.] H.] H.@.x.I w w     ",
+"        w w s w f w f w f s s s w s w f w s w s w w s w f w f w w w w w w f w f s f w s s         ",
 "        w w s w f w f w f s s s w s w f w s w s w w s w f w f w w w w w w f w f s f w s s         "
 };

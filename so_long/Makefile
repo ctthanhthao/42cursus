@@ -37,8 +37,8 @@ CP			=	cp -f
 #•❅──────✧❅✦❅✧──────❅••❅──────✧❅✦❅DIRECTORIES✦❅✧──────❅••❅──────✧❅✦❅✧──────❅•#
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
-MDT_DIR		=	Mandatory/
-BONUS_DIR	=	Bonus/
+MDT_DIR		=	mandatory/
+BONUS_DIR	=	bonus/
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
@@ -58,9 +58,9 @@ INCLUDE		+= -I $(INC_BONUS)
 #●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●●○●○●○●○●○●○●○●○●○●#
 
 SL_SRCS	=		so_long.c validate_path.c validators.c end_screen.c \
-				errors.c file_to_image.c ft_free.c \
+				errors1.c errors2.c file_to_image.c ft_free.c \
 				build_map_array.c key_hook.c sl_strjoin.c \
-				map_printer.c movements.c get_next_line.c 
+				map_printer.c movements.c
 				
 SL_SRCS_BONUS	=	so_long_bonus.c animation_monster_bonus.c checker_bonus.c \
 					errors_bonus.c file_to_image_bonus.c ft_free_bonus.c \
@@ -110,7 +110,6 @@ clean:
 			@make clean -sC mlx
 			@make clean -sC libft
 			@$(RM) -r $(OBJ_DIR)
-			@$(RM) get_next_line/get_next_line.o
 			@echo "Deleting libmlx.dylib..."
 			@if [ -f libmlx.dylib ]; then $(RM) libmlx.dylib; fi
 			@echo "$(OK_COLOR)Dependencies and objects removed$(NO_COLOR)"

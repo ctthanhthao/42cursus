@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/16 17:35:39 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/18 09:50:49 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ static void	validate_elements(t_map *map)
 	{
 		while (x < map->x)
 		{
-			if (map->array[y][x] == 'C')
+			if (map->array[y][x] == COLLECTIBLE)
 				map->c += 1;
-			else if (map->array[y][x] == 'E')
+			else if (map->array[y][x] == EXIT)
 				map->e += 1;
-			else if (map->array[y][x] == 'P')
+			else if (map->array[y][x] == PLAYER)
 				map->p += 1;
-			else if (map->array[y][x] == '0' && map->array[y][x] == '1')
+			else if (map->array[y][x] != EMPTY && map->array[y][x] != WALL)
 				error_map_elements(map);
 			x++;
 		}
@@ -57,22 +57,21 @@ static void	validate_wall(t_map *map)
 	x = 0;
 	while (x < map->x)
 	{
-		if (map->array[0][x] != '1')
+		if (map->array[0][x] != WALL)
 			error_wall(map);
 		x++;
 	}
 	y = 1;
 	while (y < map->y)
 	{
-		if (map->array[y][0] != '1' ||
-				map->array[y][map->x - 1] != '1')
+		if (map->array[y][0] != WALL || map->array[y][map->x - 1] != WALL)
 			error_wall(map);
 		y++;
 	}
 	x = 0;
 	while (x < map->x)
 	{
-		if (map->array[y - 1][x] != '1')
+		if (map->array[y - 1][x] != WALL)
 			error_wall(map);
 		x++;
 	}

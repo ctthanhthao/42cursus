@@ -6,11 +6,11 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/16 19:09:24 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/18 10:34:42 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <X11/Xlib.h>
+//#include <X11/Xlib.h>
 #include "../inc/so_long.h"
 
 void	ft_free_array(char ***ret)
@@ -74,8 +74,8 @@ void	ft_clean_up(t_map *map)
     }
     if (map->mlx)
     {
-        mlx_destroy_display(map->mlx);
-	free(map->mlx);
+        //mlx_destroy_display(map->mlx);
+		free(map->mlx);
         map->mlx = NULL;
     }
 }

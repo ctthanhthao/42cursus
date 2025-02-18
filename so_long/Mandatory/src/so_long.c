@@ -6,19 +6,11 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/17 07:42:28 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/18 10:03:38 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
-
-static void error_program(char *msg)
-{
-	write(2, "\033[1;31mERROR:", 14);
-	write(2, msg, ft_strlen(msg));
-	write(2, "\033[0m", 5);
-	exit(EXIT_FAILURE);
-}
 
 void	map_initializer(t_map *map, char **av)
 {
@@ -48,11 +40,7 @@ int	main(int ac, char **av)
 	t_map	map;
 
 	if (ac != 2)
-	{
-		write(2, "\033[1;31mERROR:", 14);
-		write(2, "Usage: ./so_long mapfile\n\033[0m", 30);
-		exit(EXIT_FAILURE);
-	}
+		error_program("Usage: ./so_long mapfile\n");
 	map_initializer(&map, av);
 	map_validator(&map);
 	map.mlx = mlx_init();

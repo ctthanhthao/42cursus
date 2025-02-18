@@ -6,135 +6,94 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/16 13:49:04 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/18 09:44:34 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-static void	move_resume(t_map *map, int x, int y, int dir)
+static void	check_move_in_array(t_map *map, int x, int y)
 {
-	if (dir == UP)
-		y -= 1;
-	if (dir == DOWN)
-		y += 1;
-	if (dir == LEFT)
-		x -= 1;
-	if (dir == RIGHT)
-		x += 1;
-	if (map->array[y][x] == 'E' && map->c == 0)
+	if (map->array[y][x] == EXIT && map->c == 0)
 		return (ft_win(map));
-	if (map->array[y][x] == 'C')
+	if (map->array[y][x] == COLLECTIBLE)
 	{
-		map->array[y][x] = '0';
+		map->array[y][x] = EMPTY;
 		map->c--;
 	}
 }
 
-void	move_up(t_map *map)
+static void	player_move_horizon(t_map *map, int x, int y, enum DIR dir)
+{
+	map->moves++;
+	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
+		x * IMG_PXL, y * IMG_PXL);
+	map->array[y][x] = EMPTY;
+	if (dir == LEFT)
+	{
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
+			(x - 1) * IMG_PXL, y * IMG_PXL);
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_left,
+			(x - 1) * IMG_PXL, y * IMG_PXL);
+	}
+	else if (dir == RIGHT)
+	{
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
+			(x + 1) * IMG_PXL, y * IMG_PXL);
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_right,
+			(x + 1) * IMG_PXL, y * IMG_PXL);
+	}
+	map->array[y][x + dir] = PLAYER;
+	print_movements(map);
+}
+
+static void	player_move_vertical(t_map *map, int x, int y, enum DIR dir)
+{
+	map->moves++;
+	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
+		x * IMG_PXL, y * IMG_PXL);
+	map->array[y][x] = EMPTY;
+	if (dir == UP)
+	{
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
+			x * IMG_PXL, (y - 1) * IMG_PXL);
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_up,
+			x * IMG_PXL, (y - 1) * IMG_PXL);
+	}
+	else if (dir == DOWN)
+	{
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
+			x * IMG_PXL, (y + 1) * IMG_PXL);
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_down,
+			x * IMG_PXL, (y + 1) * IMG_PXL);
+	}
+	map->array[y + dir][x] = PLAYER;
+	print_movements(map);
+}
+
+void	move(t_map *map, char axis, enum DIR direction)
 {
 	int	x;
 	int	y;
 
 	x = map->player.x;
 	y = map->player.y;
-	if (y > 0 && map->array[y - 1][x] != '1')
+	if (axis == 'y' && y > 0 && y < map->y && map->array[y + direction][x] != WALL)
 	{
-		move_resume(map, x, y, UP);
-		if (map->array[y - 1][x] == 'E' && (map->c != 0 || map->exit == 1))
+		check_move_in_array(map, x, y + direction);
+		if (map->array[y + direction][x] == EXIT && (map->c != 0 || map->exit == 1))
 			return ;
-		map->moves++;
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, y * IMG_PXL);
-		map->array[y][x] = '0';
-		y--;
-		print_movements(map);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, y * IMG_PXL);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_up,
-			x * IMG_PXL, y * IMG_PXL);
-		map->array[y][x] = 'P';
+		player_move_vertical(map, x, y, direction);
+		y += direction;
+		map->player.y = y;
+	}
+	else if (axis == 'x' && x > 0 && x < map->x && map->array[y][x + direction] != WALL)
+	{
+		check_move_in_array(map, x + direction, y);
+		if (map->array[y][x + direction] == EXIT && (map->c != 0 || map->exit == 1))
+			return ;
+		player_move_horizon(map, x, y, direction);
+		x += direction;
 		map->player.x = x;
 	}
-}
-
-void	move_left(t_map *map)
-{
-	int	x;
-	int	y;
-
-	x = map->player.x;
-	y = map->player.y;
-	if (x > 0 && map->array[y][x - 1] != '1')
-	{
-		move_resume(map, x, y, LEFT);
-		if (map->array[y][x - 1] == 'E' && (map->c != 0 || map->exit == 1))
-			return ;
-		map->moves++;
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, y * IMG_PXL);
-		map->array[y][x] = '0';
-		x--;
-		print_movements(map);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, y * IMG_PXL);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_left,
-			x * IMG_PXL, y * IMG_PXL);
-		map->array[y][x] = 'P';
-		map->player.y = y;
-	}
-}
-
-void	move_down(t_map *map)
-{
-	int	x;
-	int	y;
-
-	x = map->player.x;
-	y = map->player.y;
-	if (y < map->y && map->array[y + 1][x] != '1')
-	{
-		move_resume(map, x, y, DOWN);
-		if (map->array[y + 1][x] == 'E' && (map->c != 0 || map->exit == 1))
-			return ;
-		map->moves++;
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, y * IMG_PXL);
-		map->array[y][x] = '0';
-		y++;
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, y * IMG_PXL);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_down,
-			x * IMG_PXL, y * IMG_PXL);
-		map->array[y][x] = 'P';
-		print_movements(map);
-		map->player.y = y;
-	}
-}
-
-void	move_right(t_map *map)
-{
-	int	x;
-	int	y;
-
-	x = map->player.x;
-	y = map->player.y;
-	if (x < map->x && map->array[y][x + 1] != '1')
-	{
-		move_resume(map, x, y, RIGHT);
-		if (map->array[y][x + 1] == 'E' && (map->c != 0 || map->exit == 1))
-			return ;
-		map->moves++;
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, y * IMG_PXL);
-		map->array[y][x] = '0';
-		x++;
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, y * IMG_PXL);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_right,
-			x * IMG_PXL, y * IMG_PXL);
-		map->array[y][x] = 'P';
-		print_movements(map);
-	}
-	map->player.x = x;
 }

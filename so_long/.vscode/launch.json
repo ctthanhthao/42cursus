@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug so_long with LLDB on MacOs",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/so_long",
+            "args": ["maps/one_line.ber"],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "terminal": "integrated",
+            "externalConsole": false
+        }
+    ]
+}

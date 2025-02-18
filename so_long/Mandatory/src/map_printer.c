@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/16 13:20:13 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/18 09:42:07 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ static void	map_type(t_map *map, int x, int y)
 	int	type;
 
 	type = map->array[y / IMG_PXL][x / IMG_PXL];
-	if (type == 'C' || type == 'P' || type == 'E' || type == '0')
+	if (type == COLLECTIBLE || type == PLAYER || type == EXIT || type == EMPTY)
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty, x, y);
-	if (type == 'C')
+	if (type == COLLECTIBLE)
 		mlx_put_image_to_window(map->mlx, map->wnd,
 			map->img.collectible, x, y);
-	else if (type == 'P')
+	else if (type == PLAYER)
 		mlx_put_image_to_window(map->mlx, map->wnd,
 			map->img.player_down, x, y);
-	else if (type == 'E')
+	else if (type == EXIT)
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.exit, x, y);
-	else if (type == '1')
+	else if (type == WALL)
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.wall, x, y);
 }
 
@@ -56,9 +56,9 @@ void	print_movements(t_map *map)
 
 	move = ft_itoa(map->moves);
 	write(1, "\r", 1);
+	write(1, "\033[32;01mMOVES: \033[0m", 20);
 	write(1, "\x1b[33;01m", 9);
 	write(1, move, ft_strlen(move));
 	write(1, "\x1b[0m", 5);
-	write(1, " movements", 11);
 	free(move);
 }

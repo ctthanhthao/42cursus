@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/01 12:33:19 by jcheel-n          #+#    #+#             */
-/*   Updated: 2025/02/16 12:18:18 by thchau           ###   ########.fr       */
+/*   Created: 2022/08/01 12:33:19 by thchau            #+#    #+#             */
+/*   Updated: 2025/02/18 09:24:53 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int		ft_free(char **ret, int i);
 void	ft_exit_free(char *str);
 int		ft_free_array(char **ret, int max);
 
-void	scan_player(t_map *map);
+void	locate_player(t_map *map);
 
 void	scan_monster(t_map *map);
 
