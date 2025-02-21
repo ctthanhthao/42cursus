@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/20 20:08:32 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 14:50:25 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	locate_player(t_map *map)
 {
 	int	x;
 	int	y;
-	
+
 	y = 0;
 	while (y < map->y)
 	{
@@ -42,12 +42,13 @@ int	key_hook(int keycode, t_map *map)
 	else if (map->exit == 1)
 		return (0);
 	else if (keycode == A)
-		move(map, 'x', LEFT);
+		player_move(map, 'x', LEFT);
 	else if (keycode == S)
-		move(map, 'y', DOWN);
+		player_move(map, 'y', DOWN);
 	else if (keycode == D)
-		move(map, 'x', RIGHT);
+		player_move(map, 'x', RIGHT);
 	else if (keycode == W)
-		move(map, 'y', UP);
+		player_move(map, 'y', UP);
+	print_movements(map);
 	return (0);
 }

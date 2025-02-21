@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/20 22:29:36 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 14:53:21 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ void	ft_clean_up(t_map *map)
 	ft_free_array(&map->copy);
 	free_images(map);
 	if (map->wnd)
-    {
-        mlx_destroy_window(map->mlx, map->wnd);
-        map->wnd = NULL;
-    }
-    if (map->mlx)
-    {
+	{
+		mlx_destroy_window(map->mlx, map->wnd);
+		map->wnd = NULL;
+	}
+	if (map->mlx)
+	{
 //        mlx_destroy_display(map->mlx);
 		free(map->mlx);
-        map->mlx = NULL;
-    }
+		map->mlx = NULL;
+	}
 }

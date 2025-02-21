@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/20 22:34:27 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 15:57:05 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 
 # define IMG_PXL 50
 # define WND_NAME "so_long"
-# define MOVE_SPEED 5
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 800
 // Linux
 /*enum Key {
 	W = 119,
@@ -34,7 +35,8 @@
 	ESC = 65307
 };*/
 // MacOs
-enum KEY {
+enum e_KEY
+{
 	W = 13,
 	S = 1,
 	A = 0,
@@ -42,7 +44,7 @@ enum KEY {
 	ESC = 53
 };
 
-enum DIR
+enum e_DIR
 {
 	UP = -1,
 	DOWN = 1,
@@ -50,7 +52,8 @@ enum DIR
 	RIGHT = 1
 };
 
-enum CHARACTERS {
+enum e_CHARACTERS
+{
 	EMPTY = '0',
 	WALL = '1',
 	COLLECTIBLE = 'C',
@@ -63,7 +66,7 @@ typedef struct s_player
 	int	y;
 	int	x;
 
-}t_player;
+}	t_player;
 
 typedef struct s_img
 {
@@ -76,7 +79,7 @@ typedef struct s_img
 	void	*player_up;
 	void	*player_down;
 	void	*enemy;
-}t_img;
+}	t_img;
 
 typedef struct s_map
 {
@@ -96,8 +99,7 @@ typedef struct s_map
 	void		*wnd;
 	t_img		img;
 	t_player	player;
-
-}t_map;
+}	t_map;
 
 char	*sl_strjoin(char *s1, char const *s2);
 void	map_validator(t_map *map);
@@ -109,7 +111,7 @@ int		key_hook(int keycode, t_map *map);
 void	error_filename(void);
 void	error_wall(t_map *map);
 void	error_openfile(char *filename);
-void	error_shape(t_map *map);
+void	error_shape(t_map *map, char *msg);
 void	error_program(char *msg);
 void	error_path(t_map *map);
 void	error_map_elements(t_map *map);
@@ -117,7 +119,7 @@ void	error_map_elements(t_map *map);
 void	ft_clean_up(t_map *map);
 void	ft_free_array(char ***ret);
 
-void	move(t_map *map, char axis, enum DIR direction);
+void	player_move(t_map *map, char axis, enum e_DIR direction);
 
 void	ft_win(t_map *map);
 int		ft_close(t_map *map);

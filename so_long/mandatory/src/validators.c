@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 08:55:02 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 16:00:05 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,18 @@ void	validate_shape(t_map *map)
 	y = 0;
 	x = 0;
 	if (map->y < 2)
-		error_shape(map);
+		error_shape(map, "The map must be rectangular\n");
 	max = ft_strlen(map->array[y]);
 	while (y < map->y)
 	{
 		x = ft_strlen(map->array[y]);
 		if (max != x)
-			error_shape(map);
+			error_shape(map, "The map must be rectangular\n");
 		y++;
 	}
 	map->x = max;
+	if (map->x * IMG_PXL > WIN_WIDTH || map->y * IMG_PXL> WIN_HEIGHT)
+		error_shape(map, "Map is larger than the fixed window size!\n");
 }
 
 void	map_validator(t_map *map)

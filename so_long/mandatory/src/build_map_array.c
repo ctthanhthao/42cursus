@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/20 21:22:41 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 14:52:17 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*build_file(t_map *map)
 	int		fd;
 	char	*line;
 	char	*file;
-	
+
 	line = NULL;
 	file = NULL;
 	fd = open(map->filename, O_RDONLY);
@@ -48,7 +48,7 @@ static char	*build_file(t_map *map)
 void	build_map_array(t_map *map)
 {
 	char	*file;
-	
+
 	file = build_file(map);
 	map->array = ft_split(file, '\n');
 	map->copy = ft_split(file, '\n');

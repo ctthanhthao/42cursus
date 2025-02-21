@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:12:50 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 08:51:39 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 15:47:35 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ int	main(int ac, char **av)
 	map.mlx = mlx_init();
 	if (!map.mlx)
 		error_program("MLX initialization failed\n");
-	map.wnd = mlx_new_window(map.mlx, map.x
-			* IMG_PXL, map.y * IMG_PXL, WND_NAME);
+	map.wnd = mlx_new_window(map.mlx, map.x * IMG_PXL,
+			map.y * IMG_PXL + IMG_PXL * 1.25, WND_NAME);
 	if (!map.wnd)
 		error_program("Window creation failed\n");
 	file_to_image(&map);
 	map_printer(&map);
-	scan_monsters(&map);
+	scan_enemies(&map);
 	if (map.enemy.nbr > 0)
-		mlx_loop_hook(map.mlx, move_monster, &map);
+		mlx_loop_hook(map.mlx, move_enemies, &map);
 	mlx_hook(map.wnd, 17, 0, ft_close, &map);
 	mlx_key_hook(map.wnd, key_hook, &map);
 	mlx_loop(map.mlx);

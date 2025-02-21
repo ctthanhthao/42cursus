@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/20 22:26:51 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 16:13:37 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	locate_player(t_map *map)
 {
 	int	x;
 	int	y;
-	
+
 	y = 0;
 	while (y < map->y)
 	{
@@ -38,6 +38,7 @@ static void	print_counter(t_map *map)
 {
 	int		x;
 	char	*num;
+	char	*str_display;
 
 	x = 0;
 	while (x < map->x)
@@ -49,12 +50,13 @@ static void	print_counter(t_map *map)
 		x++;
 	}
 	num = ft_itoa(map->moves);
+	str_display = ft_strjoin("MOVES: ", num);
 	mlx_string_put(map->mlx, map->wnd, (map->x / 2) * IMG_PXL / 5,
-		map->y * IMG_PXL + IMG_PXL / 2, 0x00000, "MOVES:");
-	mlx_string_put(map->mlx, map->wnd,
-		(map->x / 2) * (IMG_PXL / 4) + (IMG_PXL / 2) + (IMG_PXL / 4),
-		map->y * IMG_PXL + IMG_PXL / 2, 0xFFFF01, num);
+		map->y * IMG_PXL + IMG_PXL / 2, 0x00000, str_display);
 	free(num);
+	num = NULL;
+	free(str_display);
+	str_display = NULL;
 }
 
 int	key_hook(int keycode, t_map *map)
@@ -64,14 +66,14 @@ int	key_hook(int keycode, t_map *map)
 		exit(EXIT_SUCCESS);
 	if (map->exit == 1)
 		return (0);
-		else if (keycode == A)
-		move(map, 'x', LEFT);
+	else if (keycode == A)
+		player_move(map, 'x', LEFT);
 	else if (keycode == S)
-		move(map, 'y', DOWN);
+		player_move(map, 'y', DOWN);
 	else if (keycode == D)
-		move(map, 'x', RIGHT);
+		player_move(map, 'x', RIGHT);
 	else if (keycode == W)
-		move(map, 'y', UP);
+		player_move(map, 'y', UP);
 	print_counter(map);
 	return (0);
 }

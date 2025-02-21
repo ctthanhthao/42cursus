@@ -12,7 +12,7 @@
 
 #include "../inc/so_long_bonus.h"
 
-static int	count_monster(t_map *map)
+static int	count_enemies(t_map *map)
 {
 	int	y;
 	int	x;
@@ -35,7 +35,7 @@ static int	count_monster(t_map *map)
 	return (m);
 }
 
-static void	locate_monsters(t_map *map)
+static void	locate_enemies(t_map *map)
 {
 	int	y;
 	int	x;
@@ -60,9 +60,9 @@ static void	locate_monsters(t_map *map)
 	}
 }
 
-void	scan_monsters(t_map *map)
+void	scan_enemies(t_map *map)
 {
-	map->enemy.nbr = count_monster(map);
+	map->enemy.nbr = count_enemies(map);
 	if (map->enemy.nbr <= 0)
 		return ;
 	map->enemy.array = malloc(sizeof(int **) * 3);
@@ -71,5 +71,5 @@ void	scan_monsters(t_map *map)
 	map->enemy.array[2] = 0;
 	map->enemy.array[0][map->enemy.nbr] = 0;
 	map->enemy.array[1][map->enemy.nbr] = 0;
-	locate_monsters(map);
+	locate_enemies(map);
 }

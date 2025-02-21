@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:33:19 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 08:51:28 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 16:50:03 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,29 @@
 
 # define IMG_PXL 50
 # define WND_NAME "so_long"
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 800
 
 // Linux
-enum Key {
+/*enum e_KEY
+{
 	W = 119,
 	S = 115,
 	A = 97,
 	D = 100,
 	ESC = 65307
-};
+};*/
 // MacOs
-/*enum KEY {
+enum e_KEY
+{
 	W = 13,
 	S = 1,
 	A = 0,
 	D = 2,
 	ESC = 53
-};*/
+};
 
-enum DIR
+enum e_DIR
 {
 	UP = -1,
 	DOWN = 1,
@@ -50,7 +54,8 @@ enum DIR
 	RIGHT = 1
 };
 
-enum CHARACTERS {
+enum e_CHARACTERS
+{
 	EMPTY = '0',
 	WALL = '1',
 	COLLECTIBLE = 'C',
@@ -64,13 +69,13 @@ typedef struct s_enemy
 	int	**array;
 	int	nbr;
 	int	pos;
-}t_enemy;
+}	t_enemy;
 
 typedef struct s_player
 {
 	int	y;
 	int	x;
-}t_player;
+}	t_player;
 
 typedef struct s_img
 {
@@ -89,7 +94,7 @@ typedef struct s_img
 	void	*enemy;
 	void	*enemy_flip;
 
-}t_img;
+}	t_img;
 
 typedef struct s_map
 {
@@ -113,7 +118,7 @@ typedef struct s_map
 	t_player	player;
 	t_enemy		enemy;
 
-}t_map;
+}	t_map;
 
 void	map_validator(t_map *map);
 void	validate_path(t_map *map);
@@ -125,7 +130,7 @@ int		key_hook(int keycode, t_map *map);
 void	error_filename(void);
 void	error_wall(t_map *map);
 void	error_openfile(char *filename);
-void	error_shape(t_map *map);
+void	error_shape(t_map *map, char *msg);
 void	error_program(char *msg);
 void	error_path(t_map *map);
 void	error_map_elements(t_map *map);
@@ -136,29 +141,16 @@ void	ft_free_array(char ***ret);
 void	locate_player(t_map *map);
 char	*sl_strjoin(char *s1, char const *s2);
 
-void	move(t_map *map, char axis, enum DIR direction);
+void	player_move(t_map *map, char axis, enum e_DIR direction);
+void	enemy_move(t_map *map, char axis, enum e_DIR direction, int enemyth);
 
-int		count_monster(t_map *map);
-void	scan_monsters(t_map *map);
+void	scan_enemies(t_map *map);
 
-void	move_up_m(t_map *map, int m);
-void	move_left_m(t_map *map, int m);
-void	move_down_m(t_map *map, int m);
-void	move_right_m(t_map *map, int m);
-
-int		move_monster(t_map *map);
+int		move_enemies(t_map *map);
 
 void	print_movements(t_map *map);
 
 void	ft_win(t_map *map);
 void	ft_lose(t_map *map);
 int		ft_close(t_map *map);
-
-void	print_wall(t_map *map);
-
-void	move_animation_right(t_map *map, int x, int y);
-void	move_animation_left(t_map *map, int x, int y);
-void	move_animation_down(t_map *map, int x, int y);
-void	move_animation_up(t_map *map, int x, int y);
-
 #endif

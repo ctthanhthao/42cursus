@@ -21,7 +21,7 @@ void	move_on_paths(int x, int y, t_map *map)
 		map->c_check -= 1;
 	else if (type == EXIT)
 		map->e_check -= 1;
-	else if (type != EMPTY && type != PLAYER && type != ENEMY)
+	else if (type != EMPTY && type != PLAYER)
 		return ;
 	map->copy[y][x] = '1';
 	move_on_paths(x + 1, y, map);

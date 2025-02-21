@@ -16,29 +16,29 @@ void	randomize_enemy(t_map *map, int m)
 {
 	if (map->enemy.pos == 0)
 	{
-		move_right_m(map, m);
+		enemy_move(map, 'x', RIGHT, m);
 		map->enemy.pos++;
 	}
 	else if (map->enemy.pos == 1)
 	{
-		move_down_m(map, m);
+		enemy_move(map, 'y', DOWN, m);
 		map->enemy.pos++;
 	}
 	else if (map->enemy.pos == 2)
 	{
-		move_left_m(map, m);
+		enemy_move(map, 'x', LEFT, m);
 		map->enemy.pos++;
 	}
 	else if (map->enemy.pos == 3)
 	{
-		move_up_m(map, m);
+		enemy_move(map, 'y', UP, m);
 		map->enemy.pos++;
 	}
 	else
 		map->enemy.pos = 0;
 }
 
-static void	monster_animation(t_map *map, int x, int y)
+static void	enemy_animation(t_map *map, int x, int y)
 {
 	if (map->action % 1000 == 0)
 	{
@@ -46,6 +46,7 @@ static void	monster_animation(t_map *map, int x, int y)
 			x * IMG_PXL, y * IMG_PXL);
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy,
 			x * IMG_PXL, y * IMG_PXL);
+		usleep(5000);
 	}
 	if (map->action % 3000 == 0)
 	{
@@ -53,10 +54,11 @@ static void	monster_animation(t_map *map, int x, int y)
 			x * IMG_PXL, y * IMG_PXL);
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy_flip,
 			x * IMG_PXL, y * IMG_PXL);
+		usleep(5000);
 	}
 }
 
-int	move_monster(t_map *map)
+int	move_enemies(t_map *map)
 {
 	int	m;
 	int	x;
@@ -69,7 +71,7 @@ int	move_monster(t_map *map)
 	{
 		y = map->enemy.array[0][m];
 		x = map->enemy.array[1][m];
-		monster_animation(map, x, y);
+		enemy_animation(map, x, y);
 		if (map->action % 5000 == 0)
 			randomize_enemy(map, m);
 		m++;

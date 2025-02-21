@@ -62,12 +62,12 @@ SL_SRCS	=		so_long.c validate_path.c validators.c end_screen.c \
 				build_map_array.c key_hook.c sl_strjoin.c \
 				map_printer.c movements.c
 				
-SL_SRCS_BONUS	=	so_long_bonus.c animation_monster_bonus.c validators_bonus.c \
-					errors1_bonus.c errors2_bonus.c file_to_image_bonus.c \
-					ft_free_bonus.c build_map_array_bonus.c key_hook_bonus.c \
-					map_printer_bonus.c move_animation_bonus.c movements_bonus.c \
-					movements_monster_bonus.c \
-					scan_monster_bonus.c end_screen_bonus.c validate_path_bonus.c
+SL_SRCS_BONUS	=	build_map_array_bonus.c end_screen_bonus.c enemies_movements_bonus.c \
+					enemies_animation_bonus.c errors1_bonus.c errors2_bonus.c \
+					file_to_image_bonus.c ft_free_bonus.c key_hook_bonus.c \
+					map_printer_bonus.c player_animation_bonus.c \
+					scan_enemies_bonus.c sl_strjoin_bonus.c so_long_bonus.c \
+					validate_path_bonus.c validators_bonus.c
 
 SRCS			+=	$(addprefix $(MDT_DIR), $(addprefix $(SRC_DIR), $(SL_SRCS)))
 SRCS_BONUS		+=	$(addprefix $(BONUS_DIR), $(addprefix $(SRC_DIR), $(SL_SRCS_BONUS)))
@@ -98,13 +98,14 @@ $(NAME):	$(OBJS)
 			@$(CC) $(CFLAGS)  $(LIBFT) $(OBJS) -o $(NAME) $(MLXFLAGS)
 			@echo "Moving libmlx.dylib..."
 			@if [ -f mlx/libmlx.dylib ]; then mv mlx/libmlx.dylib ./; fi
-
 			@echo "$(OK_COLOR)So Long Compiled!$(NO_COLOR)"
 
 bonus:		$(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJS_BONUS)
 			@$(CC) $(CFLAGS)  $(LIBFT) $(OBJS_BONUS) -o $(NAME_BONUS) $(MLXFLAGS)
+			@echo "Moving libmlx.dylib..."
+			@if [ -f mlx/libmlx.dylib ]; then mv mlx/libmlx.dylib ./; fi
 			@echo "$(OK_COLOR)So Long Bonus Compiled!$(NO_COLOR)"
 clean:
 			@make clean -sC mlx

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors1.c                                          :+:      :+:    :+:   */
+/*   errors1_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/18 10:02:44 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 15:56:38 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ void	error_openfile(char *filename)
 	exit(EXIT_FAILURE);
 }
 
-void	error_shape(t_map *map)
+void	error_shape(t_map *map, char *msg)
 {
 	write(2, "\033[1;31mERROR\n", 14);
-	write(2, "The map must be rectangular\n\033[0m", 33);
+	write(2, msg, ft_strlen(msg));
+	write(2, "\033[0m", 5);
 	ft_free_array(&map->array);
 	ft_free_array(&map->copy);
 	exit(EXIT_FAILURE);

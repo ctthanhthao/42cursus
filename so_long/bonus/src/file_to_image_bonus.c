@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 08:42:28 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 15:10:20 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	file_to_image_player(t_map *map)
 			"resources/down.xpm", &a, &a);
 	map->img.player_left = mlx_xpm_file_to_image(map->mlx,
 			"resources/left.xpm", &a, &a);
-	map->img.player_keep_right= mlx_xpm_file_to_image(map->mlx,
+	map->img.player_keep_right = mlx_xpm_file_to_image(map->mlx,
 			"resources/keep_right.xpm", &a, &a);
 	map->img.player_keep_up = mlx_xpm_file_to_image(map->mlx,
 			"resources/keep_up.xpm", &a, &a);
@@ -51,6 +51,6 @@ void	file_to_image(t_map *map)
 	map->img.enemy = mlx_xpm_file_to_image(map->mlx,
 			"resources/enemy.xpm", &a, &a);
 	map->img.enemy_flip = mlx_xpm_file_to_image(map->mlx,
-		"resources/enemy_flip.xpm", &a, &a);
+			"resources/enemy_flip.xpm", &a, &a);
 	file_to_image_player(map);
 }

@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/20 19:38:11 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 15:09:30 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	map_type(t_map *map, int x, int y)
 	else if (type == WALL)
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.wall, x, y);
 	else if (type == ENEMY)
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy, x + 14, y);
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy, x, y);
 }
 
 void	map_printer(t_map *map)
@@ -53,8 +53,8 @@ void	map_printer(t_map *map)
 	x = 0;
 	while (x <= map->x)
 	{
-		// mlx_put_image_to_window(map->mlx, map->wnd, map->img.wall,
-		// 	x * IMG_PXL, map->y * IMG_PXL);
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.wall,
+			x * IMG_PXL, map->y * IMG_PXL);
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.wall,
 			x * IMG_PXL, map->y * IMG_PXL + IMG_PXL);
 		x++;

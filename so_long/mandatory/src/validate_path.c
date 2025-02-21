@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/20 19:52:59 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 14:50:37 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	validate_path(t_map *map)
 {
 	int	x;
 	int	y;
-	
+
 	map->c_check = map->c;
 	map->e_check = map->e;
 	locate_player(map);
