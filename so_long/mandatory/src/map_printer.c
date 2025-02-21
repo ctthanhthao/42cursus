@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/18 09:42:07 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 20:45:15 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ void	print_movements(t_map *map)
 	write(1, move, ft_strlen(move));
 	write(1, "\x1b[0m", 5);
 	free(move);
+	move = NULL;
 }

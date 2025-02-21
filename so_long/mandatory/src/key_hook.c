@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 14:50:25 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 20:51:39 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	key_hook(int keycode, t_map *map)
 		player_move(map, 'x', RIGHT);
 	else if (keycode == W)
 		player_move(map, 'y', UP);
-	print_movements(map);
+	if (map->exit != 1)
+		print_movements(map);
 	return (0);
 }
