@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/16 16:11:59 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/20 21:22:41 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ static void	exit_with_fail(t_map *map)
 	exit(EXIT_FAILURE);
 }
 
-void	build_map_array(t_map *map)
+static char	*build_file(t_map *map)
 {
 	int		fd;
 	char	*line;
+	char	*file;
 	
+	line = NULL;
+	file = NULL;
 	fd = open(map->filename, O_RDONLY);
 	if (fd == -1)
 		error_openfile(map->filename);
@@ -31,18 +34,26 @@ void	build_map_array(t_map *map)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		map->file = sl_strjoin(map->file, line);
+		file = sl_strjoin(file, line);
 		free(line);
 		line = NULL;
-		if (!map->file)
+		if (!file)
 			exit_with_fail(map);
 		map->y++;
 	}
 	close(fd);
-	map->array = ft_split(map->file, '\n');
-	map->copy = ft_split(map->file, '\n');
-	free(map->file);
-	map->file = NULL;
+	return (file);
+}
+
+void	build_map_array(t_map *map)
+{
+	char	*file;
+	
+	file = build_file(map);
+	map->array = ft_split(file, '\n');
+	map->copy = ft_split(file, '\n');
+	free(file);
+	file = NULL;
 	if (!map->array || !map->copy)
 		exit_with_fail(map);
 }

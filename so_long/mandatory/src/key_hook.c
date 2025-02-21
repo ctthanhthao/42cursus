@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/18 09:41:07 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/20 20:08:32 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 
 void	locate_player(t_map *map)
 {
-	map->player.y = 0;
-	map->player.x = 0;
-	while (map->player.y < map->y)
+	int	x;
+	int	y;
+	
+	y = 0;
+	while (y < map->y)
 	{
-		while (map->player.x < map->x)
+		x = 0;
+		while (x < map->x)
 		{
-			if (map->array[map->player.y][map->player.x] == PLAYER)
-				break ;
-			map->player.x++;
+			if (map->array[y][x] == PLAYER)
+			{
+				map->player.y = y;
+				map->player.x = x;
+			}
+			x++;
 		}
-		if (map->array[map->player.y][map->player.x] == PLAYER)
-			break ;
-		map->player.x = 0;
-		map->player.y++;
+		y++;
 	}
 }
 

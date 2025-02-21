@@ -62,12 +62,12 @@ SL_SRCS	=		so_long.c validate_path.c validators.c end_screen.c \
 				build_map_array.c key_hook.c sl_strjoin.c \
 				map_printer.c movements.c
 				
-SL_SRCS_BONUS	=	so_long_bonus.c animation_monster_bonus.c checker_bonus.c \
-					errors_bonus.c file_to_image_bonus.c ft_free_bonus.c \
-					generate_map_array_bonus.c key_hook_bonus.c \
+SL_SRCS_BONUS	=	so_long_bonus.c animation_monster_bonus.c validators_bonus.c \
+					errors1_bonus.c errors2_bonus.c file_to_image_bonus.c \
+					ft_free_bonus.c build_map_array_bonus.c key_hook_bonus.c \
 					map_printer_bonus.c move_animation_bonus.c movements_bonus.c \
 					movements_monster_bonus.c \
-					scan_monster_bonus.c end_screen_bonus.c check_valid_path_bonus.c
+					scan_monster_bonus.c end_screen_bonus.c validate_path_bonus.c
 
 SRCS			+=	$(addprefix $(MDT_DIR), $(addprefix $(SRC_DIR), $(SL_SRCS)))
 SRCS_BONUS		+=	$(addprefix $(BONUS_DIR), $(addprefix $(SRC_DIR), $(SL_SRCS_BONUS)))

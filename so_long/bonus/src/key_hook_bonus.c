@@ -6,32 +6,35 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/11 07:28:42 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/20 22:26:51 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long_bonus.h"
 
-void	scan_player(t_map *map)
+void	locate_player(t_map *map)
 {
-	map->player.y = 0;
-	map->player.x = 0;
-	while (map->player.y < map->y)
+	int	x;
+	int	y;
+	
+	y = 0;
+	while (y < map->y)
 	{
-		while (map->player.x < map->x)
+		x = 0;
+		while (x < map->x)
 		{
-			if (map->array[map->player.y][map->player.x] == 'P')
-				break ;
-			map->player.x++;
+			if (map->array[y][x] == PLAYER)
+			{
+				map->player.y = y;
+				map->player.x = x;
+			}
+			x++;
 		}
-		if (map->array[map->player.y][map->player.x] == 'P')
-			break ;
-		map->player.x = 0;
-		map->player.y++;
+		y++;
 	}
 }
 
-void	print_counter(t_map *map)
+static void	print_counter(t_map *map)
 {
 	int		x;
 	char	*num;
@@ -56,19 +59,19 @@ void	print_counter(t_map *map)
 
 int	key_hook(int keycode, t_map *map)
 {
-	scan_player(map);
+	locate_player(map);
 	if (keycode == ESC)
 		exit(EXIT_SUCCESS);
 	if (map->exit == 1)
 		return (0);
-	else if (keycode == LEFT)
-		move_left(map);
-	else if (keycode == DOWN)
-		move_down(map);
-	else if (keycode == RIGHT)
-		move_right(map);
-	else if (keycode == UP)
-		move_up(map);
+		else if (keycode == A)
+		move(map, 'x', LEFT);
+	else if (keycode == S)
+		move(map, 'y', DOWN);
+	else if (keycode == D)
+		move(map, 'x', RIGHT);
+	else if (keycode == W)
+		move(map, 'y', UP);
 	print_counter(map);
 	return (0);
 }

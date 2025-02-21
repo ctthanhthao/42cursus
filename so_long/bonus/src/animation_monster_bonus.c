@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:14:59 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/11 07:15:03 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 08:43:24 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ static void	monster_animation(t_map *map, int x, int y)
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 			x * IMG_PXL, y * IMG_PXL);
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy,
-			x * IMG_PXL + 8, y * IMG_PXL);
+			x * IMG_PXL, y * IMG_PXL);
 	}
 	if (map->action % 3000 == 0)
 	{
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 			x * IMG_PXL, y * IMG_PXL);
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy2,
-			x * IMG_PXL + 8, y * IMG_PXL);
+		mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy_flip,
+			x * IMG_PXL, y * IMG_PXL);
 	}
 }
 

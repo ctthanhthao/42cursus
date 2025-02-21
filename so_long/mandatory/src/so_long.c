@@ -6,22 +6,20 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/18 10:03:38 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/20 21:23:25 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-void	map_initializer(t_map *map, char **av)
+static void	map_initializer(t_map *map, char **av)
 {
 	ft_memset(map, 0, sizeof(t_map));
 	map->mlx = NULL;
 	map->wnd = NULL;
 	ft_memset(&map->img, 0, sizeof(map->img));
-	map->file = NULL;
 	map->array = NULL;
 	map->copy = NULL;
-	map->fd = -1;
 	map->filename = av[1];
 	map->moves = 0;
 	map->e = 0;

@@ -6,17 +6,17 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/18 09:50:49 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 08:55:02 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-static void	validate_file(t_map *map)
+static void	validate_file(char *filename)
 {
 	char	*file_ex;
 
-	file_ex = ft_strchr(map->filename, '.');
+	file_ex = ft_strchr(filename, '.');
 	if (!file_ex || !ft_strnstr(file_ex, ".ber", 4))
 		error_filename();
 }
@@ -100,7 +100,7 @@ void	validate_shape(t_map *map)
 
 void	map_validator(t_map *map)
 {
-	validate_file(map);
+	validate_file(map->filename);
 	build_map_array(map);
 	validate_shape(map);
 	validate_elements(map);

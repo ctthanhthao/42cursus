@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/18 10:34:42 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/20 22:29:36 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,12 @@ static void	free_images(t_map *map)
 		mlx_destroy_image(map->mlx, map->img.player_up);
 	if (map->img.player_down)
 		mlx_destroy_image(map->mlx, map->img.player_down);
-	if (map->img.enemy)
-		mlx_destroy_image(map->mlx, map->img.enemy);
 }
 
 void	ft_clean_up(t_map *map)
 {
 	if (!map)
 		return ;
-	if (map->fd > 0)
-		close(map->fd);
-	if (map->file)
-		free(map->file);
 	ft_free_array(&map->array);
 	ft_free_array(&map->copy);
 	free_images(map);
@@ -74,7 +68,7 @@ void	ft_clean_up(t_map *map)
     }
     if (map->mlx)
     {
-        //mlx_destroy_display(map->mlx);
+//        mlx_destroy_display(map->mlx);
 		free(map->mlx);
         map->mlx = NULL;
     }

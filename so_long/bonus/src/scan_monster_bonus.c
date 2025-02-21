@@ -6,13 +6,13 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/11 07:29:22 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 08:51:51 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long_bonus.h"
 
-int	count_monster(t_map *map)
+static int	count_monster(t_map *map)
 {
 	int	y;
 	int	x;
@@ -25,7 +25,7 @@ int	count_monster(t_map *map)
 	{
 		while (x < map->x)
 		{
-			if (map->array[y][x] == 'X')
+			if (map->array[y][x] == ENEMY)
 				m++;
 			x++;
 		}
@@ -35,7 +35,7 @@ int	count_monster(t_map *map)
 	return (m);
 }
 
-void	alloc_monster(t_map *map)
+static void	locate_monsters(t_map *map)
 {
 	int	y;
 	int	x;
@@ -43,12 +43,12 @@ void	alloc_monster(t_map *map)
 
 	m = 0;
 	y = 0;
-	x = 0;
 	while (y < map->y)
 	{
+		x = 0;
 		while (x < map->x && m < map->enemy.nbr)
 		{
-			if (map->array[y][x] == 'X')
+			if (map->array[y][x] == ENEMY)
 			{
 				map->enemy.array[0][m] = y;
 				map->enemy.array[1][m] = x;
@@ -56,12 +56,11 @@ void	alloc_monster(t_map *map)
 			}
 			x++;
 		}
-		x = 0;
 		y++;
 	}
 }
 
-void	scan_monster(t_map *map)
+void	scan_monsters(t_map *map)
 {
 	map->enemy.nbr = count_monster(map);
 	if (map->enemy.nbr <= 0)
@@ -72,5 +71,5 @@ void	scan_monster(t_map *map)
 	map->enemy.array[2] = 0;
 	map->enemy.array[0][map->enemy.nbr] = 0;
 	map->enemy.array[1][map->enemy.nbr] = 0;
-	alloc_monster(map);
+	locate_monsters(map);
 }

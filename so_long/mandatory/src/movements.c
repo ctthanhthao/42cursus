@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/18 09:44:34 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/20 21:37:13 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,14 @@ static void	player_move_vertical(t_map *map, int x, int y, enum DIR dir)
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 		x * IMG_PXL, y * IMG_PXL);
 	map->array[y][x] = EMPTY;
+	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
+		x * IMG_PXL, (y + dir) * IMG_PXL);
 	if (dir == UP)
-	{
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, (y - 1) * IMG_PXL);
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_up,
 			x * IMG_PXL, (y - 1) * IMG_PXL);
-	}
 	else if (dir == DOWN)
-	{
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, (y + 1) * IMG_PXL);
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_down,
 			x * IMG_PXL, (y + 1) * IMG_PXL);
-	}
 	map->array[y + dir][x] = PLAYER;
 	print_movements(map);
 }
@@ -84,8 +78,7 @@ void	move(t_map *map, char axis, enum DIR direction)
 		if (map->array[y + direction][x] == EXIT && (map->c != 0 || map->exit == 1))
 			return ;
 		player_move_vertical(map, x, y, direction);
-		y += direction;
-		map->player.y = y;
+		map->player.y += direction;
 	}
 	else if (axis == 'x' && x > 0 && x < map->x && map->array[y][x + direction] != WALL)
 	{
@@ -93,7 +86,6 @@ void	move(t_map *map, char axis, enum DIR direction)
 		if (map->array[y][x + direction] == EXIT && (map->c != 0 || map->exit == 1))
 			return ;
 		player_move_horizon(map, x, y, direction);
-		x += direction;
-		map->player.x = x;
+		map->player.x = direction;
 	}
 }

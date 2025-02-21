@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/11 07:29:16 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/21 08:44:44 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	move_up_m(t_map *map, int m)
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 		x * IMG_PXL, y * IMG_PXL);
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy,
-		x * IMG_PXL + 8, y * IMG_PXL);
+		x * IMG_PXL, y * IMG_PXL);
 	map->array[y][x] = 'X';
 	map->enemy.array[0][m] = y;
 }
@@ -73,7 +73,7 @@ void	move_left_m(t_map *map, int m)
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 		x * IMG_PXL, y * IMG_PXL);
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy,
-		x * IMG_PXL + 8, y * IMG_PXL);
+		x * IMG_PXL, y * IMG_PXL);
 	map->array[y][x] = 'X';
 	map->enemy.array[1][m] = x;
 }
@@ -99,7 +99,7 @@ void	move_down_m(t_map *map, int m)
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 		x * IMG_PXL, y * IMG_PXL);
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy,
-		x * IMG_PXL + 8, y * IMG_PXL);
+		x * IMG_PXL, y * IMG_PXL);
 	map->array[y][x] = 'X';
 	map->enemy.array[0][m] = y;
 }
@@ -125,7 +125,7 @@ void	move_right_m(t_map *map, int m)
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 		x * IMG_PXL, y * IMG_PXL);
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy,
-		x * IMG_PXL + 8, y * IMG_PXL);
+		x * IMG_PXL, y * IMG_PXL);
 	map->array[y][x] = 'X';
 	map->enemy.array[1][m] = x;
 }

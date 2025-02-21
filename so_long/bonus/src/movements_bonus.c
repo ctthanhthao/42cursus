@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/11 07:29:08 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/20 21:31:53 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,4 +124,29 @@ void	move_right(t_map *map)
 	move_animation_right(map, x, y);
 	map->array[y][x] = 'P';
 	map->player.x = x;
+}
+
+void	move(t_map *map, char axis, enum DIR direction)
+{
+	int	x;
+	int	y;
+
+	x = map->player.x;
+	y = map->player.y;
+	if (axis == 'y' && y > 0 && y < map->y && map->array[y + direction][x] != WALL)
+	{
+		check_move_in_array(map, x, y + direction);
+		if (map->array[y + direction][x] == EXIT && (map->c != 0 || map->exit == 1))
+			return ;
+		player_move_vertical(map, x, y, direction);
+		map->player.y += direction;
+	}
+	else if (axis == 'x' && x > 0 && x < map->x && map->array[y][x + direction] != WALL)
+	{
+		check_move_in_array(map, x + direction, y);
+		if (map->array[y][x + direction] == EXIT && (map->c != 0 || map->exit == 1))
+			return ;
+		player_move_horizon(map, x, y, direction);
+		map->player.x = direction;
+	}
 }

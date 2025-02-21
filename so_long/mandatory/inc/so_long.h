@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/18 10:01:02 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/20 22:34:27 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 # define IMG_PXL 50
 # define WND_NAME "so_long"
+# define MOVE_SPEED 5
 // Linux
 /*enum Key {
 	W = 119,
@@ -79,8 +80,6 @@ typedef struct s_img
 
 typedef struct s_map
 {
-	int			fd;
-	char		*file;
 	char		**array;
 	char		**copy;
 	char		*filename;
@@ -115,19 +114,15 @@ void	error_program(char *msg);
 void	error_path(t_map *map);
 void	error_map_elements(t_map *map);
 
-int		ft_free(char **ret, int i);
 void	ft_clean_up(t_map *map);
 void	ft_free_array(char ***ret);
 
 void	move(t_map *map, char axis, enum DIR direction);
 
-void	file_to_image_player(t_map *map);
-
 void	ft_win(t_map *map);
 int		ft_close(t_map *map);
 
 void	print_movements(t_map *map);
-void	map_initializer(t_map *map, char **av);
 
 void	validate_path(t_map *map);
 void	locate_player(t_map *map);
