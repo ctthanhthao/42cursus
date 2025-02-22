@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   animation_monster_bonus.c                          :+:      :+:    :+:   */
+/*   enemies_animation_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:14:59 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 08:43:24 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 22:47:23 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,19 @@ static void	enemy_animation(t_map *map, int x, int y)
 {
 	if (map->action % 1000 == 0)
 	{
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, y * IMG_PXL);
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy,
 			x * IMG_PXL, y * IMG_PXL);
-		usleep(5000);
+		usleep(10000);
 	}
 	if (map->action % 3000 == 0)
 	{
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			x * IMG_PXL, y * IMG_PXL);
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy_flip,
 			x * IMG_PXL, y * IMG_PXL);
-		usleep(5000);
+		usleep(10000);	
 	}
 }
 
-int	move_enemies(t_map *map)
+int	enemies_dance(t_map *map)
 {
 	int	m;
 	int	x;

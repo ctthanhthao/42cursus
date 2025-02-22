@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scan_monster_bonus.c                               :+:      :+:    :+:   */
+/*   scan_enemies_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 08:51:51 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 23:19:47 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	scan_enemies(t_map *map)
 	if (map->enemy.nbr <= 0)
 		return ;
 	map->enemy.array = malloc(sizeof(int **) * 3);
-	map->enemy.array[0] = malloc(sizeof(int *) * map->enemy.nbr + 1);
-	map->enemy.array[1] = malloc(sizeof(int *) * map->enemy.nbr + 1);
+	map->enemy.array[0] = malloc(sizeof(int *) * (map->enemy.nbr + 1));
+	map->enemy.array[1] = malloc(sizeof(int *) * (map->enemy.nbr + 1));
 	map->enemy.array[2] = 0;
 	map->enemy.array[0][map->enemy.nbr] = 0;
 	map->enemy.array[1][map->enemy.nbr] = 0;

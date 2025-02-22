@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 15:06:34 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 22:38:04 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	check_ahead_move(t_map *map, int x, int y)
 		ft_lose(map);
 		return (0);
 	}
-	if (map->array[y - 1][x] == EXIT || map->array[y - 1][x] == COLLECTIBLE
-			|| map->array[y - 1][x] == ENEMY || map->exit == 1)
+	if (map->array[y][x] == EXIT || map->array[y][x] == COLLECTIBLE
+			|| map->array[y][x] == ENEMY || map->exit == 1)
 		return (0);
 	return (1);
 }
@@ -30,8 +30,6 @@ static void	enemy_move_horizon(t_map *map, int x, int y, enum e_DIR dir)
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 		x * IMG_PXL, y * IMG_PXL);
 	map->array[y][x] = EMPTY;
-	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-		(x + dir) * IMG_PXL, y * IMG_PXL);
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy,
 		(x + dir) * IMG_PXL, y * IMG_PXL);
 	map->array[y][x + dir] = ENEMY;
@@ -42,8 +40,6 @@ static void	enemy_move_vertical(t_map *map, int x, int y, enum e_DIR dir)
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 		x * IMG_PXL, y * IMG_PXL);
 	map->array[y][x] = EMPTY;
-	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-		x * IMG_PXL, (y + dir) * IMG_PXL);
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy,
 		x * IMG_PXL, (y + dir) * IMG_PXL);
 	map->array[y + dir][x] = ENEMY;

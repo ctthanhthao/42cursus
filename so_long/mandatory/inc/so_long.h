@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 15:57:05 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 22:57:56 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,25 @@
 
 # define IMG_PXL 50
 # define WND_NAME "so_long"
-# define WIN_WIDTH 1000
-# define WIN_HEIGHT 800
+# define WIN_WIDTH 2000
+# define WIN_HEIGHT 1500
 // Linux
-/*enum Key {
+enum Key {
 	W = 119,
 	S = 115,
 	A = 97,
 	D = 100,
 	ESC = 65307
-};*/
+};
 // MacOs
-enum e_KEY
+/*enum e_KEY
 {
 	W = 13,
 	S = 1,
 	A = 0,
 	D = 2,
 	ESC = 53
-};
+};*/
 
 enum e_DIR
 {

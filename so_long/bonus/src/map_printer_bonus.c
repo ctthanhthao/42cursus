@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 15:09:30 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 22:23:02 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	map_type(t_map *map, int x, int y)
 	int	type;
 
 	type = map->array[y / IMG_PXL][x / IMG_PXL];
-	if (type == COLLECTIBLE || type == PLAYER || type == EXIT || type == EMPTY)
+	if (type == EXIT || type == EMPTY)
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty, x, y);
 	if (type == COLLECTIBLE)
 		mlx_put_image_to_window(map->mlx, map->wnd,

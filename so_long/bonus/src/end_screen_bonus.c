@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 16:50:26 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 21:16:53 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,24 @@ static void	print_wall(t_map *map)
 	}
 }
 
-void	ft_win(t_map *map)
+static void	put_msg_in_center(t_map *map, char *msg, int color)
 {
-	char	*msg;
 	int		text_width;
 	int		x_center;
 	int		y_center;
-	
-	map->exit = 1;
-	mlx_clear_window(map->mlx, map->wnd);
-	print_wall(map);
-	msg = "~.~ CONGRATULATIONS ~.~";
+
 	text_width = 10 * ft_strlen(msg);
 	x_center = (map->x * IMG_PXL / 2) - (text_width / 2);
 	y_center = (map->y * IMG_PXL / 2);
-	mlx_string_put(map->mlx, map->wnd, x_center, y_center, 0x800080, msg);
-	write(1, "\n", 1);
+	mlx_string_put(map->mlx, map->wnd, x_center, y_center, color, msg);
+}
+
+void	ft_win(t_map *map)
+{
+	map->exit = 1;
+	mlx_clear_window(map->mlx, map->wnd);
+	print_wall(map);
+	put_msg_in_center(map, "~.~ CONGRATULATIONS ~.~", 0x800080);
 	write(1, "\x1b[35;01m", 9);
 	write(1, "GAME FINISHED\n", 15);
 	write(1, "\x1b[0m", 5);
@@ -73,9 +75,7 @@ void	ft_lose(t_map *map)
 	map->exit = 1;
 	mlx_clear_window(map->mlx, map->wnd);
 	print_wall(map);
-	mlx_string_put(map->mlx, map->wnd,
-		map->x / 2 * IMG_PXL, map->y / 2 * IMG_PXL, 0xF52200, "GAME OVER");
-	write(1, "\n", 1);
+	put_msg_in_center(map, "-- GAME OVER --", 0xF52200);
 	write(1, "\x1b[35;01m", 9);
 	write(1, "GAME OVER\n", 11);
 	write(1, "\x1b[0m", 5);

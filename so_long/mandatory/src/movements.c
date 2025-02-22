@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 15:21:28 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 22:42:11 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,11 @@ static void	player_move_horizon(t_map *map, int x, int y, enum e_DIR dir)
 		x * IMG_PXL, y * IMG_PXL);
 	map->array[y][x] = EMPTY;
 	if (dir == LEFT)
-	{
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			(x - 1) * IMG_PXL, y * IMG_PXL);
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_left,
 			(x - 1) * IMG_PXL, y * IMG_PXL);
-	}
 	else if (dir == RIGHT)
-	{
-		mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-			(x + 1) * IMG_PXL, y * IMG_PXL);
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_right,
 			(x + 1) * IMG_PXL, y * IMG_PXL);
-	}
 	map->array[y][x + dir] = PLAYER;
 }
 
@@ -57,8 +49,7 @@ static void	player_move_vertical(t_map *map, int x, int y, enum e_DIR dir)
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 		x * IMG_PXL, y * IMG_PXL);
 	map->array[y][x] = EMPTY;
-	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-		x * IMG_PXL, (y + dir) * IMG_PXL);
+
 	if (dir == UP)
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_up,
 			x * IMG_PXL, (y - 1) * IMG_PXL);

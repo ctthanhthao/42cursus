@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 15:56:38 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 17:47:17 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	error_wall(t_map *map)
 	write(2, "The map must be surrounded by walls\n\033[0m", 41);
 	ft_free_array(&map->array);
 	ft_free_array(&map->copy);
+	ft_free_int_array(&map->enemy.array);
 	exit(EXIT_FAILURE);
 }
 
@@ -43,6 +44,7 @@ void	error_shape(t_map *map, char *msg)
 	write(2, "\033[0m", 5);
 	ft_free_array(&map->array);
 	ft_free_array(&map->copy);
+	ft_free_int_array(&map->enemy.array);
 	exit(EXIT_FAILURE);
 }
 
@@ -52,5 +54,6 @@ void	error_map_elements(t_map *map)
 	write(2, "Some required elements are invalid\n\033[0m", 40);
 	ft_free_array(&map->array);
 	ft_free_array(&map->copy);
+	ft_free_int_array(&map->enemy.array);
 	exit(EXIT_FAILURE);
 }

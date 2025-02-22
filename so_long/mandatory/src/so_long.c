@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/20 21:23:25 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 17:44:50 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,6 @@ int	main(int ac, char **av)
 	mlx_hook(map.wnd, 17, 0, ft_close, &map);
 	mlx_key_hook(map.wnd, key_hook, &map);
 	mlx_loop(map.mlx);
+	ft_clean_up(&map);
+	return (0);
 }

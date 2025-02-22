@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 15:08:42 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 22:51:23 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,25 @@ void	ft_free_array(char ***ret)
 {
 	int		i;
 	char	**array;
+
+	if (!ret || !*ret)
+		return ;
+	array = *ret;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		array[i] = NULL;
+		i++;
+	}
+	free(array);
+	*ret = NULL;
+}
+
+void	ft_free_int_array(int ***ret)
+{
+	int		i;
+	int		**array;
 
 	if (!ret || !*ret)
 		return ;
@@ -77,6 +96,7 @@ void	ft_clean_up(t_map *map)
 		return ;
 	ft_free_array(&map->array);
 	ft_free_array(&map->copy);
+	ft_free_int_array(&map->enemy.array);
 	free_images(map);
 	if (map->wnd)
 	{
@@ -85,7 +105,7 @@ void	ft_clean_up(t_map *map)
 	}
 	if (map->mlx)
 	{
-//        mlx_destroy_display(map->mlx);
+        mlx_destroy_display(map->mlx);
 		free(map->mlx);
 		map->mlx = NULL;
 	}

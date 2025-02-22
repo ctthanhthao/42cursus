@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:33:19 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 16:50:03 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 22:57:24 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,27 @@
 
 # define IMG_PXL 50
 # define WND_NAME "so_long"
-# define WIN_WIDTH 1000
-# define WIN_HEIGHT 800
+# define WIN_WIDTH 2000
+# define WIN_HEIGHT 1500
 
 // Linux
-/*enum e_KEY
+enum e_KEY
 {
 	W = 119,
 	S = 115,
 	A = 97,
 	D = 100,
 	ESC = 65307
-};*/
+};
 // MacOs
-enum e_KEY
+/*enum e_KEY
 {
 	W = 13,
 	S = 1,
 	A = 0,
 	D = 2,
 	ESC = 53
-};
+};*/
 
 enum e_DIR
 {
@@ -137,18 +137,15 @@ void	error_map_elements(t_map *map);
 
 void	ft_clean_up(t_map *map);
 void	ft_free_array(char ***ret);
+void	ft_free_int_array(int ***ret);
 
 void	locate_player(t_map *map);
 char	*sl_strjoin(char *s1, char const *s2);
 
 void	player_move(t_map *map, char axis, enum e_DIR direction);
 void	enemy_move(t_map *map, char axis, enum e_DIR direction, int enemyth);
-
 void	scan_enemies(t_map *map);
-
-int		move_enemies(t_map *map);
-
-void	print_movements(t_map *map);
+int		enemies_dance(t_map *map);
 
 void	ft_win(t_map *map);
 void	ft_lose(t_map *map);

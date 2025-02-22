@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 16:00:05 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 17:43:35 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	validate_elements(t_map *map)
 		x = 0;
 		y++;
 	}
-	if (map->c < 1 || map->e < 1 || map->p != 1)
+	if (map->c < 1 || map->e != 1 || map->p != 1)
 		error_map_elements(map);
 }
 

@@ -2,7 +2,7 @@
 static char *keep_down[] = {
 /* columns rows colors chars-per-pixel */
 "50 50 5 1 ",
-"  c None",
+"  c #FFAE5D",
 ". c black",
 "X c #B3493C",
 "o c #CD746A",

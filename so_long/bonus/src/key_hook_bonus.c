@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 16:13:37 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 23:14:00 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	key_hook(int keycode, t_map *map)
 {
 	locate_player(map);
 	if (keycode == ESC)
-		exit(EXIT_SUCCESS);
+		ft_close(map);
 	if (map->exit == 1)
 		return (0);
 	else if (keycode == A)

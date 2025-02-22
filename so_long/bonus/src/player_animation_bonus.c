@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 16:37:13 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 22:38:52 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static int	check_move_in_array(t_map *map, int x, int y)
 {
-	int	enemyth;
+	int	eth;
 
-	enemyth = 0;
-	while (enemyth < map->enemy.nbr)
+	eth = 0;
+	while (eth < map->enemy.nbr)
 	{
-		if (map->enemy.array[0][enemyth] == y && map->enemy.array[1][enemyth] == x)
+		if (map->enemy.array[0][eth] == y && map->enemy.array[1][eth] == x)
 		{
 			ft_lose(map);
-			return (0);	
+			return (0);
 		}
-		enemyth++;
+		eth++;
 	}
 	if (map->array[y][x] == EXIT)
 	{
@@ -70,8 +70,6 @@ static void	player_move_vertical(t_map *map, int x, int y, enum e_DIR dir)
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 		x * IMG_PXL, y * IMG_PXL);
 	map->array[y][x] = EMPTY;
-	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
-		x * IMG_PXL, (y + dir) * IMG_PXL);
 	if (dir == UP && map->z == 0)
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_up,
 			x * IMG_PXL, (y - 1) * IMG_PXL);

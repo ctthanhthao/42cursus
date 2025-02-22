@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 09:56:00 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 15:07:12 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 17:47:24 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	error_path(t_map *map)
 	write(2, "No valid path\n\033[0m", 19);
 	ft_free_array(&map->array);
 	ft_free_array(&map->copy);
+	ft_free_int_array(&map->enemy.array);
 	exit(EXIT_FAILURE);
 }
 

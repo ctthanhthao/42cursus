@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:12:50 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 15:47:35 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/22 23:26:19 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	map_initializer(t_map *map, char **av)
 	map->action = 0;
 	map->enemy.pos = 0;
 	map->enemy.nbr = 0;
+	map->enemy.array = NULL;
 }
 
 int	main(int ac, char **av)
@@ -45,7 +46,7 @@ int	main(int ac, char **av)
 		error_program("Usage: ./so_long mapfile\n");
 	map_initializer(&map, av);
 	map_validator(&map);
-	map.mlx = mlx_init();
+	map.mlx = mlx_init();x
 	if (!map.mlx)
 		error_program("MLX initialization failed\n");
 	map.wnd = mlx_new_window(map.mlx, map.x * IMG_PXL,
@@ -56,8 +57,10 @@ int	main(int ac, char **av)
 	map_printer(&map);
 	scan_enemies(&map);
 	if (map.enemy.nbr > 0)
-		mlx_loop_hook(map.mlx, move_enemies, &map);
+		mlx_loop_hook(map.mlx, enemies_dance, &map);
 	mlx_hook(map.wnd, 17, 0, ft_close, &map);
 	mlx_key_hook(map.wnd, key_hook, &map);
 	mlx_loop(map.mlx);
+	ft_clean_up(&map);
+	return (0);
 }
