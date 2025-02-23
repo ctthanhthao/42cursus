@@ -3,11 +3,12 @@
 so_long is a 2D game project built using MiniLibX, where the player navigates a maze, collects collectibles, and reaches the exit while avoiding enemies.
 
 ## Features
-- Player movement in four directions (Up, Down, Left, Right)
-- Animated player and enemies
-- Collectible items to gather before reaching the exit
-- Simple 2D graphics using MiniLibX
-- Map validation and error handling
+- Uses MiniLibX for window management and image rendering.
+- Reads and parses a map file (.ber) to generate the game environment.
+- Implements player movement with keyboard inputs.
+- Features collectibles, walls, exits, and optional enemies (bonus part).
+- Includes basic animations for smooth gameplay (bonus).
+- Detects valid paths to ensure the map is playable.
 
 ## How to Compile
 Run the following command in the project directory:
