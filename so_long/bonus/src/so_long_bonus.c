@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:12:50 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/22 23:26:19 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/23 10:48:11 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int ac, char **av)
 		error_program("Usage: ./so_long mapfile\n");
 	map_initializer(&map, av);
 	map_validator(&map);
-	map.mlx = mlx_init();x
+	map.mlx = mlx_init();
 	if (!map.mlx)
 		error_program("MLX initialization failed\n");
 	map.wnd = mlx_new_window(map.mlx, map.x * IMG_PXL,

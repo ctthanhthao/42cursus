@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/22 22:42:11 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/23 11:01:34 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static void	player_move_vertical(t_map *map, int x, int y, enum e_DIR dir)
 	mlx_put_image_to_window(map->mlx, map->wnd, map->img.empty,
 		x * IMG_PXL, y * IMG_PXL);
 	map->array[y][x] = EMPTY;
-
 	if (dir == UP)
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.player_up,
 			x * IMG_PXL, (y - 1) * IMG_PXL);

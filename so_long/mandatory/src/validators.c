@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/22 17:43:35 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/23 11:02:00 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	validate_shape(t_map *map)
 		y++;
 	}
 	map->x = max;
-	if (map->x * IMG_PXL > WIN_WIDTH || map->y * IMG_PXL> WIN_HEIGHT)
+	if (map->x * IMG_PXL > WIN_WIDTH || map->y * IMG_PXL > WIN_HEIGHT)
 		error_shape(map, "Map is larger than the fixed window size!\n");
 }
 

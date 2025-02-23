@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/21 16:53:22 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/23 11:00:45 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_win(t_map *map)
 	int		text_width;
 	int		x_center;
 	int		y_center;
-	
+
 	map->exit = 1;
 	mlx_clear_window(map->mlx, map->wnd);
 	print_wall(map);

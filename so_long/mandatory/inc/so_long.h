@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:15:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/22 22:57:56 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/23 11:00:18 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 # define WIN_WIDTH 2000
 # define WIN_HEIGHT 1500
 // Linux
-enum Key {
+enum e_KEY
+{
 	W = 119,
 	S = 115,
 	A = 97,

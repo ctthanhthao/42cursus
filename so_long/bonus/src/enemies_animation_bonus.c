@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 07:14:59 by thchau            #+#    #+#             */
-/*   Updated: 2025/02/22 22:47:23 by thchau           ###   ########.fr       */
+/*   Updated: 2025/02/23 11:03:18 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	enemy_animation(t_map *map, int x, int y)
 	{
 		mlx_put_image_to_window(map->mlx, map->wnd, map->img.enemy_flip,
 			x * IMG_PXL, y * IMG_PXL);
-		usleep(10000);	
+		usleep(10000);
 	}
 }
 
