@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 19:38:02 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/15 13:50:05 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/18 20:06:03 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,16 @@ void	custom_usleep(long usec)
 	long	start;
 	long	elapsed;
 	long	rem;
-
-	start = get_time(MILLISECOND);
-	while (get_time(MILLISECOND) - start < usec)
+	
+	start = get_time(MICROSECOND);
+	while (get_time(MICROSECOND) - start < usec)
 	{
-		elapsed = get_time(MILLISECOND) - start;
+		elapsed = get_time(MICROSECOND) - start;
 		rem = usec - elapsed;
 		if (rem > 1e3)
 			usleep(rem / 2);
 		else
-			while (get_time(MILLISECOND) - start < usec);
+			while (get_time(MICROSECOND) - start < usec);
 	}
 }
 

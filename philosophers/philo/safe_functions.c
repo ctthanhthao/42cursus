@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:11:17 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/18 11:33:51 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/18 19:12:31 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	*safe_malloc(size_t bytes)
 		log_error("Error with malloc.");
 		return (NULL);
 	}
+	memset(ret, 0, bytes);
 	return (ret);	
 }
 

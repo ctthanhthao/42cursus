@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 12:22:32 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/17 11:38:47 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/18 18:50:18 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int position)
 
 	philo_nbr = philo->table->philo_nbr;
 	if (philo_nbr == 1)
-	{
 		philo->first_fork = &forks[position];
-		printf("philo->first_fork->fork :%p\n", (void *)&philo->first_fork->fork);	
-	}
 	else
 	{
 		philo->first_fork = &forks[(position + 1) % philo_nbr];
@@ -63,6 +60,7 @@ t_error_code	data_init(t_table *tb)
 
 	i = 0;
 	tb->end_simulation = 0;
+	tb->all_threads_ready = false;
 	tb->philos = safe_malloc(sizeof(t_philo) * tb->philo_nbr);
 	if (!tb->philos)
 		return (ERROR_INIT);
@@ -77,12 +75,16 @@ t_error_code	data_init(t_table *tb)
 			log_error("Error happens during initializing forks.");
 			return (ERROR_INIT);
 		}
-		printf("tb->forks[%i].fork initialized..\n", i);
 		i++;
 	}
 	if (safe_mutex_handle(&tb->access_mtx, INIT) == ERROR_MUTEX)
 	{
 		log_error("Error happens when create access_mtx");
+		return (ERROR_INIT);
+	}
+	if (safe_mutex_handle(&tb->write_mtx, INIT) == ERROR_MUTEX)
+	{
+		log_error("Error happens when create write_mtx");
 		return (ERROR_INIT);
 	}
 	philos_init(tb);

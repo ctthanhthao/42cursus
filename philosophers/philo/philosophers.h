@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:09:59 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/16 21:17:30 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/18 19:13:35 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdbool.h>
 # include <sys/time.h>
 # include <stdio.h>
+# include <string.h>
 
 typedef enum e_philo_action
 {

@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:00:28 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/18 11:10:07 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/18 20:49:00 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void *dinner_simulation(void *data)
 			return (log_error("Error happens when philo starts to eat."),NULL);
 		if (status == THREAD_DIED)
 		{
-			set_bool(&philo->table->access_mtx, &philo->table->end_simulation, true);
 			log_action(DIED, philo);
+			set_bool(&philo->table->access_mtx, &philo->table->end_simulation, true);
 			break ;
 		}
 		philo_sleeps(philo);
@@ -47,6 +47,7 @@ void	*start_monitor(void *data)
 	bool	all_full;
 
 	tb = (t_table *)data;
+	while (!tb->all_threads_ready);
 	all_full = true;
 	while (!simulation_finished(tb))
 	{
@@ -75,7 +76,6 @@ static void	monitor_process(void *data)
 	t_table *tb;
 	
 	tb = (t_table *)data;
-	while (!tb->all_threads_ready);
 	if (safe_thread_handle(&monitor, 
 		&start_monitor, tb, CREATE) == ERROR_THREAD)
 	{
@@ -89,17 +89,12 @@ static void	*start_alone(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
-	printf("start_alone STARTS\n");
-	printf("lock philo %d - philo->first_fork->fork : %p\n", philo->id, (void *)&philo->first_fork->fork);
 	if (safe_mutex_handle(&philo->first_fork->fork, LOCK) == ERROR_MUTEX)
-	{
-		printf("ERROR philo %d - philo->first_fork->fork : %p\n", philo->id, (void *)&philo->first_fork->fork);
 		return (NULL);
-	}
 	log_action(TAKE_FIRST_FORK, philo);
 	if (safe_mutex_handle(&philo->first_fork->fork, UNLOCK) == ERROR_MUTEX)
 		return (NULL);
-	usleep(philo->table->time_to_die * 1e3);
+	usleep(philo->table->time_to_die);
 	log_action(DIED, philo);
 	set_bool(&philo->table->access_mtx, &philo->table->end_simulation, true);
 	return (NULL);
@@ -107,7 +102,6 @@ static void	*start_alone(void *data)
 
 static t_error_code one_philo(t_table *tb)
 {
-	printf("one_philo STARTS\n");
 	tb->start_simulation = get_time(MILLISECOND);
 	if (safe_thread_handle(&tb->philos[0].thread, 
 		&start_alone, &tb->philos[0], CREATE) == ERROR_THREAD)
@@ -139,7 +133,7 @@ t_error_code	dinner_start(t_table *tb)
 		while (i < tb->philo_nbr)
 		{
 			if (safe_thread_handle(&tb->philos[i].thread, 
-				dinner_simulation, &tb->philos[i].thread, CREATE) == ERROR_THREAD)
+				dinner_simulation, &tb->philos[i], CREATE) == ERROR_THREAD)
 				return (ERROR_DINNER_START);
 			i++;
 		}

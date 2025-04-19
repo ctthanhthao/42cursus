@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 10:28:21 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/16 20:50:23 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/18 21:10:47 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ bool	log_action(t_philo_action action, t_philo *philo)
 	else if (action == DIED && !simulation_finished(philo->table))
 		printf("%ld(%ld) %d died\n", timestamp, elapsed, philo->id);
 	else
+	{
+		safe_mutex_handle(&philo->table->write_mtx, UNLOCK);
 		return (false);
+	}
 	if (safe_mutex_handle(&philo->table->write_mtx, UNLOCK) == ERROR_MUTEX)
 		return (false);
 	return (true);

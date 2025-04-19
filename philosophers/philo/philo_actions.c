@@ -20,7 +20,7 @@ static long	calculate_thinking_time (long timestamp, t_philo *philo)
 		relative_elapsed = timestamp - philo->table->start_simulation;
 	else
 		relative_elapsed = timestamp - philo->last_meal_time;
-	return ((philo->table->time_to_die - relative_elapsed) / 2);
+	return (((philo->table->time_to_die / 1e3) - relative_elapsed) / 2);
 }
 
 bool	can_eat(t_philo *philo)
@@ -29,11 +29,13 @@ bool	can_eat(t_philo *philo)
 	long	timestamp;
 
 	timestamp = get_time(MILLISECOND);
+	//printf("philo[%i] timestamp: %ld\n", philo->id, timestamp);
 	if (philo->last_meal_time > 0)
 		elapsed_from_last_meal = timestamp - philo->last_meal_time;
 	else
 		elapsed_from_last_meal = timestamp - philo->table->start_simulation;
-	if (elapsed_from_last_meal < philo->table->time_to_die)
+	//printf("philo[%i] elapsed_from_last_meal: %ld\n", philo->id, elapsed_from_last_meal);
+	if (elapsed_from_last_meal < (philo->table->time_to_die / 1e3))
 		return (true);
 	return (false);
 }
@@ -44,11 +46,13 @@ void	philo_thinks(t_philo *philo)
 	long	timestamp;
 
 	timestamp = get_time(MILLISECOND);
-	time_to_think = calculate_thinking_time(timestamp, philo); 
+	time_to_think = calculate_thinking_time(timestamp, philo);
 	if (time_to_think > 0)
 	{
 		if(log_action(THINKING, philo))
+		{
 			custom_usleep(time_to_think);
+		}
 	}
 }
 
@@ -72,15 +76,15 @@ t_error_code	philo_eats(t_philo *philo)
 		return (ERROR_MUTEX);
 	log_action(TAKE_SECOND_FORK, philo);
 	log_action(EATING, philo);
-	custom_usleep(philo->table->time_to_eat);
-	if (safe_mutex_handle(&philo->second_fork->fork, LOCK) == ERROR_MUTEX)
-		return (ERROR_MUTEX);
-	if (safe_mutex_handle(&philo->first_fork->fork, LOCK) == ERROR_MUTEX)
-		return (ERROR_MUTEX);
 	philo->num_of_meals++;
 	philo->last_meal_time = get_time(MILLISECOND);
+	custom_usleep(philo->table->time_to_eat);
 	if (philo->table->nbr_limit_meal > 0 &&
 		philo->num_of_meals >= philo->table->nbr_limit_meal)
 		set_bool(&philo->mtx, &philo->is_full, true);
+	if (safe_mutex_handle(&philo->second_fork->fork, UNLOCK) == ERROR_MUTEX)
+		return (ERROR_MUTEX);
+	if (safe_mutex_handle(&philo->first_fork->fork, UNLOCK) == ERROR_MUTEX)
+		return (ERROR_MUTEX);
 	return (SUCCESS);
 }
