@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:25:49 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/15 14:13:40 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/23 19:59:04 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	set_bool(pthread_mutex_t *mtx, bool *dest, bool value)
 bool	get_bool(pthread_mutex_t *mtx, bool *dest)
 {
 	bool	value;
-	
+
 	if (safe_mutex_handle(mtx, LOCK) == ERROR_MUTEX)
 	{
 		log_error("Failed to gain lock mutex when get bool value.");
@@ -41,6 +41,39 @@ bool	get_bool(pthread_mutex_t *mtx, bool *dest)
 	{
 		log_error("Failed to unlock mutex when get bool value.");
 		return (false);
+	}
+	return (value);
+}
+
+void	set_long(pthread_mutex_t *mtx, long *dest, long value)
+{
+	if (safe_mutex_handle(mtx, LOCK) == ERROR_MUTEX)
+	{
+		log_error("Failed to gain lock mutex when set long for value.");
+		return ;
+	}
+	*dest = value;
+	if (safe_mutex_handle(mtx, UNLOCK) == ERROR_MUTEX)
+	{
+		log_error("Failed to unlock mutex when set long for value.");
+		return ;
+	}
+}
+
+long	get_long(pthread_mutex_t *mtx, long *dest)
+{
+	long	value;
+
+	if (safe_mutex_handle(mtx, LOCK) == ERROR_MUTEX)
+	{
+		log_error("Failed to gain lock mutex when get long value.");
+		return (ERROR_MUTEX);
+	}
+	value = *dest;
+	if (safe_mutex_handle(mtx, UNLOCK) == ERROR_MUTEX)
+	{
+		log_error("Failed to unlock mutex when get long value.");
+		return (ERROR_MUTEX);
 	}
 	return (value);
 }

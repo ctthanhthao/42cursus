@@ -6,109 +6,65 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:00:28 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/18 20:49:00 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/23 13:30:21 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static void *dinner_simulation(void *data)
+static void	*dinner_simulation(void *data)
 {
-	t_philo 		*philo;
+	t_philo			*philo;
 	t_error_code	status;
-		
-	philo = (t_philo*) data;
-	while (!philo->table->all_threads_ready);
+
+	philo = (t_philo *)data;
+	while (!get_bool(&philo->table->access_mtx,
+			&philo->table->all_threads_ready))
+		usleep(100);
 	while (!simulation_finished(philo->table))
 	{
-		if (get_bool(&philo->mtx, &philo->is_full))
-			break ;
 		status = philo_eats(philo);
 		if (status == ERROR_MUTEX)
-			return (log_error("Error happens when philo starts to eat."),NULL);
-		if (status == THREAD_DIED)
-		{
-			log_action(DIED, philo);
-			set_bool(&philo->table->access_mtx, &philo->table->end_simulation, true);
-			break ;
-		}
+			return (log_error("Error happens when philo starts to eat."), NULL);
 		philo_sleeps(philo);
 		philo_thinks(philo);
 	}
-	
 	return (NULL);
 }
 
-void	*start_monitor(void *data)
+static t_error_code	trigger_philos_threads(t_table *tb)
 {
-	t_philo *philo;
-	t_table	*tb;
-	int		i;
-	bool	all_full;
+	int	i;
 
-	tb = (t_table *)data;
-	while (!tb->all_threads_ready);
-	all_full = true;
-	while (!simulation_finished(tb))
+	i = 0;
+	while (i < tb->philo_nbr)
 	{
-		i = 0;
-		all_full = true;
-		while (i < tb->philo_nbr)
+		if (safe_thread_handle(&tb->philos[i].thread, dinner_simulation,
+				&tb->philos[i], CREATE) == ERROR_THREAD)
 		{
-			philo = tb->philos + i;
-			if (!get_bool(&philo->mtx, &philo->is_full))
-				all_full = false;
-			i++;
+			log_error("Failed to init philo thread.");
+			return (ERROR_DINNER_START);
 		}
-		usleep(10);
+		i++;
 	}
-	if (all_full)
-		set_bool(&tb->access_mtx, &tb->end_simulation, true);
-	return (NULL);
+	return (SUCCESS);
 }
 
-/*
-* 1. will end simulation if all philos are full
-*/
-static void	monitor_process(void *data)
+static t_error_code	join_philos_threads(t_table *tb)
 {
-	pthread_t monitor;
-	t_table *tb;
-	
-	tb = (t_table *)data;
-	if (safe_thread_handle(&monitor, 
-		&start_monitor, tb, CREATE) == ERROR_THREAD)
+	int	i;
+
+	i = 0;
+	while (i < tb->philo_nbr)
 	{
-		log_message("Failed to start monitor process.");
-		return ;
+		if (safe_thread_handle(&tb->philos[i].thread, NULL,
+				NULL, JOIN) == ERROR_THREAD)
+		{
+			log_error("Failed to join philo thread.");
+			return (ERROR_DINNER_START);
+		}
+		i++;
 	}
-}
-
-static void	*start_alone(void *data)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)data;
-	if (safe_mutex_handle(&philo->first_fork->fork, LOCK) == ERROR_MUTEX)
-		return (NULL);
-	log_action(TAKE_FIRST_FORK, philo);
-	if (safe_mutex_handle(&philo->first_fork->fork, UNLOCK) == ERROR_MUTEX)
-		return (NULL);
-	usleep(philo->table->time_to_die);
-	log_action(DIED, philo);
-	set_bool(&philo->table->access_mtx, &philo->table->end_simulation, true);
-	return (NULL);
-}
-
-static t_error_code one_philo(t_table *tb)
-{
-	tb->start_simulation = get_time(MILLISECOND);
-	if (safe_thread_handle(&tb->philos[0].thread, 
-		&start_alone, &tb->philos[0], CREATE) == ERROR_THREAD)
-		return (ERROR_DINNER_START);
-	if (safe_thread_handle(&tb->philos[0].thread, NULL, 
-		NULL, JOIN) == ERROR_THREAD)
-		return (ERROR_DINNER_START);
 	return (SUCCESS);
 }
 
@@ -117,37 +73,27 @@ static t_error_code one_philo(t_table *tb)
 * 2. If philo is only one, it will die
 * 3. create all threads.
 * 4. wait until all threads are created, start a monitor
-* which goes to check if any thread dies or all threads are full. -> end simulation 
+* which goes to check if any thread dies or all threads are full. 
+-> end simulation 
 */
 t_error_code	dinner_start(t_table *tb)
 {
-	int	i;
-	
-	i = 0;
 	if (tb->nbr_limit_meal == 0)
 		return (SUCCESS);
 	if (tb->philo_nbr == 1)
 		return (one_philo(tb));
 	else
 	{
-		while (i < tb->philo_nbr)
-		{
-			if (safe_thread_handle(&tb->philos[i].thread, 
-				dinner_simulation, &tb->philos[i], CREATE) == ERROR_THREAD)
-				return (ERROR_DINNER_START);
-			i++;
-		}
+		if (trigger_philos_threads(tb) == ERROR_DINNER_START)
+			return (ERROR_DINNER_START);
+		if (trigger_monitor_threads(tb) == ERROR_DINNER_START)
+			return (ERROR_DINNER_START);
 		tb->start_simulation = get_time(MILLISECOND);
 		set_bool(&tb->access_mtx, &tb->all_threads_ready, true);
-		monitor_process(tb);
-		i = 0;
-		while (i < tb->philo_nbr)
-		{
-			if (safe_thread_handle(&tb->philos[i].thread, NULL, 
-				NULL, JOIN) == ERROR_THREAD)
-				return (ERROR_DINNER_START);
-			i++;
-		}
+		if (join_philos_threads(tb) == ERROR_DINNER_START)
+			return (ERROR_DINNER_START);
+		if (join_monitor_threads(tb) == ERROR_DINNER_START)
+			return (ERROR_DINNER_START);
 	}
 	return (SUCCESS);
 }

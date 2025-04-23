@@ -6,13 +6,13 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 21:01:56 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/16 20:53:55 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/20 17:56:35 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static long p_atol(const char *str)
+static long	p_atol(const char *str)
 {
 	long	result;
 
@@ -30,13 +30,13 @@ static long p_atol(const char *str)
 	if (result > 2147483647)
 	{
 		log_error("Number could not exceed INT_MAX");
-			return (INVALID_INPUT);
+		return (INVALID_INPUT);
 	}
 	return (result);
 }
 
-static long ft_atol(const char *str)
-{	
+static long	ft_atol(const char *str)
+{
 	while (is_space(*str))
 		++str;
 	if (*str == '+')
@@ -52,10 +52,9 @@ static long ft_atol(const char *str)
 		return (INVALID_INPUT);
 	}
 	return (p_atol(str));
-	
 }
 
-static t_error_code	assign_ms(long *dest, char *str)
+static t_error_code	assign_usec(long *dest, char *str)
 {
 	int	value;
 
@@ -66,25 +65,25 @@ static t_error_code	assign_ms(long *dest, char *str)
 	return (SUCCESS);
 }
 
-t_error_code parse_input(t_table *tb, char **argv)
+t_error_code	parse_input(t_table *tb, char **argv)
 {
 	int	value;
 
-	if ((value = ft_atol(argv[1])) == INVALID_INPUT)
+	value = ft_atol(argv[1]);
+	if (value == INVALID_INPUT)
 		return (INVALID_INPUT);
 	tb->philo_nbr = value;
-	if (assign_ms(&tb->time_to_die, argv[2]) == INVALID_INPUT ||
-		assign_ms(&tb->time_to_eat, argv[3]) == INVALID_INPUT ||
-		assign_ms(&tb->time_to_sleep, argv[4]) == INVALID_INPUT)
+	if (assign_usec(&tb->time_to_die, argv[2]) == INVALID_INPUT
+		|| assign_usec(&tb->time_to_eat, argv[3]) == INVALID_INPUT
+		||assign_usec(&tb->time_to_sleep, argv[4]) == INVALID_INPUT)
 		return (ERROR_PARSE);
-	if (tb->time_to_die < 6e4 || tb->time_to_eat < 6e4 || tb->time_to_sleep < 6e4)
-	{
-		log_error("Timestamp must be larger than 60ms");
-		return (ERROR_PARSE);
-	}
+	if (tb->time_to_die < 6e4 || tb->time_to_eat < 6e4
+		|| tb->time_to_sleep < 6e4)
+		return (log_error("Timestamp must be larger than 60ms"), ERROR_PARSE);
 	if (argv[5])
 	{
-		if ((value = ft_atol(argv[5])) == INVALID_INPUT)
+		value = ft_atol(argv[5]);
+		if (value == INVALID_INPUT)
 			return (ERROR_PARSE);
 		tb->nbr_limit_meal = value;
 	}

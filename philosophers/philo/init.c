@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 12:22:32 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/18 18:50:18 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/23 13:17:57 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	philos_init(t_table *tb)
 	while (i < tb->philo_nbr)
 	{
 		tb->philos[i].is_full = false;
-		tb->philos[i].is_dead = false;
 		tb->philos[i].num_of_meals = 0;
 		tb->philos[i].last_meal_time = -1;
 		tb->philos[i].id = i + 1;
@@ -54,19 +53,11 @@ static void	philos_init(t_table *tb)
 	}
 }
 
-t_error_code	data_init(t_table *tb)
+static t_error_code	fork_mutexes_init(t_table *tb)
 {
 	int	i;
 
 	i = 0;
-	tb->end_simulation = 0;
-	tb->all_threads_ready = false;
-	tb->philos = safe_malloc(sizeof(t_philo) * tb->philo_nbr);
-	if (!tb->philos)
-		return (ERROR_INIT);
-	tb->forks = safe_malloc(sizeof(t_fork) * tb->philo_nbr);
-	if (!tb->forks)
-		return (ERROR_INIT);
 	while (i < tb->philo_nbr)
 	{
 		tb->forks[i].fork_id = i;
@@ -77,6 +68,21 @@ t_error_code	data_init(t_table *tb)
 		}
 		i++;
 	}
+	return (SUCCESS);
+}
+
+t_error_code	data_init(t_table *tb)
+{
+	tb->end_simulation = 0;
+	tb->all_threads_ready = false;
+	tb->philos = safe_malloc(sizeof(t_philo) * tb->philo_nbr);
+	if (!tb->philos)
+		return (ERROR_INIT);
+	tb->forks = safe_malloc(sizeof(t_fork) * tb->philo_nbr);
+	if (!tb->forks)
+		return (ERROR_INIT);
+	if (fork_mutexes_init(tb) == ERROR_INIT)
+		return (ERROR_INIT);
 	if (safe_mutex_handle(&tb->access_mtx, INIT) == ERROR_MUTEX)
 	{
 		log_error("Error happens when create access_mtx");

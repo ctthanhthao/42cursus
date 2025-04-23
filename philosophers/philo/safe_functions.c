@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:11:17 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/18 19:12:31 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/20 17:19:45 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,26 @@ void	*safe_malloc(size_t bytes)
 		return (NULL);
 	}
 	memset(ret, 0, bytes);
-	return (ret);	
+	return (ret);
 }
 
-static t_error_code handle_mutex_error(int status, t_opcode code)
+static t_error_code	handle_mutex_error(int status, t_opcode code)
 {
 	if (status == 0)
-		return SUCCESS;
-	if (status == EINVAL && (code == LOCK || code == UNLOCK ||
-		code == DESTROY))
+		return (SUCCESS);
+	if (status == EINVAL && (code == LOCK || code == UNLOCK
+			|| code == DESTROY))
 		log_error("The value specified by mutex is invalid.");
 	else if (status == EINVAL && code == INIT)
 		log_error("The value specified by attr is invalid.");
 	else if (status == ENOMEM)
 		log_error("The process cannot allocate enough memory to create"
-                        "another mutex.");
+			"another mutex.");
 	else if (status == EPERM)
 		log_error("The current thread does not hold a lock on mutex.");
 	else if (status == EDEADLK)
-		log_error (" A deadlock would occur if the thread blocked waiting"
-                        "for mutex.");
+		log_error ("A deadlock would occur if the thread blocked waiting"
+			"for mutex.");
 	else if (status == EBUSY)
 		log_error("Mutex is locked.");
 	else
@@ -70,7 +70,7 @@ t_error_code	safe_mutex_handle(pthread_mutex_t *mutex, t_opcode opcode)
 static t_error_code	handle_thread_error(int status, t_opcode code)
 {
 	if (status == 0)
-		return SUCCESS;
+		return (SUCCESS);
 	if (status == EINVAL && (code == CREATE))
 		log_error("The value specified by attr is invalid.");
 	else if (status == EINVAL && code == JOIN)
@@ -78,7 +78,7 @@ static t_error_code	handle_thread_error(int status, t_opcode code)
 			" joinable thread.");
 	else if (status == EAGAIN)
 		log_error("The system lacked the necessary resources to create"
-            " another thread");
+			" another thread");
 	else if (status == EPERM)
 		log_error("The caller does not have appropriate permission.");
 	else if (status == EDEADLK)
@@ -90,16 +90,17 @@ static t_error_code	handle_thread_error(int status, t_opcode code)
 	return (ERROR_THREAD);
 }
 
-t_error_code safe_thread_handle(pthread_t *thread, void *(*foo)(void *), void *data,
-	t_opcode code)
+t_error_code	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
+									void *data, t_opcode code)
 {
 	if (code == CREATE)
-		return (handle_thread_error(pthread_create(thread, NULL, foo, data), CREATE));
+		return (handle_thread_error(pthread_create(thread, NULL, foo, data),
+				CREATE));
 	else if (code == JOIN)
 		return (handle_thread_error(pthread_join(*thread, NULL), JOIN));
 	else
 	{
 		log_error("Wrong opcode for thread handle.");
-		return (ERROR_THREAD);	
+		return (ERROR_THREAD);
 	}
 }

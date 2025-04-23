@@ -6,33 +6,34 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 19:38:02 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/18 20:06:03 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/20 17:47:16 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int is_space(char c)
+int	is_space(char c)
 {
 	if ((c >= 9 && c <= 13) || c == 32)
 		return (1);
 	return (0);
 }
 
-int is_digit(char c)
+int	is_digit(char c)
 {
 	if (c >= '0' && c <= '9')
-		return(1);
-	return (0);	
+		return (1);
+	return (0);
 }
 
 int	ft_length(const char *s)
 {
 	int	i;
+
 	if (!s)
 		return (0);
 	i = 0;
-	while(s[i] != '\0')
+	while (s[i] != '\0')
 		i++;
 	return (i);
 }
@@ -40,6 +41,7 @@ int	ft_length(const char *s)
 long	get_time(t_time_code tc)
 {
 	struct timeval	tv;
+
 	if (gettimeofday(&tv, NULL))
 	{
 		log_error("Failed in gettimeofday function.");
@@ -63,7 +65,7 @@ void	custom_usleep(long usec)
 	long	start;
 	long	elapsed;
 	long	rem;
-	
+
 	start = get_time(MICROSECOND);
 	while (get_time(MICROSECOND) - start < usec)
 	{
@@ -72,7 +74,7 @@ void	custom_usleep(long usec)
 		if (rem > 1e3)
 			usleep(rem / 2);
 		else
-			while (get_time(MICROSECOND) - start < usec);
+			while (get_time(MICROSECOND) - start < usec)
+				;
 	}
 }
-

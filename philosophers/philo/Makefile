@@ -3,9 +3,9 @@ CC          	:= cc
 CFLAGS      	:= -Wall -Wextra -Werror -g -Iinclude
 
 # Source Files (explicitly listed)
-SRCS    := dinner.c getters_setters.c init.c  log_msg_error.c \
-			parsing.c philo_actions.c safe_functions.c utils.c \
-			main.c clean_up.c
+SRCS    := dinner.c getters_setters.c getters_setters2.c init.c  \
+			log_msg.c parsing.c philo_actions.c safe_functions.c \
+			utils.c main.c clean_up.c one_philo.c monitor.c
 	
 OBJS        := $(SRCS:.c=.o)
 
