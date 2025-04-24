@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:09:59 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/23 20:09:21 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/24 15:06:36 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_philo
 	long			last_meal_time;
 	int				num_of_meals;
 	bool			is_full;
+	bool			has_started;
 	t_fork			*first_fork;
 	t_fork			*second_fork;
 	t_table			*table;
@@ -141,9 +142,9 @@ t_error_code	parse_input(t_table *tb, char **argv);
 t_error_code	data_init(t_table *tb);
 t_error_code	dinner_start(t_table *tb);
 t_error_code	one_philo(t_table *tb);
-void			*monitor_philos_full(void *data);
 t_error_code	trigger_monitor_threads(t_table *tb);
 t_error_code	join_monitor_threads(t_table *tb);
+bool			all_philos_started(t_table *tb);
 
 t_error_code	philo_eats(t_philo *philo);
 void			philo_sleeps(t_philo *philo);

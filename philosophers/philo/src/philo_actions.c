@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 10:23:51 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/23 15:04:16 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/24 14:59:42 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,24 @@ void	philo_sleeps(t_philo *philo)
 		custom_usleep(philo->table->time_to_sleep);
 }
 
-t_error_code	philo_eats(t_philo *philo)
+t_error_code	philo_eats(t_philo *ph)
 {
-	if (safe_mutex_handle(&philo->first_fork->fork, LOCK) == ERROR_MUTEX)
+	if (safe_mutex_handle(&ph->first_fork->fork, LOCK) == ERROR_MUTEX)
 		return (ERROR_MUTEX);
-	log_action(TAKE_FIRST_FORK, philo);
-	if (safe_mutex_handle(&philo->second_fork->fork, LOCK) == ERROR_MUTEX)
-	{
-		safe_mutex_handle(&philo->first_fork->fork, UNLOCK);
-		return (ERROR_MUTEX);
-	}
-	log_action(TAKE_SECOND_FORK, philo);
-	set_long(&philo->mtx, &philo->last_meal_time, get_time(MILLISECOND));
-	philo->num_of_meals++;
-	log_action(EATING, philo);
-	custom_usleep(philo->table->time_to_eat);
-	if (philo->table->nbr_limit_meal > 0
-		&& philo->num_of_meals == philo->table->nbr_limit_meal)
-		set_bool(&philo->mtx, &philo->is_full, true);
-	if (safe_mutex_handle(&philo->second_fork->fork, UNLOCK) == ERROR_MUTEX)
-		return (ERROR_MUTEX);
-	if (safe_mutex_handle(&philo->first_fork->fork, UNLOCK) == ERROR_MUTEX)
+	log_action(TAKE_FIRST_FORK, ph);
+	if (safe_mutex_handle(&ph->second_fork->fork, LOCK) == ERROR_MUTEX)
+		return (safe_mutex_handle(&ph->first_fork->fork, UNLOCK), ERROR_MUTEX);
+	log_action(TAKE_SECOND_FORK, ph);
+	set_long(&ph->mtx, &ph->last_meal_time, get_time(MILLISECOND));
+	ph->num_of_meals++;
+	log_action(EATING, ph);
+	custom_usleep(ph->table->time_to_eat);
+	if (ph->table->nbr_limit_meal > 0
+		&& ph->num_of_meals == ph->table->nbr_limit_meal)
+		set_bool(&ph->mtx, &ph->is_full, true);
+	if (safe_mutex_handle(&ph->first_fork->fork, UNLOCK) == ERROR_MUTEX)
+		return (safe_mutex_handle(&ph->second_fork->fork, UNLOCK), ERROR_MUTEX);
+	if (safe_mutex_handle(&ph->second_fork->fork, UNLOCK) == ERROR_MUTEX)
 		return (ERROR_MUTEX);
 	return (SUCCESS);
 }

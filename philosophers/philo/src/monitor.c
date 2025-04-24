@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:14:43 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/23 15:32:36 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/24 15:08:34 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,20 @@ static bool	is_dead(t_philo *philo)
 		elapsed_from_last_meal = timestamp - last_meal_time;
 	else
 		elapsed_from_last_meal = timestamp - philo->table->start_simulation;
-	// printf("philo[%i] last_meal_time %ld\n", philo->id, last_meal_time);
-	// printf("philo[%i] elapsed_from_last_meal %ld\n", philo->id, elapsed_from_last_meal);
 	if (elapsed_from_last_meal < (philo->table->time_to_die / 1e3))
 		return (false);
 	return (true);
 }
 
-void	*monitor_philo_dead(void *data)
+static void	*monitor_philo_dead(void *data)
 {
 	t_philo	*philo;
 	t_table	*tb;
 	int		i;
 
 	tb = (t_table *)data;
-	while (!get_bool(&tb->access_mtx, &tb->all_threads_ready))
-		usleep(100);
+	while (!all_philos_started(tb))
+		usleep(50);
 	while (!simulation_finished(tb))
 	{
 		i = 0;
@@ -63,7 +61,7 @@ void	*monitor_philo_dead(void *data)
 * Monitor will check if all philos are full
 * If yes, end simulation.
 */
-void	*monitor_philos_full(void *data)
+static void	*monitor_philos_full(void *data)
 {
 	t_philo	*philo;
 	t_table	*tb;
@@ -71,7 +69,7 @@ void	*monitor_philos_full(void *data)
 	bool	all_full;
 
 	tb = (t_table *)data;
-	while (!get_bool(&tb->access_mtx, &tb->all_threads_ready))
+	while (!all_philos_started(tb))
 		usleep(50);
 	while (!simulation_finished(tb))
 	{

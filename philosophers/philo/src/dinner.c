@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:00:28 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/23 13:30:21 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/24 15:03:35 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void	*dinner_simulation(void *data)
 	philo = (t_philo *)data;
 	while (!get_bool(&philo->table->access_mtx,
 			&philo->table->all_threads_ready))
-		usleep(100);
+		usleep(50);
+	set_bool(&philo->mtx, &philo->has_started, true);
 	while (!simulation_finished(philo->table))
 	{
 		status = philo_eats(philo);

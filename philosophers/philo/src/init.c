@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 12:22:32 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/23 13:17:57 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/23 20:49:59 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	philos_init(t_table *tb)
 		tb->philos[i].num_of_meals = 0;
 		tb->philos[i].last_meal_time = -1;
 		tb->philos[i].id = i + 1;
+		tb->philos[i].has_started = false;
 		tb->philos[i].table = tb;
 		if (safe_mutex_handle(&tb->philos[i].mtx, INIT) == ERROR_MUTEX)
 		{

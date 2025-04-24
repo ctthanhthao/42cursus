@@ -1,16 +1,20 @@
 NAME        	:= philo
 CC          	:= cc
 CFLAGS      	:= -Wall -Wextra -Werror -g -Iinclude
+LIB_DIR 		:= lib
+SRC_DIR			:= src
 
 # Source Files (explicitly listed)
-SRCS    := dinner.c getters_setters.c getters_setters2.c init.c  \
-			log_msg.c parsing.c philo_actions.c safe_functions.c \
-			utils.c main.c clean_up.c one_philo.c monitor.c
+SRCS    := main.c \
+		$(LIB_DIR)/getters_setters.c $(LIB_DIR)/getters_setters2.c  $(LIB_DIR)/log_msg.c \
+		$(LIB_DIR)/safe_functions.c  $(LIB_DIR)/utils.c \
+		$(SRC_DIR)/clean_up.c $(SRC_DIR)/one_philo.c $(SRC_DIR)/monitor.c       $(SRC_DIR)/dinner.c \
+		$(SRC_DIR)/init.c     $(SRC_DIR)/parsing.c   $(SRC_DIR)/philo_actions.c $(SRC_DIR)/synchronize.c
 	
 OBJS        := $(SRCS:.c=.o)
 
 # Header Files (for dependency tracking)
-HEADERS     := philosopers.h
+HEADERS     := include/philosopers.h
 
 # Rules
 all: $(NAME)

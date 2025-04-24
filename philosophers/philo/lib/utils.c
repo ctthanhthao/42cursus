@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 19:38:02 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/20 17:47:16 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/23 20:45:13 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	custom_usleep(long usec)
 		if (rem > 1e3)
 			usleep(rem / 2);
 		else
-			while (get_time(MICROSECOND) - start < usec)
-				;
+			usleep(50);
 	}
 }

@@ -28,32 +28,39 @@ static void	print_take_fork_msg(t_philo_action action, t_philo *philo,
 			philo->id, philo->second_fork->fork_id);
 }
 
-static bool	log_action_debug(t_philo_action action, t_philo *philo)
+static bool	log_debug(t_philo_action action, t_philo *philo)
 {
 	long	elapsed;
-	long	timestamp;
+	long	now;
 	int		id;
-	int		meal_count;
+	int		meal_counter;
 
-	if (safe_mutex_handle(&philo->table->write_mtx, LOCK) == ERROR_MUTEX)
-		return (false);
-	timestamp = get_time(MILLISECOND);
-	elapsed = timestamp - philo->table->start_simulation;
+	now = get_time(MILLISECOND);
+	elapsed = now - philo->table->start_simulation;
 	id = get_int(&philo->mtx, &philo->id);
-	meal_count = get_int(&philo->mtx, &philo->num_of_meals);
+	meal_counter = get_int(&philo->mtx, &philo->num_of_meals);
 	if ((action == TAKE_FIRST_FORK || action == TAKE_SECOND_FORK)
 		&& !simulation_finished(philo->table))
-		print_take_fork_msg(action, philo, timestamp, elapsed);
+		print_take_fork_msg(action, philo, now, elapsed);
 	else if (action == EATING && !simulation_finished(philo->table))
-		printf(B"%ld(%ld) %d is eating -- meal counter: %d\n"RST, timestamp,
-			elapsed, id, meal_count);
+		printf(B"%ld(%ld) %d is eating -- meal counter: %d\n"RST,
+			now, elapsed, id, meal_counter);
 	else if (action == SLEEPING && !simulation_finished(philo->table))
-		printf("%ld(%ld) %d is sleeping\n", timestamp, elapsed, id);
+		printf("%ld(%ld) %d is sleeping\n", now, elapsed, id);
 	else if (action == THINKING && !simulation_finished(philo->table))
-		printf("%ld(%ld) %d is thinking\n", timestamp, elapsed, id);
+		printf("%ld(%ld) %d is thinking\n", now, elapsed, id);
 	else if (action == DIED && !simulation_finished(philo->table))
-		printf(Y"%ld(%ld) %d died\n"RST, timestamp, elapsed, id);
+		printf(Y"%ld(%ld) %d died\n"RST, now, elapsed, id);
 	else
+		return (false);
+	return (true);
+}
+
+static bool	log_action_debug(t_philo_action action, t_philo *philo)
+{
+	if (safe_mutex_handle(&philo->table->write_mtx, LOCK) == ERROR_MUTEX)
+		return (false);
+	if (!log_debug(action, philo))
 		return (safe_mutex_handle(&philo->table->write_mtx, UNLOCK), false);
 	if (safe_mutex_handle(&philo->table->write_mtx, UNLOCK) == ERROR_MUTEX)
 		return (false);
@@ -71,8 +78,6 @@ bool	log_action(t_philo_action action, t_philo *philo)
 		return (false);
 	now = get_time(MILLISECOND);
 	id = get_int(&philo->mtx, &philo->id);
-	if (id == ERROR_MUTEX)
-		return (safe_mutex_handle(&philo->table->write_mtx, UNLOCK), false);
 	if ((action == TAKE_FIRST_FORK || action == TAKE_SECOND_FORK)
 		&& !simulation_finished(philo->table))
 		printf(G"%ld %d has taken a fork\n"RST, now, id);
