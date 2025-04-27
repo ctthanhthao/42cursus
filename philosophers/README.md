@@ -87,6 +87,11 @@ valgrind --tool=helgrind --fair-sched=yes --history-level=none ./philo 5 800 200
 
 Ensure that all semaphores are properly unlinked and resources are cleaned up after the simulation ends.
 
+## Tester
+
+A semi-automatic tester for checking 42's philosophers project (2021 curriculum).
+https://github.com/MichelleJiam/LazyPhilosophersTester
+
 ## License
 
 This project is licensed under the MIT License.
