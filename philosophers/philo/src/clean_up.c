@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 21:01:46 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/20 16:40:58 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/27 12:44:12 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void	clean_up(t_table *tb)
 		i++;
 	}
 	clean_philo_data(tb);
-	if (tb->philos)
-		free(tb->philos);
 	if (tb->forks)
 		free(tb->forks);
+	if (tb->philos)
+		free(tb->philos);
 	if (safe_mutex_handle(&tb->access_mtx, DESTROY) == ERROR_MUTEX)
 		return (log_error("Error happens when destroying access_mtx"));
 	if (safe_mutex_handle(&tb->write_mtx, DESTROY) == ERROR_MUTEX)
