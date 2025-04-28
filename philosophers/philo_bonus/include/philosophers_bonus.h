@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:09:59 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/27 17:15:27 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/28 09:15:32 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@
 
 # define SEM_WRITE_FNAME "/write"
 # define SEM_SYNC_START_FNAME "/sync_start"
-# define SEM_LAST_MEAL_FNAME "/last meal"
-# define SEM_FORK_FNAME "/fork"
+# define SEM_LAST_MEAL_FNAME "/last_meal"
+# define SEM_PHILO_DEAD_FNAME "/dead"
+
+# define FORK_PREFIX "/fork"
 
 typedef enum e_philo_action
 {
@@ -68,7 +70,7 @@ typedef enum e_opcode
 	UNLINK,
 	JOIN,
 	CREATE,
-	DESTROY,
+	CANCEL,
 	DETACH
 }	t_opcode;
 
@@ -110,6 +112,7 @@ struct s_table
 	sem_t		*sem_write;
 	sem_t		*sem_start; // Sync start time for all philos
 	sem_t		*sem_last_meal; // protect last meal
+	sem_t		*sem_dead;
 	pthread_t	monitor_dead;
 };
 
@@ -133,6 +136,7 @@ void			custom_usleep(long usec);
 int				ft_strlen(const char *s);
 char			*ft_itoa(int n);
 char			*ft_strjoin(char *s1, char *s2);
+char			*ft_strdup(const char *src);
 
 void			*safe_malloc(size_t bytes);
 sem_t			*safe_sem_open(const char *name, int oflag, mode_t mode,

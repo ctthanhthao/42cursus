@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:11:17 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/27 17:57:04 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/28 10:40:12 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ t_error_code	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
 		return (handle_thread_error(pthread_detach(*thread), DETACH));
 	else if (code == JOIN)
 		return (handle_thread_error(pthread_join(*thread, NULL), JOIN));
+	else if (code == CANCEL)
+		return (handle_thread_error(pthread_cancel(*thread), CANCEL));
 	else
 	{
 		log_error("Wrong opcode for thread handle.");

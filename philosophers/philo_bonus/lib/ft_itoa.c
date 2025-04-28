@@ -6,30 +6,11 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:38:49 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/27 12:41:34 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/28 08:06:02 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
-
-static char	*ft_strdup(const char *src)
-{
-	size_t	s_len;
-	size_t	idx;
-	char	*ptr;
-
-	s_len = ft_strlen(src);
-	ptr = (char *)malloc((s_len + 1) * sizeof(char));
-	if (ptr == NULL)
-		return (NULL);
-	idx = 0;
-	while (idx <= s_len)
-	{
-		ptr[idx] = src[idx];
-		idx++;
-	}
-	return (ptr);
-}
 
 static int	ft_count_digits(int n)
 {

@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 12:22:32 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/27 18:02:40 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/28 08:27:21 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int position)
 	}
 }
 
-static void	clean_exist_sem(t_fork *forks, int to_pos)
+static void	clean_local_data(t_fork *forks, int to_pos, char *id, char *name)
 {
 	int	i;
 
@@ -42,6 +42,8 @@ static void	clean_exist_sem(t_fork *forks, int to_pos)
 		sem_unlink(forks[i].name);
 		i++;
 	}
+	free(id);
+	free(name);
 }
 
 static int	init_philo(t_table *tb)
@@ -73,18 +75,18 @@ static int	init_fork(t_table *tb)
 	{
 		tb->forks[i].id = i;
 		id = ft_itoa(i);
-		f_name = ft_strjoin(SEM_FORK_FNAME, id);
+		f_name = ft_strjoin(FORK_PREFIX, id);
 		safe_sem_unlink(f_name);
-		tb->forks[i].name = f_name;
-		tb->forks[i].sem_fork = sem_open(f_name, O_CREAT,
-				0664, 1);
+		tb->forks[i].name = ft_strdup(f_name);
+		tb->forks[i].sem_fork = sem_open(f_name, O_CREAT, 0664, 1);
 		if (tb->forks[i].sem_fork == SEM_FAILED)
 		{
 			perror("sem_open");
-			clean_exist_sem(tb->forks, i);
+			clean_local_data(tb->forks, i, id, f_name);
 			return (FAILURE);
 		}
 		free(id);
+		free(f_name);
 		i++;
 	}
 	return (SUCCESS);
@@ -93,15 +95,17 @@ static int	init_fork(t_table *tb)
 t_error_code	init_data(t_table *tb)
 {
 	tb->philos = safe_malloc(sizeof(t_philo) * tb->philo_nbr);
-	tb->start_simulation = 0;
 	if (!tb->philos)
 		return (ERROR_INIT);
 	tb->forks = safe_malloc(sizeof(t_fork) * tb->philo_nbr);
 	if (!tb->forks)
 		return (ERROR_INIT);
+	tb->start_simulation = 0;
 	tb->sem_write = safe_sem_open(SEM_WRITE_FNAME, O_CREAT, 0644, 1);
 	tb->sem_start = safe_sem_open(SEM_SYNC_START_FNAME, O_CREAT, 0644, 0);
 	tb->sem_last_meal = safe_sem_open(SEM_LAST_MEAL_FNAME, O_CREAT,
+			0644, 1);
+	tb->sem_dead = safe_sem_open(SEM_PHILO_DEAD_FNAME, O_CREAT,
 			0644, 1);
 	if (init_fork(tb) == FAILURE || init_philo(tb) == FAILURE)
 		return (ERROR_INIT);

@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:14:43 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/27 17:57:59 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/28 10:38:01 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,14 @@ static void	*monitor_philo_dead(void *data)
 	philo = (t_philo *)data;
 	while (1)
 	{
+		safe_sem_wait(philo->table->sem_dead, "sem_wait dead philo");
 		if (is_dead(philo))
 		{
 			log_action(DIED, philo);
+			clean_up(philo->table);
 			exit(EXIT_FAILURE);
 		}
+		safe_sem_post(philo->table->sem_dead, "sem_post dead philo");
 		usleep(100);
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:00:28 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/27 18:01:42 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/28 08:41:02 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	*handle_dead_process(void *data)
 			i = 0;
 			while (i < tb->philo_nbr)
 			{
+				printf("kill process.....\n");
 				kill(tb->philos[i].pid, SIGKILL);
 				i++;
 			}
