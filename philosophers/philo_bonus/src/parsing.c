@@ -71,7 +71,7 @@ t_error_code	parse_input(t_table *tb, char **argv)
 
 	value = ft_atol(argv[1]);
 	if (value == INVALID_INPUT)
-		return (INVALID_INPUT);
+		return (ERROR_PARSE);
 	tb->philo_nbr = value;
 	if (assign_usec(&tb->time_to_die, argv[2]) == INVALID_INPUT
 		|| assign_usec(&tb->time_to_eat, argv[3]) == INVALID_INPUT
