@@ -6,11 +6,11 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 19:38:02 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/25 20:10:48 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/23 20:45:13 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 int	is_space(char c)
 {
@@ -26,7 +26,7 @@ int	is_digit(char c)
 	return (0);
 }
 
-int	ft_length(const char *s)
+int	ft_strlen(const char *s)
 {
 	int	i;
 

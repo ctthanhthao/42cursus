@@ -6,11 +6,11 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:14:43 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/28 10:38:01 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/30 23:06:42 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 static bool	is_dead(t_philo *philo)
 {
@@ -19,9 +19,7 @@ static bool	is_dead(t_philo *philo)
 	long	last_meal_time;
 
 	timestamp = get_time(MILLISECOND);
-	safe_sem_wait(philo->table->sem_last_meal, "sem_wait last meal");
-	last_meal_time = philo->last_meal_time;
-	safe_sem_post(philo->table->sem_last_meal, "sem_post last meal");
+	last_meal_time = get_long(philo->table->sem_meal, &philo->last_meal_time);
 	if (last_meal_time > 0)
 		elapsed_from_last_meal = timestamp - last_meal_time;
 	else
@@ -38,14 +36,20 @@ static void	*monitor_philo_dead(void *data)
 	philo = (t_philo *)data;
 	while (1)
 	{
-		safe_sem_wait(philo->table->sem_dead, "sem_wait dead philo");
 		if (is_dead(philo))
-		{
-			log_action(DIED, philo);
-			clean_up(philo->table);
-			exit(EXIT_FAILURE);
+        {     
+			safe_sem_wait(philo->table->sem_dead, "sem_wait sem_dead");
+			if (!philo->table->end_simulation) // Check if cleanup is already done
+{
+				usleep(100);
+				log_action(DIED, philo);
+				safe_sem_post(philo->table->sem_dead, "sem_post sem_dead");
+				//clean_up(philo->table);
+				exit(EXIT_PHILO_DIED); // Exit the process
+			}
+			safe_sem_post(philo->table->sem_dead, "sem_post sem_dead");
+			break;
 		}
-		safe_sem_post(philo->table->sem_dead, "sem_post dead philo");
 		usleep(100);
 	}
 	return (NULL);
@@ -53,7 +57,7 @@ static void	*monitor_philo_dead(void *data)
 
 t_error_code	trigger_monitor_death(t_philo *philo)
 {
-	if (safe_thread_handle(&philo->table->monitor_dead, monitor_philo_dead,
+	if (safe_thread_handle(&philo->table->monitor_dead, &monitor_philo_dead,
 			philo, CREATE) == ERROR_THREAD)
 		return (ERROR_DINNER_START);
 	if (safe_thread_handle(&philo->table->monitor_dead, NULL, NULL, DETACH)
@@ -61,3 +65,4 @@ t_error_code	trigger_monitor_death(t_philo *philo)
 		return (ERROR_DINNER_START);
 	return (SUCCESS);
 }
+

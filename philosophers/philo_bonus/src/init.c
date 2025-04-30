@@ -6,11 +6,11 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 12:22:32 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/28 08:27:21 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/30 22:09:45 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 static void	assign_forks(t_philo *philo, t_fork *forks, int position)
 {
@@ -31,7 +31,28 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int position)
 	}
 }
 
-static void	clean_local_data(t_fork *forks, int to_pos, char *id, char *name)
+static int	init_philo(t_table *tb)
+{
+	int		i;
+	char	*id;
+
+	i = 0;
+	while (i < tb->philo_nbr)
+	{
+		tb->philos[i].num_of_meals = 0;
+		tb->philos[i].last_meal_time = -1;
+		tb->philos[i].id = i + 1;
+		tb->philos[i].table = tb;
+		id = ft_itoa(i);
+		free(id);
+		id = NULL;
+		assign_forks(&tb->philos[i], tb->forks, i);
+		i++;
+	}
+	return (SUCCESS);
+}
+
+static void	clean_local_data(t_fork *forks, int to_pos, char **id, char **name)
 {
 	int	i;
 
@@ -42,26 +63,8 @@ static void	clean_local_data(t_fork *forks, int to_pos, char *id, char *name)
 		sem_unlink(forks[i].name);
 		i++;
 	}
-	free(id);
-	free(name);
-}
-
-static int	init_philo(t_table *tb)
-{
-	int	i;
-
-	i = 0;
-	while (i < tb->philo_nbr)
-	{
-		tb->philos[i].is_full = false;
-		tb->philos[i].num_of_meals = 0;
-		tb->philos[i].last_meal_time = -1;
-		tb->philos[i].id = i + 1;
-		tb->philos[i].table = tb;
-		assign_forks(&tb->philos[i], tb->forks, i);
-		i++;
-	}
-	return (SUCCESS);
+	free(*id);
+	free(*name);
 }
 
 static int	init_fork(t_table *tb)
@@ -82,11 +85,12 @@ static int	init_fork(t_table *tb)
 		if (tb->forks[i].sem_fork == SEM_FAILED)
 		{
 			perror("sem_open");
-			clean_local_data(tb->forks, i, id, f_name);
-			return (FAILURE);
+			return (clean_local_data(tb->forks, i, &id, &f_name), FAILURE);
 		}
 		free(id);
 		free(f_name);
+		id = NULL;
+		f_name = NULL;
 		i++;
 	}
 	return (SUCCESS);
@@ -101,12 +105,12 @@ t_error_code	init_data(t_table *tb)
 	if (!tb->forks)
 		return (ERROR_INIT);
 	tb->start_simulation = 0;
+	tb->end_simulation = false;
 	tb->sem_write = safe_sem_open(SEM_WRITE_FNAME, O_CREAT, 0644, 1);
-	tb->sem_start = safe_sem_open(SEM_SYNC_START_FNAME, O_CREAT, 0644, 0);
-	tb->sem_last_meal = safe_sem_open(SEM_LAST_MEAL_FNAME, O_CREAT,
-			0644, 1);
-	tb->sem_dead = safe_sem_open(SEM_PHILO_DEAD_FNAME, O_CREAT,
-			0644, 1);
+	tb->sem_end = safe_sem_open(SEM_END_SIMULATION_FNAME, O_CREAT, 0644, 1);
+	tb->sem_sync = safe_sem_open(SEM_SYNC_START_FNAME, O_CREAT, 0644, 0);
+	tb->sem_dead = safe_sem_open(SEM_DEAD_FNAME, O_CREAT, 0644, 1);
+	tb->sem_meal = safe_sem_open(SEM_PROTECT_MEAL_FNAME, O_CREAT, 0644, 1);
 	if (init_fork(tb) == FAILURE || init_philo(tb) == FAILURE)
 		return (ERROR_INIT);
 	return (SUCCESS);

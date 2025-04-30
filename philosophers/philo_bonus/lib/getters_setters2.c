@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   getters_setters2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 08:02:59 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/28 08:06:06 by thchau           ###   ########.fr       */
+/*   Created: 2025/04/23 20:06:46 by thchau            #+#    #+#             */
+/*   Updated: 2025/04/24 15:08:45 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers_bonus.h"
 
-char	*ft_strdup(const char *src)
+void	set_int(sem_t *sem, int *dest, int value)
 {
-	size_t	s_len;
-	size_t	idx;
-	char	*ptr;
+	safe_sem_wait(sem, "sem_wait set_int");
+	*dest = value;
+	safe_sem_post(sem, "sem_post set_int");
+}
 
-	s_len = ft_strlen(src);
-	ptr = (char *)malloc((s_len + 1) * sizeof(char));
-	if (ptr == NULL)
-		return (NULL);
-	idx = 0;
-	while (idx <= s_len)
-	{
-		ptr[idx] = src[idx];
-		idx++;
-	}
-	return (ptr);
+int	get_int(sem_t *sem, int *dest)
+{
+	int	value;
+
+	safe_sem_wait(sem, "sem_wait get_int");
+	value = *dest;
+	safe_sem_post(sem, "sem_post get_int");
+	return (value);
 }

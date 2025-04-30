@@ -10,19 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers_bonus.h"
-
-int	ft_strlen(const char *s)
-{
-	int	length;
-
-	length = 0;
-	if (!s)
-		return (length);
-	while (s[length] != '\0')
-		length++;
-	return (length);
-}
+#include "../include/philosophers_bonus.h"
 
 static void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
@@ -40,8 +28,8 @@ static void	*ft_memcpy(void *dest, const void *src, size_t n)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	unsigned int	l1;
-	unsigned int	l2;
+	int	l1;
+	int	l2;
 	char			*result;
 
 	l1 = ft_strlen(s1);

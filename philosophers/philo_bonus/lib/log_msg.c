@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 void	log_error(const char *error)
 {
@@ -21,11 +21,11 @@ static void	print_take_fork_msg(t_philo_action action, t_philo *philo,
 	long timestamp, long elapsed)
 {
 	if (action == TAKE_FIRST_FORK)
-		printf(G"%ld(%ld) %d has taken fork[%s]\n"RST, timestamp, elapsed,
-			philo->id, philo->first_fork->name);
+		printf(G"%ld(%ld) %d has taken fork[%d]\n"RST, timestamp, elapsed,
+			philo->id, philo->first_fork->id);
 	else
-		printf(G"%ld(%ld) %d has taken fork[%s]\n"RST, timestamp, elapsed,
-			philo->id, philo->second_fork->name);
+		printf(G"%ld(%ld) %d has taken fork[%d]\n"RST, timestamp, elapsed,
+			philo->id, philo->second_fork->id);
 }
 
 static void	log_action_debug(t_philo_action action, t_philo *philo)
@@ -38,7 +38,7 @@ static void	log_action_debug(t_philo_action action, t_philo *philo)
 	now = get_time(MILLISECOND);
 	elapsed = now - philo->table->start_simulation;
 	id = philo->id;
-	meal_counter = philo->num_of_meals;
+	meal_counter = get_int(philo->table->sem_meal, &philo->num_of_meals);
 	if ((action == TAKE_FIRST_FORK || action == TAKE_SECOND_FORK))
 		print_take_fork_msg(action, philo, now, elapsed);
 	else if (action == EATING)
@@ -64,7 +64,7 @@ void	log_action(t_philo_action action, t_philo *philo)
 	{
 		now = get_time(MILLISECOND);
 		id = philo->id;
-		if (action == TAKE_FIRST_FORK || action == TAKE_SECOND_FORK)
+		if ((action == TAKE_FIRST_FORK || action == TAKE_SECOND_FORK))
 			printf(G"%ld %d has taken a fork\n"RST, now, id);
 		else if (action == EATING)
 			printf(B"%ld %d is eating\n"RST, now, id);

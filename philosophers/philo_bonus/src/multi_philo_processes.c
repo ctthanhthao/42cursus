@@ -6,15 +6,15 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 07:40:45 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/27 17:50:47 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/30 22:28:41 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 static void	dinner_simulation(t_philo *philo)
 {
-	safe_sem_wait(philo->table->sem_start, "sem_wait sync start");
+	safe_sem_wait(philo->table->sem_sync, "sem_wait sync start");
 	if (trigger_monitor_death(philo) == ERROR_DINNER_START)
 	{
 		log_error("Failed to trigger monitor dead philos.");
@@ -34,7 +34,7 @@ static void	sync_all_processes(t_table *tb)
 
 	i = -1;
 	while (++i < tb->philo_nbr)
-		safe_sem_post(tb->sem_start, "sem_post sync start");
+		safe_sem_post(tb->sem_sync, "sem_post sync start");
 }
 
 static void	kill_exist_processes(t_table *tb, int to_pos)
@@ -46,7 +46,7 @@ static void	kill_exist_processes(t_table *tb, int to_pos)
 		kill(tb->philos[i].pid, SIGINT);
 }
 
-int	init_trigger_philos_processes(t_table *tb)
+t_error_code	trigger_philos_processes(t_table *tb)
 {
 	int		i;
 

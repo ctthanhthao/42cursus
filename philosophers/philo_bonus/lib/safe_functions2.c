@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   safe_functions_2.c                                 :+:      :+:    :+:   */
+/*   safe_functions2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:11:17 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/27 18:00:51 by thchau           ###   ########.fr       */
+/*   Updated: 2025/04/20 17:19:45 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 sem_t	*safe_sem_open(const char *name, int oflag, mode_t mode,
 	unsigned int value)
@@ -40,7 +40,7 @@ void	safe_sem_post(sem_t *sem, const char *name)
 	if (sem_post(sem) == -1)
 	{
 		perror(name);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 }
 
