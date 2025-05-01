@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 10:23:51 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/30 21:33:25 by thchau           ###   ########.fr       */
+/*   Updated: 2025/05/01 10:21:41 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,4 @@ void	philo_eats(t_philo *philo)
 	if (philo->table->nbr_limit_meal > 0
 		&& philo->num_of_meals == philo->table->nbr_limit_meal)
 		exit(EXIT_PHILO_FULL);
-
 }

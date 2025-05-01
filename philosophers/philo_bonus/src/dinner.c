@@ -6,13 +6,14 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:00:28 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/30 22:34:57 by thchau           ###   ########.fr       */
+/*   Updated: 2025/05/01 10:28:49 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers_bonus.h"
 
-void	kill_all_philos(t_table *tb)
+// ESRCH: No such process
+static void	kill_all_philos(t_table *tb)
 {
 	int	i;
 
@@ -23,46 +24,55 @@ void	kill_all_philos(t_table *tb)
 	{
 		if (kill(tb->philos[i].pid, SIGKILL) == -1)
 		{
-			if (errno != ESRCH) // ESRCH: No such process
+			if (errno != ESRCH)
 				perror("Failed to kill philosopher");
 		}
 		i++;
 	}
 }
 
-void monitor_exit_codes(t_table *tb)
+static bool	check_if_exit(int status, t_table *tb, int *count)
+{
+	if (WIFEXITED(status))
+	{
+		if (WEXITSTATUS(status) == EXIT_PHILO_DIED)
+		{
+			kill_all_philos(tb);
+			return (true);
+		}
+		if (WEXITSTATUS(status) == EXIT_PHILO_FULL)
+		{
+			(*count)++;
+			if (*count == tb->philo_nbr)
+				return (true);
+		}
+	}
+	return (false);
+}
+
+// // ECHILD: No more child processes
+static void	monitor_exit_codes(t_table *tb)
 {
 	int		status;
 	pid_t	pid;
-	int		count_full_philo = 0;
+	int		count_full_philo;
 
+	count_full_philo = 0;
 	while (1)
 	{
 		pid = waitpid(-1, &status, 0);
-		if (pid == -1)
-        {
-            if (errno == ECHILD)
-                break; // No more child processes
-            else
-			{
-				perror("waitpid failed");
-				continue;
-			}
-        }
-		if (WIFEXITED(status)) {
-			switch (WEXITSTATUS(status))
-			{
-				case EXIT_PHILO_DIED:
-					kill_all_philos(tb);
-					return;
-				case EXIT_PHILO_FULL:
-					count_full_philo++;
-					if (count_full_philo == tb->philo_nbr)
-						return;
-			}
+		if (pid == -1 && errno == ECHILD)
+			break ;
+		else if (pid == -1)
+		{
+			perror("waitpid failed");
+			continue ;
 		}
+		if (check_if_exit(status, tb, &count_full_philo))
+			return ;
 	}
 }
+
 /*
 * 1. if num of meal = 0, return
 * 2. If philo is only one, it will die

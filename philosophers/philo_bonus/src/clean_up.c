@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 21:01:46 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/30 22:10:14 by thchau           ###   ########.fr       */
+/*   Updated: 2025/05/01 10:29:17 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static void	clean_fork_data(t_table *tb)
 
 void	clean_up(t_table *tb)
 {
-	printf("Clean up in the end ====================.\n");
 	safe_sem_close(tb->sem_write, "sem_close write action");
 	safe_sem_close(tb->sem_end, "sem_close sync start");
 	safe_sem_close(tb->sem_sync, "sem_close sync start");
@@ -61,7 +60,7 @@ void	clean_up(t_table *tb)
 	if (tb->philos)
 	{
 		free(tb->philos);
-		tb->philos = NULL;	
+		tb->philos = NULL;
 	}
 	if (tb->forks)
 	{

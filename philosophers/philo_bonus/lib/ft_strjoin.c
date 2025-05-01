@@ -28,9 +28,9 @@ static void	*ft_memcpy(void *dest, const void *src, size_t n)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int	l1;
-	int	l2;
-	char			*result;
+	int		l1;
+	int		l2;
+	char	*result;
 
 	l1 = ft_strlen(s1);
 	l2 = ft_strlen(s2);

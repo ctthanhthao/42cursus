@@ -6,12 +6,12 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:09:59 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/30 21:59:26 by thchau           ###   ########.fr       */
+/*   Updated: 2025/05/01 10:34:11 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILOSOPHERS_BONUS_H
+# define PHILOSOPHERS_BONUS_H
 
 # include <pthread.h>
 # include <stdlib.h>
@@ -35,9 +35,9 @@
 # define DEBUG_MODE 0
 
 // Exit status codes
-#define EXIT_SUCCESSFUL_END 0
-#define EXIT_PHILO_DIED		2
-#define EXIT_PHILO_FULL     3
+# define EXIT_SUCCESSFUL_END 0
+# define EXIT_PHILO_DIED		2
+# define EXIT_PHILO_FULL     3
 
 # define SEM_WRITE_FNAME "/write"
 # define SEM_END_SIMULATION_FNAME "/end_sim"
@@ -153,23 +153,17 @@ char			*ft_strdup(const char *src);
 
 void			log_action(t_philo_action action, t_philo *philo);
 
-void			set_bool(sem_t *sem, bool *dest, bool value);
-bool			get_bool(sem_t *sem, bool *dest);
-void			set_long(sem_t *sem, long *dest, long value);
 long			get_long(sem_t *sem, long *dest);
-void			set_int(sem_t *sem, int *dest, int value);
 int				get_int(sem_t *sem, int *dest);
-bool			simulation_finished(t_table *tb);
-bool			all_philos_started(t_table *tb);
 
 sem_t			*safe_sem_open(const char *name, int oflag, mode_t mode,
-	unsigned int value);
+					unsigned int value);
 void			safe_sem_wait(sem_t *sem, const char *name);
 void			safe_sem_post(sem_t *sem, const char *name);
 void			safe_sem_close(sem_t *sem, const char *name);
 void			safe_sem_unlink(const char *name);
 t_error_code	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
-	void *data, t_opcode code);
+					void *data, t_opcode code);
 
 t_error_code	parse_input(t_table *tb, char **argv);
 t_error_code	init_data(t_table *tb);
@@ -183,6 +177,5 @@ void			philo_eats(t_philo *philo);
 void			philo_sleeps(t_philo *philo);
 void			philo_thinks(t_philo *philo);
 void			clean_up(t_table *tb);
-
 
 #endif

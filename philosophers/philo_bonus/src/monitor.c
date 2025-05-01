@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:14:43 by thchau            #+#    #+#             */
-/*   Updated: 2025/04/30 23:06:42 by thchau           ###   ########.fr       */
+/*   Updated: 2025/05/01 10:34:27 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,10 @@ static void	*monitor_philo_dead(void *data)
 	while (1)
 	{
 		if (is_dead(philo))
-        {     
+		{
 			safe_sem_wait(philo->table->sem_dead, "sem_wait sem_dead");
-			if (!philo->table->end_simulation) // Check if cleanup is already done
-{
-				usleep(100);
-				log_action(DIED, philo);
-				safe_sem_post(philo->table->sem_dead, "sem_post sem_dead");
-				//clean_up(philo->table);
-				exit(EXIT_PHILO_DIED); // Exit the process
-			}
-			safe_sem_post(philo->table->sem_dead, "sem_post sem_dead");
-			break;
+			log_action(DIED, philo);
+			exit(EXIT_PHILO_DIED);
 		}
 		usleep(100);
 	}
@@ -65,4 +57,3 @@ t_error_code	trigger_monitor_death(t_philo *philo)
 		return (ERROR_DINNER_START);
 	return (SUCCESS);
 }
-
