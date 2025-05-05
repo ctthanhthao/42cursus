@@ -4,8 +4,6 @@ CFLAGS      	:= -Wall -Wextra -Werror -g -Iinclude
 LIB_DIR 		:= lib
 SRC_DIR			:= src
 
-UNAME_S := $(shell uname -s)
-
 # Source Files (explicitly listed)
 SRCS    := main.c \
 		$(LIB_DIR)/log_msg.c $(LIB_DIR)/safe_functions.c  $(LIB_DIR)/safe_functions2.c $(LIB_DIR)/utils.c \
