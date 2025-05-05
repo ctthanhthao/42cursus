@@ -22,8 +22,8 @@ A C implementation of the classic Dining Philosophers problem, demonstrating int
 - Process-based simulation with each philosopher as a separate process.
 - Synchronization of shared resources using POSIX named semaphores.
 - Graceful handling of process termination and resource cleanup.
-- One monitor threads:
-  - **Death Monitor**: Continuously checks if any philosopher has died due to starvation.
+- In each process, there is a monitor death thread:
+  - **Death Monitor**: Continuously checks if that philosopher has died due to starvation.
 
 ### Visualize philosopher actions
 using the Philosophers Visualizer: https://nafuka11.github.io/philosophers-visualizer/ 
