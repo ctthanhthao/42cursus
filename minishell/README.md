@@ -62,9 +62,9 @@ or
 ./minishell_bonus
 ```
 ### 🧪Tester
-You can test the functionality of this shell with the following tester:
+- You can test the functionality of this shell with the following tester:
 🔗 [LucasKuhn/minishell_tester](https://github.com/LucasKuhn/minishell_tester)
-and i add some tests for bonus here https://github.com/ctthanhthao/minishell/blob/bonus/minishell_tester/bonus_complex 
+- I also add some tests for [bonus](https://github.com/ctthanhthao/42cursus/blob/main/minishell/minishell_tester/bonus_complex) here 
 
 ## 🚫 Limitations
 - No interpretation of unclosed quotes or backslashes (\)
