@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 19:42:49 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/10 12:41:58 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/13 13:50:54 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	expect_end_input(int fd_write, char *delimiter, int last_status,
 	if (g_heredoc_interrupted == 0)
 		write(fd_write, heredoc_buffer, ft_strlen(heredoc_buffer));
 	free(heredoc_buffer);
-	close(fd_write);
+	safe_close_fd(fd_write);
 }
 
 static int	redirect_last_stdin(int last_fd)
@@ -47,10 +47,10 @@ static int	redirect_last_stdin(int last_fd)
 		if (dup2(last_fd, STDIN_FILENO) == -1)
 		{
 			log_errno(NULL);
-			close(last_fd);
+			safe_close_fd(last_fd);
 			return (CMD_FAILURE);
 		}
-		close(last_fd);
+		safe_close_fd(last_fd);
 	}
 	return (CMD_SUCCESS);
 }
@@ -68,18 +68,18 @@ static int	do_heredoc(t_redir *redir, int last_status, char **envp,
 	{
 		signal(SIGINT, heredoc_sigint_handler);
 		signal(SIGQUIT, SIG_IGN);
-		close(fds[0]);
+		safe_close_fd(fds[0]);
 		expect_end_input(fds[1], redir->filename, last_status, envp);
 		exit(CMD_SUCCESS);
 	}
-	close(fds[1]);
+	safe_close_fd(fds[1]);
 	waitpid(pid, &status, 0);
 	if ((WIFEXITED(status) && WEXITSTATUS(status) == 130)
 		|| (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT))
 	{
 		if (WEXITSTATUS(status) == 130)
 			return (130);
-		return (close(fds[0]), CMD_FAILURE);
+		return (safe_close_fd(fds[0]), CMD_FAILURE);
 	}
 	return (CMD_SUCCESS);
 }
@@ -97,7 +97,7 @@ static int	process_single_heredoc(t_redir *redir, int last_status, char **envp)
 	status = do_heredoc(redir, last_status, envp, fd);
 	if (status != CMD_SUCCESS)
 	{
-		close(fd[0]);
+		safe_close_fd(fd[0]);
 		return (-1);
 	}
 	return (fd[0]);
@@ -119,12 +119,10 @@ int	process_heredoc(t_redir *redir, int last_status, char **envp)
 			cur_fd = process_single_heredoc(cur, last_status, envp);
 			if (cur_fd == -1)
 			{
-				if (last_fd != -1)
-					close(last_fd);
+				safe_close_fd(last_fd);
 				return (CMD_FAILURE);
 			}
-			if (last_fd != -1)
-				close(last_fd);
+			safe_close_fd(last_fd);
 			last_fd = cur_fd;
 		}
 		cur = cur->next;

@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:32:50 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/09 18:59:29 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/13 16:09:52 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ static char	*apply_expansion_if_need(char *file_name, int last_status,
 		i++;
 	}
 	free_split(expanded);
+	if (i == 0)
+		return (log_errno_more(file_name, "No such file or directory"), NULL);
+	else if (i > 1)
+		return (log_errno_more(file_name, "ambiguous redirect"), NULL);
 	return (files);
 }
 
@@ -41,6 +45,8 @@ static int	process_write(t_redir *re, int type, int last_status, char **env)
 	char	*files;
 
 	files = apply_expansion_if_need(re->filename, last_status, env);
+	if (!files)
+		return (CMD_FAILURE);
 	if (type == REDIR_OUT)
 	{
 		fd = open(files, O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -65,6 +71,8 @@ static int	process_read(t_redir *re, int type, int last_status, char **env)
 	if (type == REDIR_IN)
 	{
 		files = apply_expansion_if_need(re->filename, last_status, env);
+		if (!files)
+			return (CMD_FAILURE);
 		fd = open(files, O_RDONLY);
 		free(files);
 		return (safe_dup2(fd, STDIN_FILENO, NULL));

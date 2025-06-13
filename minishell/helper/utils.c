@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:38:06 by amarcz            #+#    #+#             */
-/*   Updated: 2025/06/12 16:54:07 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/13 13:59:46 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void	print_sorted_env(char **env)
 int	return_failed_exit_code(void)
 {
 	if (errno == ENOENT)
-		exit(127);
+		return (127);
 	else if (errno == EACCES || errno == ENOEXEC || errno == EISDIR)
-		exit(126);
+		return (126);
 	else
-		exit(1);
+		return (1);
 }

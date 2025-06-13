@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 11:35:36 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/12 16:45:46 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/13 14:37:37 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,8 @@ char	*extract_key(const char *entry);
 char	*strip_quotes(const char *str);
 int		return_failed_exit_code(void);
 char	*remove_quotes_if_need(char *arg);
-void	safe_close(int *fds);
+void	safe_close_fds(int *fds);
+void	safe_close_fd(int fd);
+char	*find_valid_path(char *cmd, char **envp, int *status);
 
 #endif

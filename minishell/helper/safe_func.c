@@ -6,20 +6,24 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 17:26:00 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/10 12:47:59 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/13 13:48:57 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	safe_close(int *fds)
+void	safe_close_fds(int *fds)
 {
 	if (!fds)
 		return ;
-	if (fds[0] != -1)
-		close(fds[0]);
-	if (fds[1] != -1)
-		close(fds[1]);
+	safe_close_fd(fds[0]);
+	safe_close_fd(fds[1]);
+}
+
+void	safe_close_fd(int fd)
+{
+	if (fd >= 0)
+		close(fd);
 }
 
 int	safe_dup2(int oldfd, int newfd, char *error)

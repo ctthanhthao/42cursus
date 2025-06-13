@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:40:57 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/12 18:29:58 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/13 13:53:12 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	execute_pipeline_child(t_cmd *cur, char ***env,
 		if (safe_dup2(pid_data->prev_fd, STDIN_FILENO,
 				"dup2 error: bad source fd (-1)\n") == CMD_FAILURE)
 		{
-			safe_close(pid_data->pipe_fd);
+			safe_close_fds(pid_data->pipe_fd);
 			exit (CMD_FAILURE);
 		}
 	}
@@ -59,15 +59,14 @@ static void	execute_pipeline_child(t_cmd *cur, char ***env,
 		if (safe_dup2(pid_data->pipe_fd[1], STDOUT_FILENO,
 				"dup2 error: bad source fd (-1)\n") == CMD_FAILURE)
 		{
-			safe_close(pid_data->pipe_fd);
-			close(pid_data->prev_fd);
+			safe_close_fds(pid_data->pipe_fd);
+			safe_close_fd(pid_data->prev_fd);
 			exit(CMD_FAILURE);
 		}
-		safe_close(pid_data->pipe_fd);
-		close(pid_data->prev_fd);
+		safe_close_fds(pid_data->pipe_fd);
+		safe_close_fd(pid_data->prev_fd);
 	}
-	if (pid_data->pipe_fd[0] != -1)
-		close(pid_data->pipe_fd[0]);
+	safe_close_fd(pid_data->pipe_fd[0]);
 	exit(execute_single_command(cur, env, last_status, false));
 }
 
@@ -102,10 +101,8 @@ static int	spawn_pipeline_process(t_pid_pipe_fd *pid_data, t_cmd *cur,
 	else
 	{
 		pid_data->pids[pid_data->child_count++] = pid_data->pid;
-		if (pid_data->prev_fd != -1)
-			close(pid_data->prev_fd);
-		if (pid_data->pipe_fd[1] != -1)
-			close(pid_data->pipe_fd[1]);
+		safe_close_fd(pid_data->prev_fd);
+		safe_close_fd(pid_data->pipe_fd[1]);
 		pid_data->prev_fd = pid_data->pipe_fd[0];
 	}
 	return (CMD_SUCCESS);
@@ -132,7 +129,6 @@ int	process_pipe(t_cmd *cmd, char ***envp, int *last_status)
 			break ;
 	}
 	collect_pipeline_status(&pid_data, last_status);
-	if (pid_data.prev_fd != -1)
-		close(pid_data.prev_fd);
+	safe_close_fd(pid_data.prev_fd);
 	return (*last_status);
 }
