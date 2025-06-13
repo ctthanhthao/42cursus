@@ -61,6 +61,10 @@ A simplified Unix shell written in C. This project is part of the 42 curriculum 
 or
 ./minishell_bonus
 ```
+
+### Run with valgrind
+valgrind -s  --leak-check=full  --show-reachable=yes --show-leak-kinds=definite --error-limit=no  --track-fds=yes  --trace-children=yes  --suppressions=readline.supp  ./minishell
+
 ### 🧪Tester
 - You can test the functionality of this shell with the following tester:
 🔗 [LucasKuhn/minishell_tester](https://github.com/LucasKuhn/minishell_tester)
