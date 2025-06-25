@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 10:23:05 by thchau            #+#    #+#             */
-/*   Updated: 2025/05/31 21:31:19 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/16 19:48:09 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ char	**handle_expansion_if_any(char *token, int last_status, char **envp)
 	char	**wildcards;
 	char	**res;
 
+	if (!token)
+		return (NULL);
 	expanded = expand_variables(token, last_status, envp);
 	if (!expanded)
 		return (NULL);

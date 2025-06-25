@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 19:28:36 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/09 07:56:42 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/16 20:32:01 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	**ft_tokenize_bonus(char *input)
 
 	tokeni = 0;
 	capacity = 64;
-	tokens = malloc(sizeof(char *) * capacity);
+	tokens = safe_alloc(capacity);
 	if (!tokens)
 		return (NULL);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:03:24 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/12 16:59:01 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/23 10:59:19 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_ast
 	struct s_ast	*left;
 	struct s_ast	*right;
 	t_cmd			*cmd;	// only used if type == NODE_CMD
-	t_redir			*redirs;	// attach redirections to group or pipeline
+	t_redir			*redirs;	// attach redirections to group
 }	t_ast;
 
 typedef struct s_parser
@@ -48,31 +48,37 @@ typedef struct s_parser
 	int		token_count; // total number of tokens
 	char	**envp;
 	int		last_status;
+	bool	in_group;
+	bool	is_group_node;
 }	t_parser;
 
 // Parser
 t_ast	*parse_input_bonus(char *input, int last_status, char **envp);
 t_ast	*parse_expression(t_parser *p);
 t_ast	*parse_group_or_command(t_parser *p);
-void	parse_redirections_bonus(t_redir **re, t_parser *p);
+int		parse_redirections_bonus(t_redir **re, t_parser *p);
 char	**ft_tokenize_bonus(char *input);
 int		handle_expansion_bonus(char ***argv_ptr, int *argc, int *capacity,
 			t_parser *p);
 char	**extent_argv_if_need(char **argv, int *capacity, int argc);
 // Executor
-int		execute_ast(t_ast *node, int *last_status, char ***envp);
-int		execute_cmd(t_cmd *cmd, int *last_status, char ***envp);
-int		execute_pipe(t_ast *left, t_ast *right, int *last_status, char ***envp);
-int		execute_group(t_ast *node, int *last_status, char ***envp);
+int		execute_ast(t_ast *node, int last_status, char ***envp);
+int		execute_cmd(t_cmd *cmd, int last_status, char ***envp,
+			bool should_fork);
+int		execute_pipe(t_ast *node, int last_status, char ***envp);
+int		execute_group(t_ast *node, int last_status, char ***envp);
+int		preprocess_heredocs_bonus(t_ast *node, int last_status, char **envp);
+int		apply_group_redirections(t_ast *node, int last_status, char **env);
 // Utils
-char	**safe_realloc(char **argv, int old_size, int new_size);
 t_ast	*new_ast_node(t_node_type type, t_ast *left, t_ast *right, t_cmd *cmd);
 t_redir	*new_redirections(t_token type, char *filename);
+t_cmd	*new_cmd(int capacity);
 int		check_unclosed_parenthesis(const char *input);
 void	free_redirs(t_redir *re);
 void	free_ast(t_ast *node);
 void	print_ast(t_ast *root);
 void	print_redirections(t_ast *node, const char *prefix);
 char	*node_type_str(t_node_type type);
+int		is_logical_op_bonus(char *token);
 
 #endif

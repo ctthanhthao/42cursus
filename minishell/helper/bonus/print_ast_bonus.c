@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 09:18:30 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/12 17:05:18 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/18 18:32:37 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void	print_argv(char **argv)
 
 	ft_printf(": ");
 	i = 0;
-	while (*argv[i])
-		ft_printf("%s ", *argv[i++]);
+	while (argv[i])
+		ft_printf("%s ", argv[i++]);
 }
 
 static void	print_ast_node(t_ast *node, const char *prefix, int is_last)
@@ -71,7 +71,8 @@ static void	print_ast_node(t_ast *node, const char *prefix, int is_last)
 	if (node->right)
 		print_ast_node(node->right, new_prefix, 1);
 	print_redirections(node, new_prefix);
-	free(new_prefix);
+	if (new_prefix)
+		free(new_prefix);
 }
 
 void	print_ast(t_ast *root)

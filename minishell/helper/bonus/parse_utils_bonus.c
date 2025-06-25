@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 20:45:36 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/10 12:50:50 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/16 20:28:47 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,11 @@ int	check_unclosed_parenthesis(const char *input)
 		return (ft_printf(R "Whoa, you messed up! You forgot to "),
 			ft_printf("close all parenthesises, Dudio!\n" RST), 0);
 	return (1);
+}
+
+int	is_logical_op_bonus(char *token)
+{
+	return (ft_strcmp(token, "||") == 0
+		|| ft_strcmp(token, "|") == 0 || ft_strcmp(token, "&&") == 0
+		|| ft_strcmp(token, ")") == 0);
 }

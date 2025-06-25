@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 20:10:16 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/07 17:40:25 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/17 08:25:20 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ t_cmd	*clone_cmd(t_cmd *cmd)
 		free_split(new_cmd->argv);
 		return (free(new_cmd), NULL);
 	}
+	new_cmd->heredoc_fd = cmd->heredoc_fd;
 	new_cmd->next = clone_cmd(cmd->next);
 	if (cmd->next && !new_cmd->next)
 		return (free_cmd(new_cmd), NULL);

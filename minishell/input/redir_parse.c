@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 10:16:48 by amarcz            #+#    #+#             */
-/*   Updated: 2025/06/07 17:41:46 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/23 08:24:31 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ int	handle_redirection(t_cmd *cmd, char **tokens, int *i)
 	t_redir	*last;
 
 	if (!tokens[*i + 1])
-		return (ft_printf("There is a syntax error, Dude!\n"), 0);
+		return (log_errno("There is a syntax error, Dude!"), 0);
 	new = malloc(sizeof(t_redir));
 	if (!new)
-		return (ft_printf("Memory allocation error, Dude!\n"), 0);
+		return (log_errno("Memory allocation error, Dude!"), 0);
 	new->type = identify_red(tokens[*i]);
 	new->filename = ft_strdup(tokens[*i + 1]);
 	if (!new->filename)
-		return (ft_printf("File name error, Dude!\n"), 0);
+		return (log_errno("File name error, Dude!"), 0);
 	new->next = NULL;
 	if (!cmd->redirs)
 		cmd->redirs = new;

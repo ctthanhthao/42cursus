@@ -1,0 +1,18 @@
+(echo hello
+echo hello)
+(echo hi)) && echo bye
+((echo hi) && echo there)
+() && echo test
+&& echo hi
+echo hi ||
+echo a && || echo b
+echo a && | echo b
+echo a && (|| echo b)
+(echo hi) cat
+(echo hi) > outfile cat
+(cat < file.txt) << EOF
+(echo hi && echo there) < in.txt >> out.txt foo
+(echo a) (echo b)
+echo hello; ls
+cat >
+echo hi < > out.txt

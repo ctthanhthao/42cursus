@@ -11,6 +11,7 @@ if [[ $1 == "bonus" ]]; then
 		"extras"
 		"bonus_complex"
 		"wildcards"
+		"unsupported_and_error_cases"
 	)
 elif [[ $1 ]]; then
 	test_lists=(
@@ -121,6 +122,10 @@ chmod 666 ./test_files/invalid_permission
 rm -rf ./outfiles
 rm -rf ./mini_outfiles
 rm -rf ./bash_outfiles
+rm group_output.txt
+rm out.txt
+rm result.log
+rm testa.txt
 
 printf $PURPLE
 printf $BOLD

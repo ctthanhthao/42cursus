@@ -6,11 +6,33 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:38:06 by amarcz            #+#    #+#             */
-/*   Updated: 2025/06/12 17:02:24 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/23 09:33:44 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell_bonus.h"
+
+t_cmd	*new_cmd(int capacity)
+{
+	t_cmd	*cmd;
+	int		i;
+
+	cmd = ft_calloc(1, sizeof(t_cmd));
+	if (!cmd)
+		return (NULL);
+	cmd->argv = malloc(sizeof(char *) * capacity);
+	if (!cmd->argv)
+		return (free(cmd), NULL);
+	i = 0;
+	while (i < capacity)
+	{
+		cmd->argv[i] = NULL;
+		i++;
+	}
+	cmd->redirs = NULL;
+	cmd->heredoc_fd = -1;
+	return (cmd);
+}
 
 t_ast	*new_ast_node(t_node_type type, t_ast *left, t_ast *right, t_cmd *cmd)
 {
@@ -54,4 +76,21 @@ char	*node_type_str(t_node_type type)
 		return ("GROUP - ()");
 	else
 		return ("UNKNOWN");
+}
+
+void	read_from_fd(int fd)
+{
+	char	buffer[1024];
+	ssize_t	bytes;
+
+	if (fd == -1)
+		return ;
+	while (true)
+	{
+		bytes = read(fd, buffer, sizeof(buffer));
+		if (bytes > 0)
+			write(STDOUT_FILENO, buffer, bytes);
+		else
+			break ;
+	}
 }

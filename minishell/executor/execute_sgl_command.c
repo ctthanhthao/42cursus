@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:47:05 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/13 15:13:50 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/23 09:47:52 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	execute_external_cmd_without_fork(t_cmd *cmd, int last_status,
 {
 	int	status;
 
-	status = apply_redirections(cmd->redirs, last_status, *envp);
+	status = apply_redirections(cmd, last_status, *envp);
 	if (status != CMD_SUCCESS)
 		return (status);
 	if (execve(success_path, cmd->argv, *envp) == -1)
@@ -36,7 +36,7 @@ static int	execute_external_cmd(t_cmd *cmd, int last_status, char ***envp,
 		return (log_errno(NULL), CMD_FAILURE);
 	if (pid == 0)
 	{
-		status = apply_redirections(cmd->redirs, last_status, *envp);
+		status = apply_redirections(cmd, last_status, *envp);
 		if (status != CMD_SUCCESS)
 			exit(status);
 		if (execve(success_path, cmd->argv, *envp) == -1)

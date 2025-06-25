@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarcz <amarcz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 12:42:11 by amarcz            #+#    #+#             */
-/*   Updated: 2025/06/05 14:10:30 by amarcz           ###   ########.fr       */
+/*   Updated: 2025/06/17 08:28:32 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	init_curr(t_cmd **curr, int *argv_i, t_cmd **head, t_cmd **prev)
 		(*curr)->redirs = NULL;
 		(*curr)->next = NULL;
 		(*curr)->next_type = CMD_NONE;
+		(*curr)->heredoc_fd = -1;
 		*argv_i = 0;
 		if (!*head)
 			*head = *curr;

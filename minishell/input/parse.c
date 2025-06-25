@@ -6,27 +6,11 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:36:53 by amarcz            #+#    #+#             */
-/*   Updated: 2025/06/07 17:41:30 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/17 06:23:23 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-// //Add a new token node to the list
-// t_redir	*add_token(t_redir *last, char *value)
-// {
-// 	t_redir	*new;
-
-// 	new = malloc(sizeof(t_redir));
-// 	if (!new)
-// 		return (NULL);
-// 	new->filename = ft_strdup(value);
-// 	new->type = identify_tok(value);
-// 	new->next = NULL;
-// 	if (last)
-// 		last->next = new;
-// 	return (new);
-// }
 
 static void	clean_up(char **tokens, t_parse_state *s)
 {

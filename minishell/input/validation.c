@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarcz <amarcz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:09:11 by amarcz            #+#    #+#             */
-/*   Updated: 2025/06/04 12:55:02 by amarcz           ###   ########.fr       */
+/*   Updated: 2025/06/16 19:49:10 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ int	ft_is_redirection(char *token)
 
 int	base_error(char **tokens)
 {
-	if (is_operator(tokens[0]))
+	if (is_operator(tokens[0]) || (!ft_strncmp(tokens[0], "(", 2)
+			&& tokens[1] && !ft_strncmp(tokens[1], ")", 2))
+		|| !ft_strncmp(tokens[0], "\\", 2))
 		return (ft_printf(R "Whoa, Dude!\n" RST),
-			ft_printf(R "You can't start a command with '&&' or '||'.")
+			ft_printf(R "You can't start a command with '&&', '||', '|',"
+				" '()' or '\\'.")
 			, ft_printf(" Seriously, Bro!\n" RST), 0);
 	return (1);
 }

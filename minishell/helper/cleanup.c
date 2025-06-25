@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 16:07:20 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/12 16:28:43 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/19 19:55:58 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	free_cmd(t_cmd *cmd)
 				free(tmp_re->filename);
 			free(tmp_re);
 		}
+		safe_close_fd(&cmd->heredoc_fd);
 		free(cmd);
 		cmd = next;
 	}

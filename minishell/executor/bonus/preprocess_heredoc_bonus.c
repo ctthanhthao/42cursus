@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_cmd_bonus.c                                :+:      :+:    :+:   */
+/*   preprocess_heredoc_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/06 16:02:21 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/23 09:59:08 by thchau           ###   ########.fr       */
+/*   Created: 2025/06/17 06:26:31 by thchau            #+#    #+#             */
+/*   Updated: 2025/06/22 22:51:00 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell_bonus.h"
 
-int	execute_cmd(t_cmd *cmd, int last_status, char ***envp, bool should_fork)
+int	preprocess_heredocs_bonus(t_ast *node, int last_status, char **envp)
 {
-	int	status;
+	int		status;
 
-	if ((!cmd->argv || !*cmd->argv) && cmd->redirs)
-	{
-		status = handle_builtin_with_redirection(cmd, envp, &last_status, NULL);
-		if (status == 130)
-			g_heredoc_interrupted = 1;
+	if (!node)
+		return (CMD_SUCCESS);
+	status = CMD_SUCCESS;
+	if (node->type == NODE_CMD && node->cmd && node->cmd->redirs)
+		return (process_heredoc(node->cmd, last_status, envp));
+	status = preprocess_heredocs_bonus(node->left, last_status, envp);
+	if (status != CMD_SUCCESS)
 		return (status);
-	}
-	status = execute_single_command(cmd, envp, &last_status, should_fork);
-	if (status == 130)
-		g_heredoc_interrupted = 1;
+	status = preprocess_heredocs_bonus(node->right, last_status, envp);
+	if (status != CMD_SUCCESS)
+		return (status);
 	return (status);
 }

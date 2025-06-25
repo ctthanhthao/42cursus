@@ -34,6 +34,14 @@ A simplified Unix shell written in C. This project is part of the 42 curriculum 
 
 - `&&`, `||` and parentheses for priority
 - Wildcard `*` expansion (current working directory)
+  
+### ❌ Not Supported
+- Nested groups (e.g., `(cmd1 && (cmd2 || cmd3))`)
+- Heredoc inside groups (e.g., `(cat << EOF)` is not supported)
+- Subshells (no separate environment for grouped commands)
+- Brace expansion (e.g., `file_{a,b}.txt`)
+- Nested globbing (e.g., `dir*/**/*.c`)
+- Other stuffs which are not mentioned in subject
 
 ## 🛠️ Installation & Usage
 
@@ -52,7 +60,7 @@ A simplified Unix shell written in C. This project is part of the 42 curriculum 
   ```
 - For **bonus part**:
   ```bash
-  git checkout main
+  git checkout bonus
   make bonus
   ```
 ### ▶️ Run
@@ -68,7 +76,7 @@ valgrind -s  --leak-check=full  --show-reachable=yes --show-leak-kinds=definite 
 ### 🧪Tester
 - You can test the functionality of this shell with the following tester:
 🔗 [LucasKuhn/minishell_tester](https://github.com/LucasKuhn/minishell_tester)
-- I also add some tests for [bonus](https://github.com/ctthanhthao/42cursus/blob/main/minishell/minishell_tester/bonus_complex) here 
+- I also add some tests for bonus here https://github.com/ctthanhthao/minishell/blob/bonus/minishell_tester/bonus_complex 
 
 ## 🚫 Limitations
 - No interpretation of unclosed quotes or backslashes (\)

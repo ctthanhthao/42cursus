@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:37:32 by thchau            #+#    #+#             */
-/*   Updated: 2025/05/28 11:16:14 by thchau           ###   ########.fr       */
+/*   Updated: 2025/06/16 19:48:39 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ char	*expand_variables(const char *arg, int last_status, char **env)
 	int		in_single;
 	int		in_double;
 
+	if (!arg)
+		return (ft_calloc(1, 1));
 	p = (char *)arg;
 	result = ft_calloc(1, 1);
 	in_single = 0;

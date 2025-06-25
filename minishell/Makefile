@@ -9,6 +9,7 @@ LDFLAGS 		:= -lreadline
 SRCS    := helper/utils.c 			helper/cleanup.c 	 helper/clone.c 	   helper/sort.c 	helper/ms_ft_strjoin.c  \
 			helper/main_utils.c 	helper/parse_utils.c helper/parse_utils2.c helper/tokenizer_utils.c \
 			helper/validate_utils.c helper/export_utils.c helper/parse_utils3.c helper/debug_cmd.c helper/safe_func.c \
+			helper/executor_utils.c \
 			input/validation.c       input/parse.c       		input/tokenizer.c 		  input/redir_parse.c \
 			input/handle_expansion.c input/expand_variables1.c  input/expand_variables2.c input/signal.c \
 			input/expand_wildcard.c  \
@@ -16,7 +17,7 @@ SRCS    := helper/utils.c 			helper/cleanup.c 	 helper/clone.c 	   helper/sort.c
 			builtins/export.c builtins/pwd.c  builtins/unset.c builtins/exit.c \
 			executor/execute_builtin.c      executor/apply_redirections.c executor/execute_commands.c \
 			executor/execute_sgl_command.c	executor/process_heredoc.c    executor/process_pipe.c \
-			executor/backup_restore_redirections.c  executor/has_file_arguments.c
+			executor/backup_restore_redirections.c 
 MAIN_SRC := main.c
 OBJ        := $(SRCS:.c=.o) $(MAIN_SRC:.c=.o)
 
@@ -26,7 +27,7 @@ BONUS_SRCS 		:= helper/bonus/cleanup_bonus.c helper/bonus/parse_utils_bonus.c   
 					input/bonus/parse_bonus.c     input/bonus/parse_redirections_bonus.c input/bonus/parse_to_ast_bonus.c \
 					input/bonus/tokenizer_bonus.c input/bonus/handle_expansion_bonus.c   input/bonus/parse_group_cmd.c \
 					executor/bonus/execute_ast_bonus.c executor/bonus/execute_cmd_bonus.c executor/bonus/execute_group_bonus.c \
-					executor/bonus/execute_pipe_bonus.c
+					executor/bonus/execute_pipe_bonus.c executor/bonus/apply_redirections_bonus.c executor/bonus/preprocess_heredoc_bonus.c
 MAIN_BONUS_SRC 	:= main_bonus.c
 BONUS_OBJ  		:= $(SRCS:.c=.o) $(BONUS_SRCS:.c=.o) $(MAIN_BONUS_SRC:.c=.o)
 

@@ -1,18 +1,22 @@
-cat *.md *.txt | tee combined.txt
+(echo hi | cat) && echo ok
+(echo hello && echo world) | wc -l
 ls *.md && cat *.md
 (grep "foo" file.txt || echo "No match") && echo "Search done"
-(ls | grep txt) && echo "Text files exist"
 (cd tmp/ && ls *1) || echo "No such tmp dir or files"
 (test -f *.sh && echo "Script found") > found_script.log
 (test -d logs || mkdir logs) && (cd logs && ls | wc -l)
 (test -f *.sh && echo "Script found") > found_script.log
 (test -f app.log && grep "ERROR" app.log | tee errors.txt) || echo "No log or no errors"
 (cd src && make) && (cp bin/app /usr/local/bin && echo "Installed") || echo "Build failed"
-(pgrep nginx || (echo "Starting nginx..." && sudo systemctl start nginx)) && echo "Nginx running"
-(ls | grep ".log" > /dev/null && tar czf logs.tar.gz *.log) || echo "No logs to archive"
-(make && ./test.sh | tee test_results.txt && ./deploy.sh) || echo "Pipeline failed"
-(df / | awk 'NR==2 { if ($5+0 > 90) exit 1 }' && echo "OK") || echo "Disk almost full!"
 (ssh user@host "(cd /app && git pull && ./restart.sh)") || echo "Remote update failed"
-(ls -l | grep "^d") | (grep "data" && echo "Data dirs exist") || echo "None found"
 cat data.csv | (grep -i "error" || grep -i "warning") | sort | uniq > filtered.txt
 (curl -s https://primary.com/data || curl -s https://backup.com/data) | jq '.' > output.json
+ls | grep txt | wc -l && (echo success || echo failed)
+cat data.csv | grep error | cut -d: -f2 | sort | uniq -c && (echo "Processed" || echo "Failed")
+(ls | grep txt && echo ok) > group_output.txt
+cat data.csv | (grep -i "error" || grep -i "warning") | sort | uniq > testa.txt 
+(ls *.md) | grep md > out.txt
+cat <  out.txt | cat < combined.txt | cat < data.csv | grep war | wc -l
+cat *.md | wc -l && (echo counted lines in c files)
+ls | (grep supp && echo done) > result.log
+(ls -1 | grep '\.txt$' | sort | wc -l) && (echo "C files counted successfully")
