@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 11:35:36 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/23 10:32:02 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/03 18:37:16 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef enum e_token
 
 typedef enum e_cmd_status
 {
-	CMD_EXIT = -1,
 	CMD_SUCCESS = 0,
 	CMD_FAILURE = 1
 }	t_cmd_status;
@@ -172,7 +171,7 @@ int		export_builtin(t_cmd *cmd, char ***envp);
 int		echo_builtin(t_cmd *cmd, int *status);
 int		unset_builtin(t_cmd *cmd, char ***envp);
 int		env_builtin(char **envp);
-int		exit_builtin(t_cmd *cmd, char ***envp);
+void	exit_builtin(t_cmd *cmd, int status, char ***envp);
 int		execute_single_command(t_cmd *cmd, char ***envp, int *last_status,
 			bool should_fork);
 void	collect_pipeline_status(t_pid_pipe_fd *pid_data, int *last_status);

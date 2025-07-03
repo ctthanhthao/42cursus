@@ -24,6 +24,7 @@ OBJ        := $(SRCS:.c=.o) $(MAIN_SRC:.c=.o)
 # Bonus source files
 BONUS_SRCS 		:= helper/bonus/cleanup_bonus.c helper/bonus/parse_utils_bonus.c         helper/bonus/print_ast_bonus.c \
 					helper/bonus/utils_bonus.c  helper/bonus/print_redirections_bonus.c \
+					builtins/bonus/exit_bonus.c
 					input/bonus/parse_bonus.c     input/bonus/parse_redirections_bonus.c input/bonus/parse_to_ast_bonus.c \
 					input/bonus/tokenizer_bonus.c input/bonus/handle_expansion_bonus.c   input/bonus/parse_group_cmd.c \
 					executor/bonus/execute_ast_bonus.c executor/bonus/execute_cmd_bonus.c executor/bonus/execute_group_bonus.c \

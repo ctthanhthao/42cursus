@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:42:30 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/22 12:41:14 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/03 18:35:51 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	execute_builtin(t_cmd *cmd, char ***envp, int *status)
 	if (!ft_strcmp(cmd->argv[0], "cd"))
 		*status = cd_builtin(cmd, envp);
 	else if (!ft_strcmp(cmd->argv[0], "exit"))
-		return (CMD_EXIT);
+		exit_builtin(cmd, *status, envp);
 	else if (!ft_strcmp(cmd->argv[0], "export"))
 		*status = export_builtin(cmd, envp);
 	else if (!ft_strcmp(cmd->argv[0], "unset"))
@@ -50,18 +50,22 @@ int	handle_builtin_with_redirection(t_cmd *cmd, char ***envp, int *status,
 	int		stdin_bk;
 	int		stdout_bk;
 	bool	redirected;
+	int		l_status;
 
 	stdin_bk = -1;
 	stdout_bk = -1;
 	redirected = false;
+	l_status = CMD_SUCCESS;
 	if (cmd->redirs)
+	{
 		redirected = save_original_std_inout(&stdin_bk, &stdout_bk);
-	*status = apply_redirections(cmd, *status, *envp);
-	if (*status != CMD_SUCCESS)
+		l_status = apply_redirections(cmd, *status, *envp);
+	}
+	if (l_status != CMD_SUCCESS)
 	{
 		if (redirected)
 			restore_original_std_inout(stdin_bk, stdout_bk);
-		return (*status);
+		return (l_status);
 	}
 	if (operation)
 		*status = operation(cmd, envp, status);

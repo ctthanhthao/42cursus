@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 19:42:49 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/23 09:50:18 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/03 20:45:31 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	process_single_heredoc(t_redir *redir, int last_status, char **envp)
 	if (status != CMD_SUCCESS)
 	{
 		safe_close_fds(fd);
+		if (status == 130)
+			g_heredoc_interrupted = 1;
 		return (-1);
 	}
 	return (fd[0]);

@@ -1,0 +1,7 @@
+echo test;echo end
+&& export
+|| exit
+(env && echo end)
+cat <test'
+echo "hello""
+echo {a,b}

@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:03:24 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/23 10:59:19 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/03 21:12:13 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ int		handle_expansion_bonus(char ***argv_ptr, int *argc, int *capacity,
 char	**extent_argv_if_need(char **argv, int *capacity, int argc);
 // Executor
 int		execute_ast(t_ast *node, int last_status, char ***envp);
-int		execute_cmd(t_cmd *cmd, int last_status, char ***envp,
+int		execute_cmd(t_ast *node, int last_status, char ***envp,
 			bool should_fork);
+void	exit_builtin_bonus(t_ast *node, int status, char ***envp);
 int		execute_pipe(t_ast *node, int last_status, char ***envp);
 int		execute_group(t_ast *node, int last_status, char ***envp);
 int		preprocess_heredocs_bonus(t_ast *node, int last_status, char **envp);

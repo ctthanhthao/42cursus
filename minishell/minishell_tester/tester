@@ -23,6 +23,7 @@ else
 		"pipes"
 		"redirects"
 		"extras"
+		"unsupported_cases"
 	)
 fi
 

@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 20:17:14 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/23 11:09:49 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/03 21:03:46 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	execute_ast(t_ast *node, int last_status, char ***envp)
 	if (!node)
 		return (CMD_SUCCESS);
 	if (node->type == NODE_CMD)
-		return (execute_cmd(node->cmd, last_status, envp, true));
+		return (execute_cmd(node, last_status, envp, true));
 	else if (node->type == NODE_PIPE)
 		return (execute_pipe(node, last_status, envp));
 	else if (node->type == NODE_AND)

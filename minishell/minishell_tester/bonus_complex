@@ -20,3 +20,7 @@ cat <  out.txt | cat < combined.txt | cat < data.csv | grep war | wc -l
 cat *.md | wc -l && (echo counted lines in c files)
 ls | (grep supp && echo done) > result.log
 (ls -1 | grep '\.txt$' | sort | wc -l) && (echo "C files counted successfully")
+(cat data.csv || echo warning) | grep error | wc -l && (echo success || echo failed)
+cat data.csv || (echo warning | grep error) | wc -l && (echo success || echo failed)
+(ls || echo start) && echo end
+ls || (echo start && echo end)  

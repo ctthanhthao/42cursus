@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 14:23:15 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/13 15:53:17 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/03 18:53:21 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char	*find_valid_path(char *cmd, char **envp, int *status)
 		}
 	}
 	if (!path_env)
-		return (NULL);
+		return (*status = 127, log_errno_more(cmd, "command not found"), NULL);
 	paths = ft_split(path_env, ':');
 	if (!paths)
 		return (NULL);
