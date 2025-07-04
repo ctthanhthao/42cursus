@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:03:24 by thchau            #+#    #+#             */
-/*   Updated: 2025/07/03 21:12:13 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/04 20:56:26 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,7 @@ void	print_ast(t_ast *root);
 void	print_redirections(t_ast *node, const char *prefix);
 char	*node_type_str(t_node_type type);
 int		is_logical_op_bonus(char *token);
+char	*create_syntax_err_msg(char *token);
+bool	contain_invalid_parenthesis(char *argv1, char *argv2);
 
 #endif

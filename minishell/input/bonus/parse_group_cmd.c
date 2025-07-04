@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 11:24:38 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/23 11:09:06 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/04 20:56:40 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ static t_cmd	*parse_command(t_parser *p)
 	while (p->tokens[p->tokeni] && !is_logical_op(p->tokens[p->tokeni])
 		&& ft_strcmp(p->tokens[p->tokeni], ")") != 0)
 	{
+		if (contain_invalid_parenthesis(p->tokens[p->tokeni],
+				p->tokens[(p->tokeni) + 1]))
+			return (free(cmd), NULL);
 		if (ft_is_redirection(p->tokens[p->tokeni]))
 		{
 			if (parse_redirections_bonus(&cmd->redirs, p) == CMD_FAILURE)
@@ -38,16 +41,6 @@ static t_cmd	*parse_command(t_parser *p)
 	return (cmd->argv[argc] = NULL, cmd);
 }
 
-static char	*create_err_msg(char *token)
-{
-	char	*er_msg;
-
-	er_msg = ft_strdup("syntax error near unexpected token '");
-	er_msg = ft_strjoin_free(er_msg, token);
-	er_msg = ft_strjoin_free(er_msg, "'");
-	return (er_msg);
-}
-
 static int	validate_group_redirs_and_syntax(t_parser *p, t_redir **redirs)
 {
 	char	*er_msg;
@@ -59,7 +52,7 @@ static int	validate_group_redirs_and_syntax(t_parser *p, t_redir **redirs)
 	if (p->tokeni < p->token_count && p->tokens[p->tokeni]
 		&& !is_logical_op_bonus(p->tokens[p->tokeni]))
 	{
-		er_msg = create_err_msg(p->tokens[p->tokeni]);
+		er_msg = create_syntax_err_msg(p->tokens[p->tokeni]);
 		log_errno(er_msg);
 		free(er_msg);
 		return (CMD_FAILURE);
@@ -79,7 +72,7 @@ static t_ast	*parse_group(t_parser *p)
 	p->tokeni++;
 	if (is_logical_op(p->tokens[p->tokeni]))
 	{
-		er_msg = create_err_msg(p->tokens[p->tokeni]);
+		er_msg = create_syntax_err_msg(p->tokens[p->tokeni]);
 		return (log_errno(er_msg), free(er_msg), NULL);
 	}
 	group = parse_expression(p);
