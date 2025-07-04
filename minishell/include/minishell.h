@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 11:35:36 by thchau            #+#    #+#             */
-/*   Updated: 2025/07/03 18:37:16 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/04 15:28:31 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ char	**ft_tokenize(char *input);
 int		skip_whitespace(const char *input, int i);
 void	token_ender(char **tokens, int tokeni);
 int		is_redirection(char *token);
+int		is_redirection_in_quote(char *token);
 int		handle_redirection(t_cmd *cmd, char **tokens, int *i);
 int		validate_tokens(char **tokens);
 int		is_quoted(char *token);

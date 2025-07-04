@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:09:11 by amarcz            #+#    #+#             */
-/*   Updated: 2025/06/16 19:49:10 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/04 16:00:28 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	operator_check(char **tokens, int i)
 
 int	validate_tokens(char **tokens)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	if (!tokens || !tokens[0])
@@ -64,7 +64,7 @@ int	validate_tokens(char **tokens)
 			if (!operator_check(tokens, i))
 				return (0);
 		}
-		else if (is_redirection(tokens[i]) && !is_quoted(tokens[i]))
+		else if (!is_redirection_in_quote(tokens[i]))
 		{
 			if (!tokens[i + 1] || is_operator(tokens[i + 1])
 				|| ft_is_redirection(tokens[i + 1]))

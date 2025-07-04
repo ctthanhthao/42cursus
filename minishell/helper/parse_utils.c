@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 12:42:11 by amarcz            #+#    #+#             */
-/*   Updated: 2025/06/17 08:28:32 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/04 15:49:43 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	handle_token(char **tokens, t_parse_state *s)
 	if (is_logical_op(tokens[s->i]))
 		return (token_checker(s->curr, tokens[s->i]),
 			token_init(&s->curr, &s->prev, &s->i, s->argv_i), 2);
-	if (is_redirection(tokens[s->i]) && !is_quoted(tokens[s->i]))
+	if (!is_redirection_in_quote(tokens[s->i]))
 	{
 		if (!handle_redirection(s->curr, tokens, &s->i))
 			return (-1);
