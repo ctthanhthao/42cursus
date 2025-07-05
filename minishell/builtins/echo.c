@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarcz <amarcz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 13:08:16 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/03 13:29:34 by amarcz           ###   ########.fr       */
+/*   Updated: 2025/07/05 12:25:55 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	echo_builtin(t_cmd *cmd, int *status)
 		newline = 0;
 		i++;
 	}
+	while (!ft_strcmp(cmd->argv[i], "-n"))
+		i++;
 	while (cmd->argv[i])
 	{
 		ft_printf("%s", cmd->argv[i]);

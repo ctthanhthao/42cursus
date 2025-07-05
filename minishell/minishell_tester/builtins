@@ -10,6 +10,7 @@ echo "aspas ->'"
 echo "aspas -> ' "
 echo 'aspas ->"'
 echo 'aspas -> " '
+echo hello'">"'
 echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
 echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
 echo "exit_code ->$? user ->$USER home -> $HOME"
@@ -19,6 +20,10 @@ echo '$'
 echo $
 echo $?
 echo $?HELLO
+echo -n HELLO
+echo -n -n -n HELLO
+echo -n -n HELLO -n -n - n
+echo Hello">"World
 pwd
 pwd oi
 export hello

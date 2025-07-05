@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 20:39:39 by thchau            #+#    #+#             */
-/*   Updated: 2025/06/23 07:50:46 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/05 12:16:46 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_ast	*parse_input_bonus(char *input, int last_status, char **envp)
 		|| !check_unclosed_parenthesis(input))
 		return (NULL);
 	tokens = ft_tokenize_bonus(input);
-	if (!validate_tokens(tokens) || !tokens || !wildcard_check(tokens))
+	if (!validate_tokens_bonus(tokens) || !tokens || !wildcard_check(tokens))
 		return (free_split(tokens), NULL);
 	parser_data = init_parser_data(tokens, last_status, envp);
 	head = parse_expression(&parser_data);

@@ -1,3 +1,10 @@
+echo   t('te'st || )
+echo )test()
+echo )test(
+echo )
+echo  hello || ('te'st || )
+echo  hello || ('te'st && )
+echo   ('te'st | )
 (echo hello
 echo hello)
 (echo hi)) && echo bye

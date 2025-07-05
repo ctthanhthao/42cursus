@@ -1,54 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation.c                                       :+:      :+:    :+:   */
+/*   validation_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 15:09:11 by amarcz            #+#    #+#             */
-/*   Updated: 2025/07/05 12:48:52 by thchau           ###   ########.fr       */
+/*   Created: 2025/07/05 12:05:19 by thchau            #+#    #+#             */
+/*   Updated: 2025/07/05 12:56:15 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-static int	is_operator(char *token)
-{
-	return (ft_strncmp(token, "||", 2) == 0
-		|| ft_strncmp(token, "&&", 2) == 0
-		|| ft_strncmp(token, "|", 1) == 0);
-}
-
-int	ft_is_redirection(char *token)
-{
-	return (ft_strncmp(token, ">>", 2) == 0
-		|| ft_strncmp(token, ">", 1) == 0
-		|| ft_strncmp(token, "<<", 2) == 0
-		|| ft_strncmp(token, "<", 1) == 0);
-}
+#include "../../include/minishell_bonus.h"
 
 static int	base_error(char **tokens)
 {
-	if (is_operator(tokens[0]) || (!ft_strncmp(tokens[0], "(", 2)
+	if (is_logical_op(tokens[0]) || (!ft_strncmp(tokens[0], "(", 2)
 			&& tokens[1] && !ft_strncmp(tokens[1], ")", 2))
 		|| !ft_strncmp(tokens[0], "\\", 2))
 		return (ft_printf(R "Whoa, Dude!\n" RST),
 			ft_printf(R "You can't start a command with '&&', '||', '|',"
-				" or '\\'.")
+				" '()' or '\\'.")
 			, ft_printf(" Seriously, Bro!\n" RST), 0);
 	return (1);
 }
 
-int	operator_check(char **tokens, int i)
+static int	operator_check(char **tokens, int i)
 {
-	if (!tokens[i + 1] || is_operator(tokens[i + 1]))
+	if (!tokens[i + 1] || is_logical_op(tokens[i + 1])
+		|| ft_strcmp(tokens[i + 1], ")") == 0)
 		return (ft_printf(R "Yo, Bro!\n" RST),
 			ft_printf(R "You've totally messed up"),
 			ft_printf("the syntax at %s!\n" RST, tokens[i]), 0);
 	return (1);
 }
 
-int	validate_tokens(char **tokens)
+int	validate_tokens_bonus(char **tokens)
 {
 	int		i;
 
@@ -59,14 +45,14 @@ int	validate_tokens(char **tokens)
 		return (0);
 	while (tokens[i])
 	{
-		if (is_operator(tokens[i]))
+		if (is_logical_op(tokens[i]))
 		{
 			if (!operator_check(tokens, i))
 				return (0);
 		}
 		else if (!is_redirection_in_quote(tokens[i]))
 		{
-			if (!tokens[i + 1] || is_operator(tokens[i + 1])
+			if (!tokens[i + 1] || is_logical_op(tokens[i + 1])
 				|| ft_is_redirection(tokens[i + 1]))
 				return (ft_printf(R "Not cool, Dude!\n" RST),
 					ft_printf(R "Syntax error near %s", tokens[i]),

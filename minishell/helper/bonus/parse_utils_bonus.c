@@ -6,23 +6,22 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 20:45:36 by thchau            #+#    #+#             */
-/*   Updated: 2025/07/04 20:57:31 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/05 12:43:58 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell_bonus.h"
 
-int	check_unclosed_parenthesis(const char *input)
+// brackets: 0: no parenthesis, 1: open parenthesis, 2: close parenthesis
+static int	check_quotes_and_count_parentheses(const char *input, int *brackets)
 {
 	bool	in_single;
 	bool	in_double;
 	int		i;
-	int		brackets;
 
 	in_single = false;
 	in_double = false;
 	i = 0;
-	brackets = 0;
 	while (input[i])
 	{
 		if (input[i] == '\'' && !in_double)
@@ -30,14 +29,34 @@ int	check_unclosed_parenthesis(const char *input)
 		else if (input[i] == '\"' && !in_single)
 			in_double = !in_double;
 		else if (!in_double && !in_single && input[i] == '(')
-			brackets++;
+			(*brackets)++;
 		else if (!in_double && !in_single && input[i] == ')')
-			brackets--;
+		{
+			if (*brackets == 0)
+				return (0);
+			(*brackets)--;
+		}
 		i++;
 	}
+	return (1);
+}
+
+int	check_unclosed_parenthesis(const char *input)
+{
+	int		brackets;
+	char	*er_msg;
+
+	brackets = 0;
+	if (!check_quotes_and_count_parentheses(input, &brackets))
+	{
+		er_msg = create_syntax_err_msg(")");
+		return (log_errno(er_msg), free(er_msg), 0);
+	}
 	if (brackets != 0)
-		return (ft_printf(R "Whoa, you messed up! You forgot to "),
-			ft_printf("close all parenthesises, Dudio!\n" RST), 0);
+	{
+		er_msg = create_syntax_err_msg("(");
+		return (log_errno(er_msg), free(er_msg), 0);
+	}
 	return (1);
 }
 

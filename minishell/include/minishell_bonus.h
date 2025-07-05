@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:03:24 by thchau            #+#    #+#             */
-/*   Updated: 2025/07/04 20:56:26 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/05 12:10:51 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	**ft_tokenize_bonus(char *input);
 int		handle_expansion_bonus(char ***argv_ptr, int *argc, int *capacity,
 			t_parser *p);
 char	**extent_argv_if_need(char **argv, int *capacity, int argc);
+int		validate_tokens_bonus(char **tokens);
 // Executor
 int		execute_ast(t_ast *node, int last_status, char ***envp);
 int		execute_cmd(t_ast *node, int last_status, char ***envp,

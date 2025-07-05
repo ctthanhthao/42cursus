@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarcz <amarcz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:06:28 by amarcz            #+#    #+#             */
-/*   Updated: 2025/06/05 10:21:13 by amarcz           ###   ########.fr       */
+/*   Updated: 2025/07/05 12:13:37 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ int	check_unclosed_quotes(const char *input)
 int	is_logical_op(char *token)
 {
 	return (ft_strcmp(token, "||") == 0
-		|| ft_strcmp(token, "|") == 0 || ft_strcmp(token, "&&") == 0);
+		|| ft_strcmp(token, "|") == 0
+		|| ft_strcmp(token, "&&") == 0);
 }

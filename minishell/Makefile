@@ -27,6 +27,7 @@ BONUS_SRCS 		:= helper/bonus/cleanup_bonus.c helper/bonus/parse_utils_bonus.c   
 					builtins/bonus/exit_bonus.c \
 					input/bonus/parse_bonus.c     input/bonus/parse_redirections_bonus.c input/bonus/parse_to_ast_bonus.c \
 					input/bonus/tokenizer_bonus.c input/bonus/handle_expansion_bonus.c   input/bonus/parse_group_cmd.c \
+					input/bonus/validation_bonus.c \
 					executor/bonus/execute_ast_bonus.c executor/bonus/execute_cmd_bonus.c executor/bonus/execute_group_bonus.c \
 					executor/bonus/execute_pipe_bonus.c executor/bonus/apply_redirections_bonus.c executor/bonus/preprocess_heredoc_bonus.c
 MAIN_BONUS_SRC 	:= main_bonus.c
