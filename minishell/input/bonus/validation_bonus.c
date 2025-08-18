@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 12:05:19 by thchau            #+#    #+#             */
-/*   Updated: 2025/07/05 12:56:15 by thchau           ###   ########.fr       */
+/*   Updated: 2025/07/05 12:43:19 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	validate_tokens_bonus(char **tokens)
 				|| ft_is_redirection(tokens[i + 1]))
 				return (ft_printf(R "Not cool, Dude!\n" RST),
 					ft_printf(R "Syntax error near %s", tokens[i]),
-					ft_printf(" redirection, Bro!\n" RST), 0);
+					ft_printf("redirection, Bro!\n" RST), 0);
 		}
 		i++;
 	}

@@ -790,3 +790,9 @@
    match-leak-kinds: reachable
    fun:_rl_init_terminal_io
 }
+{
+   fd_leak_from_heredoc
+   Memcheck:Leak
+   fun:pipe
+   ...
+}
