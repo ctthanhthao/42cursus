@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:47:43 by thchau            #+#    #+#             */
-/*   Updated: 2025/09/30 10:58:27 by thchau           ###   ########.fr       */
+/*   Updated: 2025/10/01 10:10:04 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,36 @@ void trim(std::string &s)
 
 bool isValidPhoneNumber(const std::string &pn)
 {
-	if (pn.empty())
-		return false;
+	int digits = 0;
+	bool openParen = false;
+	
 	for (size_t i = 0; i < pn.size(); i++)
 	{
-		if (!isdigit(pn[i]) && !(i == 0 && (pn[i] == '+')))
+		char c = pn[i];
+		if (isdigit(c))
+			digits++;
+		else if (i == 0 && c == '+')
+			continue;
+		else if (c == '(')
+		{
+			if (openParen)
+				return false;
+			openParen = true;
+		}
+		else if (c == ')')
+		{
+			if (!openParen)
+				return false;
+			openParen = false;
+		}
+		else if (c == ' ' || c == '-')
+			continue;
+		else
 			return false;
 	}
-	return true;
+	if (openParen) 
+		return false;
+	return (digits >= 7 && digits <= 15);
 }
 
 void PhoneBook::addContact()
@@ -75,7 +97,7 @@ void PhoneBook::addContact()
 	}
 	if (!isValidPhoneNumber(pn))
 	{
-		std::cout << "Error: Phone number must contain only digits and start with '+'." 
+		std::cout << "Error: Phone number is invalid." 
 			<< std::endl;
 		return;
 	}
