@@ -6,30 +6,12 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 11:26:47 by thchau            #+#    #+#             */
-/*   Updated: 2025/10/05 16:39:18 by thchau           ###   ########.fr       */
+/*   Updated: 2025/10/12 15:02:38 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
-#include <sstream>
 
-static std::vector<std::string> closeLogs;
-// -------------- Helper: static object to print logs at program exit--------
-struct CloseLogPrinter
-{
-	~CloseLogPrinter()
-	{
-		if (!closeLogs.empty())
-		{
-			std::vector<std::string>::reverse_iterator it;
-			for (it = closeLogs.rbegin(); it != closeLogs.rend();++it)
-				std::cout << *it << std::endl;
-		}
-	}
-};
-static CloseLogPrinter printer;
-
-// ---------------------------- END -----------------------------------------
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
@@ -49,25 +31,14 @@ Account::Account(int initial_deposit)
 
 Account::~Account(void)
 {
-	std::ostringstream oss;
-	std::time_t now = std::time(0);
-	std::tm *ltm = std::localtime(&now);
-	oss << "["
-		<< (ltm->tm_year + 1900)
-		<< std::setw(2) << std::setfill('0') << ltm->tm_mon + 1
-		<< std::setw(2) << std::setfill('0') << ltm->tm_mday << "_"
-		<< std::setw(2) << std::setfill('0') << ltm->tm_hour
-		<< std::setw(2) << std::setfill('0') << ltm->tm_min
-		<< std::setw(2) << std::setfill('0') << ltm->tm_sec
-		<< "]"
-		<< " index:" << _accountIndex
-		<< ";amount:" << _amount
-		<< ";closed";
-	closeLogs.push_back(oss.str());
-//	_nbAccounts--;
+	_displayTimestamp();
+	std::cout << " index:" << _accountIndex
+			  << ";amount:" << _amount
+			  << ";closed" << std::endl;
 }
 //============================= END =========================================
-void	Account::_displayTimestamp( void )
+
+static void	_displayTimestamp( void )
 {
 	std::time_t now = std::time(0);
 	std::tm *ltm = std::localtime(&now);
@@ -107,8 +78,7 @@ void	Account::displayAccountsInfos( void )
 	std::cout << " accounts:" << Account::getNbAccounts() 
 			  << ";total:" << Account::getTotalAmount()
 			  << ";deposits:" << Account::getNbDeposits()
-			  << ";withdrawals:" << Account::getNbWithdrawals()
-			  << std::endl;
+			  << ";withdrawals:" << Account::getNbWithdrawals();
 }
 
 void	Account::makeDeposit( int deposit )
@@ -117,7 +87,6 @@ void	Account::makeDeposit( int deposit )
 	_amount += deposit;
 	_nbDeposits++;
 	_totalNbDeposits++;
-	_totalAmount += deposit;
 	
 	_displayTimestamp();
 	std::cout << " index:" << _accountIndex
@@ -143,7 +112,6 @@ bool	Account::makeWithdrawal( int withdrawal )
 		_amount -= withdrawal;
 		_nbWithdrawals++;
 		_totalNbWithdrawals++;
-		_totalAmount -= withdrawal;
 		std::cout << " index:" << _accountIndex
 			  << ";p_amount:" << pAmount
 			  << ";withdrawal:" << withdrawal
@@ -163,7 +131,7 @@ void	Account::displayStatus( void ) const
 	_displayTimestamp();
 	std::cout << " index:" << _accountIndex
 			  << ";amount:" << _amount
-			  << ";deposits:" << _nbDeposits
-			  << ";withdrawals:" << _nbWithdrawals
+			  << ";deposits" << _nbDeposits
+			  << ";withdrawals" << _nbWithdrawals
 			  << std::endl;
 }
