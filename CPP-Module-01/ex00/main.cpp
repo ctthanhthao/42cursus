@@ -6,17 +6,24 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 15:31:08 by thchau            #+#    #+#             */
-/*   Updated: 2025/10/12 15:40:09 by thchau           ###   ########.fr       */
+/*   Updated: 2025/10/12 15:50:26 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
+#include <sstream>
 
 Zombie *newZombie(std::string name);
 void randomChump(std::string name);
 
 void separator(std::string title) {
     std::cout << "\n==================== " << title << " ====================\n";
+}
+
+std::string to_string(int n) {
+    std::ostringstream oss;
+    oss << n;
+    return oss.str();
 }
 
 int main()
@@ -54,7 +61,7 @@ int main()
     separator("Stress Test - Multiple Heap Zombies");
     Zombie* horde[5];
     for (int i = 0; i < 5; ++i) {
-        horde[i] = newZombie("HeapZombie_" + std::to_string(i));
+        horde[i] = newZombie("HeapZombie_" + to_string(i));
         horde[i]->announce();
     }
     for (int i = 0; i < 5; ++i) {
@@ -64,7 +71,7 @@ int main()
     // 7️⃣ Stress test - multiple zombies on the stack
     separator("Stress Test - Multiple Stack Zombies");
     for (int i = 0; i < 5; ++i) {
-        randomChump("StackZombie_" + std::to_string(i));
+        randomChump("StackZombie_" + to_string(i));
     }
 
     // 8️⃣ Unicode / special characters in name
