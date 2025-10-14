@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 08:56:16 by thchau            #+#    #+#             */
-/*   Updated: 2025/10/14 09:25:44 by thchau           ###   ########.fr       */
+/*   Updated: 2025/10/14 09:32:23 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,7 @@ void Harl::complain(std::string level)
 			(this->*function[i])();
 			return;
 		}
-		if (i == 3 && level != levels[i])
-		{
-			std::cout << "Cannot recognize level: ";
-			std::cout << level << std::endl;
-			return;
-		}
 	}
+	std::cout << "[ Probably complaining about insignificant problems ]"
+			  << std::endl;
 }
