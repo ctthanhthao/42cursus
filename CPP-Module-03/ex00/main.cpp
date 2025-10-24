@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 12:16:52 by thchau            #+#    #+#             */
-/*   Updated: 2025/10/24 13:12:02 by thchau           ###   ########.fr       */
+/*   Updated: 2025/10/24 13:25:35 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ int main(void)
 	Foo.beRepaired(2);
 
 	// copy Foo
-	ClapTrap FooChild = Foo;
-	FooChild.attack("BarChild");
+	ClapTrap FooCopy(Foo);
+	FooCopy.attack("BarChild");
+	// assign Foo
+	ClapTrap FooAssign("FooAssign");
+	FooAssign = Foo;
+	FooAssign.attack("BarChild");
 	return 0;
 }
