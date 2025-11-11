@@ -6,27 +6,27 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 12:16:44 by thchau            #+#    #+#             */
-/*   Updated: 2025/10/24 13:18:39 by thchau           ###   ########.fr       */
+/*   Updated: 2025/11/10 19:24:38 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(): _name("unname"), _hitPoints(10),
-		_energyPoints(10), _attachDamage(0)
+		_energyPoints(10), _attackDamage(0)
 {
 	std::cout << "ClapTrap " << this->_name << " created." << std::endl;
 };
 
 ClapTrap::ClapTrap(const std::string &name): _name(name), _hitPoints(10),
-		_energyPoints(10), _attachDamage(0)
+		_energyPoints(10), _attackDamage(0)
 {
 	std::cout << "ClapTrap " << this->_name << " created." << std::endl;
 };
 					
 ClapTrap::ClapTrap(const ClapTrap &other): _name(other._name),
 		_hitPoints(other._hitPoints), _energyPoints(other._energyPoints),
-		_attachDamage(other._attachDamage)
+		_attackDamage(other._attackDamage)
 {
 	std::cout << "ClapTrap " << other._name << " copied." << std::endl;
 }
@@ -38,7 +38,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 		_name = other._name;
 		_hitPoints = other._hitPoints;
 		_energyPoints = other._energyPoints;
-		_attachDamage = other._attachDamage;
+		_attackDamage = other._attackDamage;
 	}
 	std::cout << "ClapTrap " << _name << " is assigned." << std::endl;
 	return *this;
@@ -67,7 +67,7 @@ void ClapTrap::attack(const std::string &target)
 	}
 	_energyPoints--;
 	std::cout << "ClapTrap " << _name << " attacks " << target
-			  << ", causing " << _attachDamage << " points of damage."
+			  << ", causing " << _attackDamage << " points of damage."
 			  << std::endl;
 }
 

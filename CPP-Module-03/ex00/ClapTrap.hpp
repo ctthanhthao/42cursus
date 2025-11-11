@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 12:16:49 by thchau            #+#    #+#             */
-/*   Updated: 2025/10/24 13:06:16 by thchau           ###   ########.fr       */
+/*   Updated: 2025/11/10 19:24:38 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ private:
 	std::string _name;
 	unsigned int _hitPoints;
 	unsigned int _energyPoints;
-	unsigned int _attachDamage;
+	unsigned int _attackDamage;
 	
 public:
 	ClapTrap();
