@@ -6,14 +6,12 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:03:46 by thchau            #+#    #+#             */
-/*   Updated: 2025/11/17 20:40:43 by thchau           ###   ########.fr       */
+/*   Updated: 2025/11/18 09:10:45 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "WrongAnimal.hpp"
-#include "WrongCat.hpp"
 
 int main()
 {
@@ -35,10 +33,14 @@ int main()
 	Dog *dog = new Dog();
 	dog->getBrain()->setIdea(0, "Go to the zoo.");
 	
-	Dog *dog_copy = new Dog();
-	*dog_copy = *dog;
+	Dog *dog_assign = new Dog();
+	*dog_assign = *dog;
+
+	Dog *dog_copy = new Dog(*dog);
 	
 	std::cout << "Dog's idea: " << dog->getBrain()->getIdea(0)
+			  << std::endl;
+	std::cout << "Dog_assign's idea: " << dog_assign->getBrain()->getIdea(0)
 			  << std::endl;
 	std::cout << "Dog_copy's idea: " << dog_copy->getBrain()->getIdea(0)
 			  << std::endl;
@@ -47,12 +49,15 @@ int main()
 	dog->getBrain()->setIdea(0, "No, go to the cinema.");
 	std::cout << "Dog's idea: " << dog->getBrain()->getIdea(0)
 			  << std::endl;
+	std::cout << "Dog_assign's idea: " << dog_assign->getBrain()->getIdea(0)
+			  << std::endl;
 	std::cout << "Dog_copy's idea: " << dog_copy->getBrain()->getIdea(0)
 			  << std::endl;
 	std::cout << "\n=== Destructor ====\n" << std::endl;
 
 	delete dog;
 	delete dog_copy;
+	delete dog_assign;
 	
 	return 0;
 }
