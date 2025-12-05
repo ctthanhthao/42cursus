@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:03:46 by thchau            #+#    #+#             */
-/*   Updated: 2025/11/18 09:50:04 by thchau           ###   ########.fr       */
+/*   Updated: 2025/11/18 09:51:12 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int main()
 			  << std::endl;
 	std::cout << "Dog_copy's idea: " << dog_copy->getBrain()->getIdea(0)
 			  << std::endl;
+			  
 	std::cout << "\n=== Cat with brain test ===\n" << std::endl;
 	Cat *cat = new Cat();
 	cat->getBrain()->setIdea(0, "I want a fish.");
