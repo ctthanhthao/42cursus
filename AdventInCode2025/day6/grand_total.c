@@ -6,13 +6,12 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 11:14:43 by thchau            #+#    #+#             */
-/*   Updated: 2025/12/06 17:01:52 by thchau           ###   ########.fr       */
+/*   Updated: 2025/12/06 22:23:18 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
-#
 
 char **build_arr_contain_item(char *p, unsigned int *arr_len)
 {
