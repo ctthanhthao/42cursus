@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 13:34:31 by thchau            #+#    #+#             */
-/*   Updated: 2025/09/30 11:05:02 by thchau           ###   ########.fr       */
+/*   Updated: 2026/01/28 15:20:34 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,4 @@ std::string Contact::getDarkestSecret() const
 {
 	return darkestSecret;
 }
+// Thao test
