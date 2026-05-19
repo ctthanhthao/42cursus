@@ -6,13 +6,26 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:15:58 by thchau            #+#    #+#             */
-/*   Updated: 2025/10/17 16:57:50 by thchau           ###   ########.fr       */
+/*   Updated: 2026/05/19 10:15:42 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-int main(void)
+int main( void ) 
+{
+	Fixed a;
+	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+	std::cout << a << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
+	std::cout << b << std::endl;
+	std::cout << Fixed::max( a, b ) << std::endl;
+	return 0;
+}
+/*int main(void)
 {
 	std::cout << "===== Basic Constructors =====" << std::endl;
     Fixed a;
@@ -109,4 +122,4 @@ int main(void)
 
     std::cout << "\n===== End of Tests =====" << std::endl;
 	return 0;
-}
+}*/
