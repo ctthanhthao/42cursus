@@ -1,0 +1,18 @@
+version: '3'
+services:
+  #dev-container:
+  #  build: .
+  #  container_name: dev-container
+  #  tty: true
+  #  stdin_open: true
+  dev-container:
+    image: ctthanhthao/42_working_environment:ubuntu-dev-23.01.25
+    pull_policy: never
+    container_name: dev-container
+    entrypoint: ["/bin/bash"]
+    environment:
+      - DISPLAY=host.docker.internal:0
+    volumes:
+      - "/Users/macbook/Documents/Project/42 Prague/Core Curriculum/git_repo:/git_repo"
+    stdin_open: true
+    tty: true
