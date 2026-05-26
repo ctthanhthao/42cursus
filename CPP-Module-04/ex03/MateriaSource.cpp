@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:00:46 by thchau            #+#    #+#             */
-/*   Updated: 2025/11/20 15:20:24 by thchau           ###   ########.fr       */
+/*   Updated: 2026/05/26 19:14:34 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,11 @@ void MateriaSource::learnMateria(AMateria *m)
 	{
 		if (_templates[i] == 0)
 		{
-			_templates[i] = m->clone();
+			_templates[i] = m;
 			return;
 		}
 	}
+	delete m;
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type)

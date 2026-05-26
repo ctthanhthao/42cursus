@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 10:25:20 by thchau            #+#    #+#             */
-/*   Updated: 2025/11/20 12:15:44 by thchau           ###   ########.fr       */
+/*   Updated: 2026/05/26 18:49:43 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ protected:
 	std::string type;
 
 public:
+	AMateria();
 	AMateria(std::string const &type);
 	AMateria(const AMateria &other);
 	AMateria &operator=(const AMateria &other);

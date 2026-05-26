@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:48:09 by thchau            #+#    #+#             */
-/*   Updated: 2025/11/20 15:34:26 by thchau           ###   ########.fr       */
+/*   Updated: 2026/05/26 20:07:43 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,33 @@
 
 int main()
 {
+	IMateriaSource* src = new MateriaSource();
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
+	
+	ICharacter* me = new Character("me");
+	
+	AMateria* tmp;
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
+	
+	ICharacter* bob = new Character("bob");
+	
+	me->use(0, *bob);
+	me->use(1, *bob);
+	delete bob;
+	delete me;
+	delete src;
+	return 0;
+}
+/*int main()
+{
 	std::cout << "\n=== TEST 1: MateriaSource Learn & Create ===\n";
 	IMateriaSource* src = new MateriaSource();
-	AMateria *ice = new Ice();
-	AMateria *cure = new Cure();
-	src->learnMateria(ice);
-	src->learnMateria(cure);
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
 	
 	ICharacter* me = new Character("me");
     AMateria* tmp;
@@ -44,6 +65,13 @@ int main()
 
     std::cout << "Unequipping index 2...\n";
     me->unequip(2);   // should NOT delete the materia
+	me->use(2, *bob);
+	
+	me->unequip(0);
+	me->use(0, *bob);
+
+	me->unequip(1);
+	me->use(1, *bob);
 	
 	std::cout << "\n=== TEST 4: Deep Copy Character ===\n";
 	Character *original = new Character("original");
@@ -80,7 +108,5 @@ int main()
 	delete bob;
 	delete me;
 	delete src;
-	delete ice;
-	delete cure;
 	return 0;
-}
+}*/

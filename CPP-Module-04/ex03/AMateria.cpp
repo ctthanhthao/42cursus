@@ -6,11 +6,17 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 11:00:53 by thchau            #+#    #+#             */
-/*   Updated: 2025/11/20 15:43:24 by thchau           ###   ########.fr       */
+/*   Updated: 2026/05/26 18:50:11 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
+
+AMateria::AMateria() : type("unknown")
+{
+	std::cout << "[AMateria] " << this->type 
+			  << " created." << std::endl;
+}
 
 AMateria::AMateria(const std::string &type) : type(type)
 {
@@ -26,12 +32,9 @@ AMateria::AMateria(const AMateria &other) : type(other.type)
 
 AMateria &AMateria::operator=(const AMateria &other)
 {
-	if (this != &other)
-	{
-		this->type = other.type;
-	}
-	std::cout << "[AMateria] " << this->type
-			  << " assigned." << std::endl;
+	(void)other;
+	// std::cout << "[AMateria] " << this->type
+	// 		  << " assigned." << std::endl;
 	return *this;
 }
 

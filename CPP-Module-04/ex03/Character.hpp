@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:10:20 by thchau            #+#    #+#             */
-/*   Updated: 2025/11/19 11:22:36 by thchau           ###   ########.fr       */
+/*   Updated: 2026/05/26 20:10:42 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "ICharacter.hpp"
 #include "AMateria.hpp"
 
+#define FLOOR_MAX 100
 class Character : public ICharacter
 {
 private:
@@ -24,6 +25,7 @@ private:
 	AMateria *_floor[100];
 	int _floorCount;
 public:
+	Character();
 	Character(const std::string &name);
 	Character(const Character &other);
 	Character &operator=(const Character &other);
