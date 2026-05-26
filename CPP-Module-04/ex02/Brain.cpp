@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:40:51 by thchau            #+#    #+#             */
-/*   Updated: 2025/11/17 20:15:24 by thchau           ###   ########.fr       */
+/*   Updated: 2026/05/26 12:07:17 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,25 @@ Brain::~Brain()
 	std::cout << "Brain destroyed." << std::endl;
 }
 
-void Brain::setIdea(unsigned int idx, const std::string &str)
+void Brain::setIdea(unsigned int idx, const char *str)
 {
-	if (idx < 100)
-		ideas[idx] = str;
+	if (idx >= 100)
+	{
+		std::cerr << "Index should be smaller than 100." << std::endl;
+		return;
+	}
+    if (str == NULL)
+    {
+        ideas[idx] = "";
+        return;
+    }
+    ideas[idx] = str;
 }
 
 std::string Brain::getIdea(unsigned int idx)
 {
 	if (idx < 100)
 		return ideas[idx];
+	std::cerr << "Index should be smaller than 100." << std::endl;
 	return "";
 }
