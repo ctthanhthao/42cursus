@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:03:46 by thchau            #+#    #+#             */
-/*   Updated: 2025/11/18 09:51:12 by thchau           ###   ########.fr       */
+/*   Updated: 2026/05/26 10:54:11 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 int main()
 {
 	std::cout << "\n=== Animal Tests ===\n" << std::endl;
-	Animal *animals[10];
-	for (int i = 0; i < 10; i++)
+	Animal *animals[4];
+	for (int i = 0; i < 4; i++)
 	{
-		if (i < 5)
+		if (i < 2)
 			animals[i] = new Dog();
 		else
 			animals[i] = new Cat();
 	}
 
 	std::cout << "\n=== Delete Array ====\n" << std::endl;
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 4; i++)
 		delete animals[i];
 	
 	std::cout << "\n=== Dog with brain test ===\n" << std::endl;
@@ -78,6 +78,8 @@ int main()
 	std::cout << "cat_assign's idea: " << cat_assign->getBrain()->getIdea(0)
 			  << std::endl;
 	std::cout << "cat_copy's idea: " << cat_copy->getBrain()->getIdea(0)
+			  << std::endl;
+	std::cout << "cat_assign's idea: " << cat_assign->getBrain()->getIdea(100)
 			  << std::endl;
 	std::cout << "\n=== Destructor ====\n" << std::endl;
 
