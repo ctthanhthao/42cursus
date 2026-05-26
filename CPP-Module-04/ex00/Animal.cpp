@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 14:25:00 by thchau            #+#    #+#             */
-/*   Updated: 2025/11/13 14:51:16 by thchau           ###   ########.fr       */
+/*   Updated: 2026/05/26 09:18:13 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 Animal::Animal() : _type("Animal")
 {
-	std::cout << this->_type << " created." << std::endl;
+	std::cout << this->_type << " (Animal) created." << std::endl;
 }
 
 Animal::Animal(const Animal &other) : _type(other._type)
 {
-	std::cout << this->_type << " copied." << std::endl;
+	std::cout << this->_type << " (Animal) copied." << std::endl;
 }
 
 Animal &Animal::operator=(const Animal &other)
@@ -28,13 +28,13 @@ Animal &Animal::operator=(const Animal &other)
 	{
 		this->_type = other._type;
 	}
-	std::cout << this->_type << " assigned." << std::endl;
+	std::cout << this->_type << " (Animal) assigned." << std::endl;
 	return *this;
 }
 
 Animal::~Animal()
 {
-	std::cout << this->_type << " destroyed." << std::endl;
+	std::cout << this->_type << " (Animal) destroyed." << std::endl;
 }
 
 std::string Animal::getType() const

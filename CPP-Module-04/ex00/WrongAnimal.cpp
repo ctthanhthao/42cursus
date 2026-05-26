@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:08:54 by thchau            #+#    #+#             */
-/*   Updated: 2025/11/13 15:10:26 by thchau           ###   ########.fr       */
+/*   Updated: 2026/05/25 21:27:04 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other)
 
 WrongAnimal::~WrongAnimal()
 {
-	std::cout << this->_type << " destroyed." << std::endl;
+	std::cout << this->_type << " (Animal) destroyed." << std::endl;
 }
 
 std::string WrongAnimal::getType() const
