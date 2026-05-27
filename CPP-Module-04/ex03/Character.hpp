@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:10:20 by thchau            #+#    #+#             */
-/*   Updated: 2026/05/26 20:10:42 by thchau           ###   ########.fr       */
+/*   Updated: 2026/05/27 16:21:51 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class Character : public ICharacter
 private:
 	std::string _name;
 	AMateria *_inventory[4];
-	AMateria *_floor[100];
+	AMateria *_floor[FLOOR_MAX];
 	int _floorCount;
 public:
 	Character();
