@@ -20,7 +20,7 @@ array_bag &array_bag::operator=(const array_bag &other) {
 }
 
 array_bag::~array_bag() {
-	delete this->data;
+	delete [] this->data;
 }
 
 void array_bag::insert(int val) {
@@ -28,7 +28,7 @@ void array_bag::insert(int val) {
 	for (int i = 0; i < size; i++)
 		tmp[i] = this->data[i];
 	tmp[this->size] = val;
-	delete this->data;
+	delete [] this->data;
 	this->data = tmp;
 	this->size++;
 }
@@ -45,7 +45,7 @@ void array_bag::print() const {
 }
 
 void array_bag::clear() {
-	delete this->data;
+	delete [] this->data;
 	this->data = 0;
 	this->size = 0;
 }

@@ -9,6 +9,7 @@
 class searchable_bag : virtual public bag {
 public:
 	virtual bool has(int) const = 0;
+	virtual ~searchable_bag() {};
 };
 
 

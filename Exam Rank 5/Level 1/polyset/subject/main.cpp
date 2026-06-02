@@ -44,5 +44,6 @@ int main(int ac, char **av)
 	sa.clear();
  	int arr[] = {1, 2, 3, 4,};
 	sa.insert(arr, 4);
-
+	delete t;
+	delete a;
 }
