@@ -27,10 +27,11 @@ int main(int ac, char **av)
 	t->clear();
 	a->clear();
 	const searchable_array_bag tmp(static_cast<searchable_array_bag &>(*a));
+	std::cout << "===== print tmp =============" << std::endl;
 	tmp.print();
-	tmp.has(1);
+	std::cout << "===== tmp has 1 : "<< tmp.has(1) << std::endl;
 	set sa(*a);
-	set st(*a);
+	set st(*t);
 	for (int i = 1; i < ac; i++)
 	{
 		st.insert(atoi(av[i]));
@@ -43,4 +44,5 @@ int main(int ac, char **av)
 	sa.clear();
  	int arr[] = {1, 2, 3, 4,};
 	sa.insert(arr, 4);
+
 }
