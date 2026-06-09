@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 14:23:56 by thchau            #+#    #+#             */
-/*   Updated: 2026/06/09 22:52:57 by thchau           ###   ########.fr       */
+/*   Updated: 2026/06/09 23:04:41 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		init_game(t_game *game, char *argv[])
 
 void	free_board(t_game *game)
 {
-	if (game || !game->board)
+	if (!game || !game->board)
 		return;
 	for(int i = 0; i < game->height; i++)
 	{
