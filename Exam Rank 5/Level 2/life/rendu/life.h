@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 14:17:11 by thchau            #+#    #+#             */
-/*   Updated: 2026/06/09 15:08:36 by thchau           ###   ########.fr       */
+/*   Updated: 2026/06/10 12:09:53 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_game
 	int width;
 	int height;
 	int iterations;
-	int draw;
 	char **board;	
 } t_game;
 
