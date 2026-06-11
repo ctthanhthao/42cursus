@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 10:14:06 by thchau            #+#    #+#             */
-/*   Updated: 2026/06/06 18:56:54 by thchau           ###   ########.fr       */
+/*   Updated: 2026/06/10 11:08:19 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void Bureaucrat::executeForm(AForm const & form) const
 		std::cerr << this->_name << " couldn't execute "
 			      << form.getName() << " because " << e.what() << std::endl;
 	}
-	
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const throw()

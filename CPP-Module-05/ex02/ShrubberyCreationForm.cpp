@@ -6,20 +6,20 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/06 19:50:47 by thchau            #+#    #+#             */
-/*   Updated: 2026/06/06 20:38:28 by thchau           ###   ########.fr       */
+/*   Updated: 2026/06/10 10:57:07 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm(void)
-: AForm("ShrubberyCreationForm", 72, 45)
+: AForm("ShrubberyCreationForm", 145, 137)
 {
 	_target = "Unknown target";
 }
 		
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
-: AForm("ShrubberyCreationForm", 72, 45)
+: AForm("ShrubberyCreationForm", 145, 137)
 {
 	this->_target = target;
 }

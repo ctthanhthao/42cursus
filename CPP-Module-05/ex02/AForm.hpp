@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/06 18:02:12 by thchau            #+#    #+#             */
-/*   Updated: 2026/06/06 20:30:04 by thchau           ###   ########.fr       */
+/*   Updated: 2026/06/10 10:58:00 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ class AForm
 		const int _gradeToExecute;
 	protected:
 		std::string _target;
-		void checkExecution(Bureaucrat const &executor) const;
 	public:
 		AForm();
 		AForm(std::string name, int gts, int gte);

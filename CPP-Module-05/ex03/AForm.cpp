@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:55:33 by thchau            #+#    #+#             */
-/*   Updated: 2026/06/06 20:30:36 by thchau           ###   ########.fr       */
+/*   Updated: 2026/06/10 11:22:53 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void AForm::execute(Bureaucrat const &executor) const
 
 const char *AForm::GradeTooHighException::what() const throw()
 {
-	return ("Form Exception: Grade too high to sign or execute.");
+	return ("Form Exception: Grade too high to sign.");
 }
 
 const char *AForm::GradeTooLowException::what() const throw()
 {
-	return ("Form Exception: Grade too low to be sign or execute.");
+	return ("Form Exception: Grade too low to be sign.");
 }
 
 const char *AForm::FormNotSignedException::what() const throw()

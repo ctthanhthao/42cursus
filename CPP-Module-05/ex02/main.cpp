@@ -6,11 +6,12 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 10:30:51 by thchau            #+#    #+#             */
-/*   Updated: 2026/06/06 20:35:04 by thchau           ###   ########.fr       */
+/*   Updated: 2026/06/10 11:28:08 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <ctime>
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -78,15 +79,30 @@ int main()
 		std::cout << "Unexpected error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n===== EXECUTION WITHOUT ENOUGH GRADE =====" << std::endl;
+	std::cout << "\n===== FORM COULD BE SIGNED BUT NOT EXECUTED =====" << std::endl;
 
 	try
 	{
-		Bureaucrat mid("Mid", 50);
+		Bureaucrat mid("Mid", 23);
 		PresidentialPardonForm pardon("Arthur");
 
 		mid.signForm(pardon);     // may fail depending on grade
 		mid.executeForm(pardon);  // likely fail
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "Unexpected error: " << e.what() << std::endl;
+	}
+
+	std::cout << "\n===== EXECUTION WITHOUT ENOUGH GRADE =====" << std::endl;
+
+	try
+	{
+		Bureaucrat mid1("Mid1", 50);
+		PresidentialPardonForm pardon("Arthur");
+
+		mid1.signForm(pardon);     // may fail depending on grade
+		mid1.executeForm(pardon);  // likely fail
 	}
 	catch (std::exception &e)
 	{

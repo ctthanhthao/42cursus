@@ -6,13 +6,11 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 10:30:51 by thchau            #+#    #+#             */
-/*   Updated: 2026/06/08 11:24:49 by thchau           ###   ########.fr       */
+/*   Updated: 2026/06/10 11:40:14 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
 
 #include "Bureaucrat.hpp"
 #include "Intern.hpp"
@@ -23,8 +21,6 @@
 
 int main()
 {
-	std::srand(std::time(NULL));
-
 	std::cout << "===== INTERN CREATION TEST =====" << std::endl;
 
 	Intern someRandomIntern;
@@ -65,7 +61,7 @@ int main()
 
 	std::cout << "\n===== LOW GRADE TEST =====" << std::endl;
 
-	Bureaucrat intern("Intern", 150);
+	Bureaucrat intern("Intern", 146);
 
 	if (f1)
 	{
@@ -73,20 +69,12 @@ int main()
 		intern.executeForm(*f1);
 	}
 
-	std::cout << "\n===== ROBOTOMY RANDOMNESS =====" << std::endl;
-
-	if (f2)
-	{
-		for (int i = 0; i < 3; i++)
-			boss.executeForm(*f2);
-	}
-
 	std::cout << "\n===== CLEANUP =====" << std::endl;
 
 	delete f1;
 	delete f2;
 	delete f3;
-//	delete f4;
+	delete f4;
 
 	return 0;
 }
