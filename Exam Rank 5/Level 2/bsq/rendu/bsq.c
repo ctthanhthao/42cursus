@@ -6,25 +6,13 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 23:12:45 by thchau            #+#    #+#             */
-/*   Updated: 2026/06/11 05:44:26 by thchau           ###   ########.fr       */
+/*   Updated: 2026/06/11 08:58:56 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "bsq.h"
 
-typedef struct s_map
-{
-	int rows;
-	int cols;
-	char empty;
-	char obs;
-	char full;
-	char **grid;
-} t_map;
-
-static void remove_newline(char *s)
+void remove_newline(char *s)
 {
 	int	i = 0;
 	while(s[i] && s[i] != '\n')
@@ -38,6 +26,7 @@ int parse_header(char *line, t_map *m)
 	int i = 0;
 	int rows = 0;
 	
+	printf("parse_header start.\n");
 	while(line[i] && line[i] >= '0' && line[i] <= '9')
 		rows = rows * 10 + (line[i++] - '0');
 	if (rows <= 0 || !line[i] || !line[i + 1] || !line[i + 2] || line[i + 3])
@@ -58,6 +47,9 @@ int	read_grid(FILE *fp, t_map *m)
 	int		i = 0;
 	
 	m->cols = 0;
+	m->grid = (char **) malloc (m->rows * sizeof(char *));
+	if (!m->grid)
+		return (0);
 	while (i < m->rows && getline(&line, &n, fp) != -1)
 	{
 		remove_newline(line);
@@ -73,6 +65,7 @@ int	read_grid(FILE *fp, t_map *m)
 			return (0);
 		i++;
 	}
+	free(line);
 	return (i == m->rows);
 }
 
@@ -89,9 +82,9 @@ void	solve_bsq(t_map *m)
 	{
 		for (int j = 0; j < m->cols; j++)
 		{
-			if (m->grid[j][j] == m->obs)
+			if (m->grid[i][j] == m->obs)
 				cur[j] = 0;
-			else if (i == 0 && j == 0)
+			else if (i == 0 || j == 0)
 				cur[j] = 1;
 			else
 			{
@@ -116,7 +109,7 @@ void	solve_bsq(t_map *m)
 	for (int i = 0; i < best; i++)
 	{
 		for (int j = 0; j < best; j++)
-			m->grid[bi-i][bj - j] = m->full;
+			m->grid[bi - i][bj - j] = m->full;
 	}
 }
 
@@ -126,32 +119,16 @@ void	print_map(t_map *map)
 		printf("%s\n", map->grid[i]);
 }
 
-int main (int argc, char **argv)
+void	clean_up(t_map *m)
 {
-	FILE	*fp;
-	t_map	m;
-	char	*line = NULL;
-	size_t	n = 0;
-	
-	if (argc == 1)
-		fp = stdin;
-	else
-		fp = fopen(argv[1], "r");
-	if (!fp)
-		return (1);
-	if (getline(&line, &n, fp) == -1)
-		return (1);
-	remove_newline(line);
-	if (!parse_header(line, &m))
+	if (!m || !m->grid)
+		return;
+	int i = 0;
+	while (i < m->rows)
 	{
-		free(line);
-		return (1);
+		if (m->grid[i])
+			free(m->grid[i]);
+		i++;
 	}
-	if (!read_grid(fp, &m))
-	{
-		free(line);
-		return (1);
-	}
-	solve_bsq(&m);
-	print_map(&m);
+	free(m->grid);
 }
