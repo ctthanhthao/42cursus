@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 23:12:45 by thchau            #+#    #+#             */
-/*   Updated: 2026/06/11 08:58:56 by thchau           ###   ########.fr       */
+/*   Updated: 2026/06/11 09:04:20 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int parse_header(char *line, t_map *m)
 	int i = 0;
 	int rows = 0;
 	
-	printf("parse_header start.\n");
 	while(line[i] && line[i] >= '0' && line[i] <= '9')
 		rows = rows * 10 + (line[i++] - '0');
 	if (rows <= 0 || !line[i] || !line[i + 1] || !line[i + 2] || line[i + 3])
