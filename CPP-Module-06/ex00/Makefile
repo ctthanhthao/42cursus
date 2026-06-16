@@ -1,4 +1,4 @@
-NAME = bureaucrat
+NAME = converter
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98

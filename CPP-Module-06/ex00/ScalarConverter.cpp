@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 10:40:59 by thchau            #+#    #+#             */
-/*   Updated: 2026/06/16 12:17:01 by thchau           ###   ########.fr       */
+/*   Updated: 2026/06/16 13:07:45 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ ScalarConverter::~ScalarConverter(){}
 
 static bool isPseudo(const std::string &s)
 {
-	return s == "nan" || s == "nanf" ||
-			s == "-inf" || "+inf" ||
-			s == "-inff" || "+inff";
+	return (s == "nan" || s == "nanf" ||
+			s == "-inf" || s == "+inf" ||
+			s == "-inff" || s == "+inff");
 }
 
 static void printChar(double v)
@@ -62,7 +62,7 @@ static void printFloat(double v)
 	else if (std::isinf(f))
 		std::cout << "float: " << ((f < 0) ? "-inff" : "+inff") << std::endl;
 	else
-		std::cout << "float: " << f << std::endl;
+		std::cout << "float: " << f << "f" << std::endl;
 }
 
 static void printDouble(double v)
@@ -92,6 +92,11 @@ void ScalarConverter::convert(const std::string &literal)
 			std::cout << "float: +inff" << std::endl;
 			std::cout << "double: +inf" << std::endl;
 		}
+		else
+		{
+			std::cout << "float: nanf" << std::endl;
+			std::cout << "double: nan" << std::endl;
+		}
 		return;
 	}
 	double val = 0;
@@ -105,7 +110,7 @@ void ScalarConverter::convert(const std::string &literal)
 		return;
 	}
 	char *end = NULL;
-	val = std::strtod(literal.c_str(), &end);
+	val = strtod(literal.c_str(), &end);
 	if (end && *end && !(*end =='f' && *(end + 1) == '\0'))
 	{
 		std::cout << "Invalid input." << std::endl;
