@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 10:22:57 by thchau            #+#    #+#             */
-/*   Updated: 2026/06/16 11:56:23 by thchau           ###   ########.fr       */
+/*   Updated: 2026/06/17 13:29:12 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 # define SCALARCONVERTER_HPP
 
 # include <string>
-# include <cmath>
-# include <iostream>
-# include <limits>
-# include <iomanip>
 
 class ScalarConverter
 {
