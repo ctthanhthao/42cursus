@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 12:52:26 by thchau            #+#    #+#             */
-/*   Updated: 2026/06/25 10:03:44 by thchau           ###   ########.fr       */
+/*   Updated: 2026/06/25 10:36:45 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int main ()
     std::cout << "max(a, b) = " << max(a, b) << std::endl;
 
 	std::cout << "/====== TEST SWAP - STRING======/" << std::endl;
-	std::string c = "Hello";
-    std::string d = "Ahoj";
+	std::string c = "chaine1";
+    std::string d = "chaine2";
 	std::cout << "BEFORE: c = " << c << ", d = " << d << std::endl;
     swap(c, d);
     std::cout << "AFTER: c = " << c << ", d = " << d << std::endl;
