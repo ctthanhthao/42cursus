@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/26 20:08:35 by thchau            #+#    #+#             */
+/*   Updated: 2026/06/26 20:09:03 by thchau           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
+#include <cstdlib>
 #include "Span.hpp"
 
 int main()
@@ -77,6 +90,23 @@ int main()
 	{
 		std::cerr << e.what() << '\n';
 	}
+	std::cout << "\n===== SUBJECT STRESS TEST =====" << std::endl;
+	std::vector<int> v;
+
+	for (int i = 0; i < 10000; ++i)
+		v.push_back(std::rand());
+
+	Span sp6(10000);
+
+	sp6.addRange(v.begin(), v.end());
+
+	std::cout << "Size: 10000" << std::endl;
+	std::cout << "Shortest span: "
+			<< sp6.shortestSpan()
+			<< std::endl;
+	std::cout << "Longest span: "
+			<< sp6.longestSpan()
+			<< std::endl;
 
     return 0;
 }

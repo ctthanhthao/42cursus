@@ -6,7 +6,7 @@
 /*   By: thchau <thchau@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/26 11:33:50 by thchau            #+#    #+#             */
-/*   Updated: 2026/06/26 12:55:48 by thchau           ###   ########.fr       */
+/*   Updated: 2026/06/26 20:09:12 by thchau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define SPAN_HPP
 
 #include <vector>
+#include <stdexcept>
 class Span
 {
 	private:
