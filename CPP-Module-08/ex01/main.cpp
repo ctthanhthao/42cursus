@@ -62,5 +62,21 @@ int main()
 		std::cerr << e.what() << '\n';
 	}
 
+	Span sp4(3);
+	std::cout << "--- Expect exception: Too many numbers---" << std::endl;
+	try
+	{
+		std::vector<int> v;
+		v.push_back(4);
+		v.push_back(7);
+		v.push_back(11);
+		v.push_back(34);
+		sp3.addRange(v.begin(), v.end());
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
     return 0;
 }
